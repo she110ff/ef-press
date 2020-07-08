@@ -1,6 +1,6 @@
 module.exports = {
   host: "localhost",
-  title: "EARL FLEX",
+  title: "Knowledge Share",
   description: "Just playing around",
   themeConfig: {
     nav: [
@@ -13,6 +13,8 @@ module.exports = {
         items: [
           { text: "VSCode", link: "/learning/vscode/" },
           { text: "VueJS", link: "/learning/vuejs/" },
+          { text: "Python", link: "/learning/python/" },
+          { text: "Django", link: "/learning/django/" },
           { text: "NuxtJS", link: "/learning/nuxtjs/" },
           { text: "NestJS", link: "/learning/nestjs/" },
         ],
@@ -40,11 +42,25 @@ module.exports = {
           children: ["", "install", "concept"],
         },
       ],
+      "/learning/python/": [
+        {
+          title: "Python",
+          collapsable: false,
+          children: ["","coding-convention", "variable", "number", "string", "class", "standard-lib"],
+        },
+      ],
+      "/learning/django/": [
+        {
+          title: "Django",
+          collapsable: false,
+          children: ["", "python-install", "python-venv", "django-install", "django-database", "errors"],
+        },
+      ],
       "/learning/nuxtjs/": [
         {
           title: "NuxtJS",
           collapsable: false,
-          children: ["", "nuxt-install", "concept"],
+          children: ["", "nuxt-install", "directory-structure", "concept"],
         },
       ],
       "/learning/nestjs/": [
