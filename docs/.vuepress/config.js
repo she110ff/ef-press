@@ -12,6 +12,7 @@ module.exports = {
         ariaLabel: "Language Menu",
         items: [
           { text: "VSCode", link: "/learning/vscode/" },
+          { text: "Git", link: "/learning/git/" },
           { text: "VueJS", link: "/learning/vuejs/" },
           { text: "Python", link: "/learning/python/" },
           { text: "Django", link: "/learning/django/" },
@@ -33,6 +34,13 @@ module.exports = {
           title: "VSCode",
           collapsable: false,
           children: ["", "install", "concept"],
+        },
+      ],
+      "/learning/git/": [
+        {
+          title: "Git",
+          collapsable: false,
+          children: ["", "ssh"],
         },
       ],
       "/learning/vuejs/": [

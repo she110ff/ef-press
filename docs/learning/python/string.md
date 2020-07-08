@@ -63,7 +63,7 @@ print(r'C:\some\name')  # note the r before the quote
 > C:\some\name
 ```
 
-### 반복 문자열 
+### 반복 및 연결  
 + 연산자로 문자열을 합치거나 * 연산자로 문자열 반복이 가능합니다. 
 ```python
 # 3 times 'un', followed by 'ium'
@@ -71,12 +71,25 @@ print(r'C:\some\name')  # note the r before the quote
 >'unununium'
 ```
 
-### 문자열 자동 연결 
 둘 이상의 리터럴 문자열은 자동으로 합쳐집니다. 
 ```python
 'Py' 'thon'
 > 'Python'
 ```
+
+```python
+A = 'Python'
+B = 1
+A + B
+> Traceback (most recent call last):
+> File "<pyshell#54>", line 1, in <module>
+>   A + B
+> TypeError: can only concatenate str (not "int") to str
+```
+::: warning
+숫자 타입과 문자열 타입은 호환되지 않는 데이터 타입이기 때문에 + 연산자를 통해서 하나로 연결될 수 없습니다. 이 경우에 str() 함수를 사용해서 형 변환을 해서 연결 할 수 있습니다. 
+:::
+
 
 ### 긴 문자열 분리 
 긴 복수 문자열은 괄호로 묶어서 여러줄로 입력할 수 있습니다. 
@@ -172,6 +185,20 @@ len(s)
 우선, 파이썬에서 주석(commnet) 처리는 # 을 사용합니다. 프로그래머는 코드 상에서 볼 수 있지만 파이썬은 전혀 관여하지 않은 코드 부분입니다. 
 ```python
 # Ask user for name
+# Ask user for age
+```
+
+파이썬에는 68개의 내장 함수가 있습니다. 사용자 입력을 얻기 위해 input() 함수를 사용할 수 있습니다. 인자로 프롬프트 를 전달할 수 있습니다. 
+다음은 --> 를 프롬프트로 표시하고 반환 된 사용자의 입력(문자열로 변환)을 s 변수에 저장하고 있습니다. 
+```python
+s = input('--> ')  
+=> Monty Python's Flying Circus
+s  
+> "Monty Python's Flying Circus"
+```
+
+```python
+# Ask user for name
 name = input("What is your name?:")
 
 # Ask user for age
@@ -186,13 +213,4 @@ love = input("What do you love dogin?:")
 # Create output text
 
 # Print output to screen
-```
-
-파이썬에는 68개의 내장 함수가 있습니다. 사용자 입력을 얻기 위해 input() 함수를 사용할 수 있습니다. 인자로 프롬프트 를 전달할 수 있습니다. 
-다음은 --> 를 프롬프트로 표시하고 반환 된 사용자의 입력(문자열로 변환)을 s 변수에 저장하고 있습니다. 
-```python
-s = input('--> ')  
-=> Monty Python's Flying Circus
-s  
-> "Monty Python's Flying Circus"
 ```
