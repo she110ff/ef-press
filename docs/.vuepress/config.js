@@ -54,7 +54,7 @@ module.exports = {
         {
           title: "Python",
           collapsable: false,
-          children: ["","coding-convention", "variable", "number", "string", "class", "standard-lib"],
+          children: ["","coding-convention", "variable", "number", "string", "list", "control-flow", "data-structures", "function", "class", "standard-lib"],
         },
       ],
       "/learning/django/": [
