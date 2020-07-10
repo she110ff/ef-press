@@ -306,6 +306,50 @@ dict(sape=4139, guido=4127, jack=4098)
 > {'sape': 4139, 'guido': 4127, 'jack': 4098}
 ```
 
+### shallow copy
+```python
+wordsDict = {
+    "Hello": 56,
+    "at" : 23 ,
+    "test" : 43,
+    "this" : 43,
+    "who" : [56, 34, 44]
+    }
+
+newDict = wordsDict.copy()
+newDict['at'] = 45
+newDict["who"].append(222)
+
+print(wordsDict)
+print(newDict)
+
+
+> {'Hello': 56, 'at': 23, 'test': 43, 'this': 43, 'who': [56, 34, 44, 222]}
+> {'Hello': 56, 'at': 45, 'test': 43, 'this': 43, 'who': [56, 34, 44, 222]}
+```
+### deep copy
+
+```python
+import copy
+wordsDict = {
+    "Hello": 56,
+    "at" : 23 ,
+    "test" : 43,
+    "this" : 43,
+    "who" : [56, 34, 44]
+    }
+
+newDict = copy.deepcopy(wordsDict)
+newDict['at'] = 45
+newDict["who"].append(222)
+
+print(wordsDict)
+print(newDict)
+
+> {'Hello': 56, 'at': 23, 'test': 43, 'this': 43, 'who': [56, 34, 44]}
+> {'Hello': 56, 'at': 45, 'test': 43, 'this': 43, 'who': [56, 34, 44, 222]}
+
+```
 
 ## Looping Techniques
 
