@@ -184,9 +184,39 @@ print(z.get_maker())
 > mars_rover2 Launched by ISRO
 ```
 
-::: tip
-파이썬은 다중 상속이 가능합니다. 
-:::
+## 다중 상속 & overriding
+파이썬은 다중 상속을 지원합니다. 다중 상속의 경우에 부모 클래스에 동일한 메소드가 존해하는 경우 super.method() 을 요청하면 상속 순서에 영향을 받는다.
+```python
+class First(object):
+    def __init__(self):
+        super(First, self).__init__()
+        print("first")
+        
+    def doSomething(self):
+        print("First doSomething")
+
+class Second(object):
+    def __init__(self):
+        super(Second, self).__init__()
+        print("second")
+        
+    def doSomething(self):
+        print("Second doSomething")
+
+class Third(First, Second):
+    def __init__(self):
+        super(Third, self).__init__()
+        print("third")
+        
+    def doSomething(self):
+        super(Third, self).doSomething()
+        print("Third doSomething")
+
+
+third = Third()        
+third.doSomething()
+
+```
 
 ```python
 class Employee:

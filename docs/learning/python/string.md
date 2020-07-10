@@ -349,3 +349,5 @@ output = "Your username is {} and your domain name is {}".format(user, domain)
 print(output)
 
 ```
+
+[PyFormat](https://pyformat.info/)
