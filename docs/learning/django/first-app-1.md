@@ -1,4 +1,10 @@
-# First App
+# First App - 1.Requests and responses
+
+학습 목표
+
+1. 프로젝트 구조의 이해
+2. 서버의 실행과 포트 변경
+3. 요청에 의한 간단한 응답
 
 ## 초기 파일 구조
 
@@ -104,10 +110,11 @@ include() 함수는 다른 URLconfs에 참조할 수 있는 기능입니다.
 이 기능은 plug-and-play URLs을 위해 사용되며, “/polls/”, 또는 “/fun_polls/”, “/content/polls/” 등 App의 경로를 사용자가 지정할 수 있게 합니다.
 
 ::: warning
-모든 URL patterns 에서 url 참조를 위해서는 include() 항상 사용합니다. 그러나 admin.site.urls 는 예외입니다.
+모든 URL patterns 에서 url 참조를 위해서는 항상 include() 사용합니다. 그러나 admin.site.urls 는 예외입니다.
 :::
 
 <p>
+
 ```python
 $ python manage.py runserver
 ```
@@ -116,24 +123,21 @@ http://localhost:8000/polls/ 이동하여 “Hello, world. You’re at the polls
 
 ## Path()
 
-he path() function is passed four arguments, two required: route and view, and two optional: kwargs, and name. At this point, it’s worth reviewing what these arguments are for.
+path 함수에는 4개의 인자를 전달할 수 있습니다. 처음 두개는 route와 view로 필수입니다. 다음 두개는 kwargs와 name으로 옵션입니다.
 
 ### path() argument: route
 
-route is a string that contains a URL pattern. When processing a request, Django starts at the first pattern in urlpatterns and makes its way down the list, comparing the requested URL against each pattern until it finds one that matches.
-
-Patterns don’t search GET and POST parameters, or the domain name. For example, in a request to https://www.example.com/myapp/, the URLconf will look for myapp/. In a request to https://www.example.com/myapp/?page=3, the URLconf will also look for myapp/.
+route는 URL pattern 을 포함할 수 있는 문자열입니다. 요청이 들어오면 Django는 첫번째 url pattern에서 시작하여 비교하면서 요청 url과 일치하는 것을 찾습니다.
+패턴은 요청의 Method(GET, POST...), domain 을 구분하여 찾지 않습니다. 오직 path 만을 찾습니다. 예를 들어 https://www.example.com/myapp/ 요청을 반은 경우, URLconf 는 myapp/ 을 찾을 것 입니다. https://www.example.com/myapp/?page=3 요청의 경우에도, URLconf 는 myapp/ 을 찾을 것 입니다. .
 
 ### path() argument: view
 
-When Django finds a matching pattern, it calls the specified view function with an HttpRequest object as the first argument and any “captured” values from the route as keyword arguments. We’ll give an example of this in a bit.
+Django 가 패턴을 찾으면 view 로 요청 객체를 첫 번째 인자로 전달합니다. 경로에서 캡쳐 된 값들은 키워드 유형의 인자로 전달 됩니다.
 
 ### path() argument: kwargs
 
-Arbitrary keyword arguments can be passed in a dictionary to the target view. We aren’t going to use this feature of Django in the tutorial.
+그 밖에 전달하고자 하는 값 들을 dictionary 형태로 추가 전달 할 수 있습니다.
 
 ### path() argument: name
 
-Naming your URL lets you refer to it unambiguously from elsewhere in Django, especially from within templates. This powerful feature allows you to make global changes to the URL patterns of your project while only touching a single file.
-
-When you’re comfortable with the basic request and response flow, read part 2 of this tutorial to start working with the database.
+URL 에 이름을 지으면, Django 어디에서나 명확하게 참조할 수 있습니다.

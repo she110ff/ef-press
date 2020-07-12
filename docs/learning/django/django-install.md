@@ -36,6 +36,13 @@ django 패키기를 설치합니다.
 
 ```bash
 (myvenv) $ pip install django
+(myvenv) $ python manage.py shell
+
+# Django 버전 확인
+>>> import django
+>>> print(django.get_version())
+3.0.8
+
 ```
 
 ## Project 만들기
