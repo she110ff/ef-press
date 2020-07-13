@@ -27,9 +27,9 @@ INSTALLED_APPS 는 활성화 Django 애플리케이션의 목록입니다. 기�
 django 프로젝트를 처음 생성하면 아래와 같이 sqlite를 기반으로 데이터베이스 설정이 작성되어 있습니다. 이 설정을 사용하여 쉽게 django 프로젝트를 시작할 수 있습니다. 
 ```python
 DATABASES = {
-    ‘default’: {
-        ‘ENGINE’: ‘django.db.backends.sqlite3’,
-        ‘NAME’: os.path.join(BASE_DIR, ‘db.sqlite3’),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 ```
@@ -108,5 +108,10 @@ class Choice(models.Model):
 * 필드 인스턴스의 이름 (e.g. question_text or pub_date) 은 데이터베이스 컬럼 이름으로 사용됩니다. 
 * 선택적으로 필드의 첫 인자에 human-readable 값을 사용할 수 있습니다. ForeignKey, ManyToManyField and OneToOneField 는 verbose_name 을 사용해야 합니다. 
 * 필드의 타입에 따라서 필수 인자를 요구합니다. CharField 의 경우 max_length 가 그러한 예 입니다. 
-* 
+* default=0 의 예와 같이, 필드는 여러 선택적 인자를 추가할 수 있습니다. 
+* Django 는 일반적인 관계형 데이터베이스의 Entity 관계(one-to-one, many-to-one, many-to-many )를 제공합니다. 
 
+### 모델 활성화
+모델은 적은 코드로 Django에 여러 정보를 제공하고 Django는 다음을 수행할 수 있습니다. 
+* App 을 위한 데이터베이스 스키마를 작성할 수 있습니다. 
+* 모델 객체에 접근하여 데이터 베이스를 

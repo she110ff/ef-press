@@ -119,6 +119,10 @@ include() 함수는 다른 URLconfs에 참조할 수 있는 기능입니다.
 $ python manage.py runserver
 ```
 
+::: tip
+django-admin 과 manage.py 은 기본적으로 같은 명령어을 수행합니다. 그러나 manage.py 의 경우 mysite/settings.py 를 DJANGO_SETTINGS_MODULE 환경 변수에 할당합니다. 
+:::
+
 http://localhost:8000/polls/ 이동하여 “Hello, world. You’re at the polls index.” 를 확인할 수 있습니다.
 
 ## Path()
