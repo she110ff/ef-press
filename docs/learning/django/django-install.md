@@ -73,6 +73,7 @@ django 패키지에 포함된 모델을 마이그레이션 합니다.
 (myvenv) $ python manage.py makemigrations # 아직 새로운 모델을 작성하지 않았다면 실행하지 않아도 됨.
 (myvenv) $ python manage.py migrate
 ```
+migrate 명령어는 INSTALLED_APPS 설정을 보고 필요한 데이터베이스 테이블을 생성합니다.
 
 ## admin 계정 만들기
 

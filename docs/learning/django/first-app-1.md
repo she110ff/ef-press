@@ -66,7 +66,7 @@ polls/
 
 ## View 작성
 
-polls/views.py 파일에 당므과 같이 작성합니다.
+polls/views.py 파일에 다음과 같이 작성합니다.
 
 ```python
 # polls/views.py

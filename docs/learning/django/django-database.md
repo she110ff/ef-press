@@ -1,7 +1,6 @@
 # Database 설치
 
-django 프로젝트를 처음 생성하면 아래와 같이 sqlite를 기반으로 데이터베이스 설정이 작성되어 있습니다.
-
+django 프로젝트를 처음 생성하면 아래와 같이 sqlite를 기반으로 데이터베이스 설정이 작성되어 있습니다. 이 설정을 사용하여 쉽게 django 프로젝트를 시작할 수 있습니다. 
 ```python
 DATABASES = {
     ‘default’: {
@@ -10,6 +9,10 @@ DATABASES = {
     }
 }
 ```
+* ENGINE : sqlite3, postgresql, mysql, oracle 과 3th party cockroachDB, Firebird, MS-SQL 을 사용할 수 있습니다. 
+* NAME : sqlite를 사용한다면 파일의 전체 경로, 다른 데이터베이스라면 DB 이름 입니다.  
+
+
 
 ## PostgreSQL 설치하기
 

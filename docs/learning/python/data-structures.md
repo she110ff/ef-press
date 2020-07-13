@@ -260,7 +260,7 @@ a
 ```
 
 
-## 5.5. Dictionaries
+## Dictionaries
 맵은 키/값 을 쌍으로 갖는 유용한 데이터 타입입니다. 시퀀스 타입과 다르게 dictionary 는 key 로 인덱싱을 합니다. tuple을 키로 사용할 수도 있습니다.  
 ```python
 tel = {'jack': 4098, 'sape': 4139}
