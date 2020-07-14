@@ -1,7 +1,7 @@
-#QuerySet API
+# QuerySet API
 
+blog App 을 생성합니다.
 
-blog App 을 생성합니다. 
 ```bash
 python manage.py startapp blog
 ```
@@ -86,6 +86,6 @@ class Entry(models.Model):
 
 ```
 
-
 ## Resources
+
 [Making queries](https://docs.djangoproject.com/en/3.0/topics/db/queries/)
