@@ -88,6 +88,7 @@ django 패키지에 포함된 모델을 마이그레이션 합니다.
 본질적으로, 모델이란 부가적인 메타데이터를 가진 데이터베이스의 구조(layout)를 말합니다.
 <p>
 다음에서 Question, Choice 두 개의 모델을 만들고 각 Choice 는 Question의 연결이 됩니다. 
+
 ```python
 # polls/models.py
 from django.db import models
@@ -121,7 +122,8 @@ class Choice(models.Model):
 Django App 은 'pluggable' 하다고 표현합니다. 여러 프로젝트에 사용할 수 있고 배포할 수 있다는 것을 의미합니다. 
 :::
 
-모델을 작성한 후에는 INSTALLED_APPS 에 참조를 설정합니다. polls/apps.py 파일의 PollsConifig 의 package path는 polls.apps.PollsConfig 입니다.   
+모델을 작성한 후에는 INSTALLED_APPS 에 참조를 설정합니다. polls/apps.py 파일의 PollsConifig 의 package path는 polls.apps.PollsConfig 입니다.  
+
 ```python
 # mysite/settings.py
 INSTALLED_APPS = [
@@ -131,10 +133,12 @@ INSTALLED_APPS = [
 ```
 
 polls App 을 위한 마이레이션 파일을 생성합니다. 
-```python
+
+```bash
 python manage.py makemigrations polls
 ```
 정상적으로 수행이 끝나면 다음과 같은 결과를 볼 수 있습니다. 
+
 ```bash
 Migrations for 'polls':
   polls/migrations/0001_initial.py
@@ -380,6 +384,7 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 ```
+
 __str__ 은 interactive 프롬프트 컨벤션만을 위한 것이 아닌 어드민, REST API 에 자동으로 생성되는 결과이기도 합니다. 
 ```python
 Question.objects.all()
