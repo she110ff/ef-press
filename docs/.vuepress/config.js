@@ -85,6 +85,7 @@ module.exports = {
             "django-database",
             "first-app-1",
             "first-app-2",
+            "model",
             "queryset",
             "lookup",
             "how-to-query",
