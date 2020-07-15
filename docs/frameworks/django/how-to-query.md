@@ -1,4 +1,4 @@
-# QuerySet 과 Lookup
+# How to query
 
 ## filter(A).filter(B) vs filter(A, B)
 
@@ -49,9 +49,16 @@ class EmpList(ListView):
 ## annotate, aggregation and subquery
 
 ## Resources
+[Making queries](https://docs.djangoproject.com/en/3.0/topics/db/queries/) 
+
 [Queryset API](https://docs.djangoproject.com/en/3.0/ref/models/querysets/)
+
 [filter(A).filter(B) vs filter(A, B)](https://hacksoft.io/django-filter-chaining/)
+
 [How to join 3 tables in query with Django](https://stackoverflow.com/questions/43772163/how-to-join-3-tables-in-query-with-django)
+
 [Django select_related and prefetch_related](https://medium.com/better-programming/django-select-related-and-prefetch-related-f23043fd635d)
+
 [5 ORM queries you should know!](https://medium.com/@chrisjune_13837/django-5-orm-queries-you-should-know-a0f4533b31e8)
+
 [Manager vs Query Sets in Django](https://medium.com/@jairvercosa/manger-vs-query-sets-in-django-e9af7ed744e0)

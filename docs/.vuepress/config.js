@@ -5,52 +5,29 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "Home", link: "/" },
-      { text: "Foo", link: "/foo/" },
-      { text: "Bar", link: "/bar/" },
+      { text: "Languages", 
+        items: [
+          { text: "Python", link: "/languages/python/" },
+        ],
+      },
       {
-        text: "Learning",
+        text: "Frameworks",
         ariaLabel: "Language Menu",
         items: [
-          { text: "VSCode", link: "/learning/vscode/" },
-          { text: "Git", link: "/learning/git/" },
-          { text: "VueJS", link: "/learning/vuejs/" },
-          { text: "Python", link: "/learning/python/" },
-          { text: "Django", link: "/learning/django/" },
-          { text: "NuxtJS", link: "/learning/nuxtjs/" },
-          { text: "NestJS", link: "/learning/nestjs/" },
+          { text: "VSCode", link: "/frameworks/vscode/" },
+          { text: "Git", link: "/frameworks/git/" },
+          { text: "VueJS", link: "/frameworks/vuejs/" },
+          { text: "Django", link: "/frameworks/django/" },
+          { text: "NuxtJS", link: "/frameworks/nuxtjs/" },
+          { text: "NestJS", link: "/frameworks/nestjs/" },
         ],
       },
       { text: "External", link: "https://google.com" },
     ],
 
     sidebar: {
-      "/foo/": [
-        ["", "foo"] /* /foo/ */,
-        ["one", "onne"] /* /foo/one.html */,
-        "two" /* /foo/two.html */,
-      ],
-      "/learning/vscode/": [
-        {
-          title: "VSCode",
-          collapsable: false,
-          children: ["", "install", "concept"],
-        },
-      ],
-      "/learning/git/": [
-        {
-          title: "Git",
-          collapsable: false,
-          children: ["", "ssh"],
-        },
-      ],
-      "/learning/vuejs/": [
-        {
-          title: "VueJS",
-          collapsable: false,
-          children: ["", "install", "concept"],
-        },
-      ],
-      "/learning/python/": [
+      
+      "/languages/python/": [
         {
           title: "Python",
           collapsable: false,
@@ -74,7 +51,28 @@ module.exports = {
           ],
         },
       ],
-      "/learning/django/": [
+      "/frameworks/vscode/": [
+        {
+          title: "VSCode",
+          collapsable: false,
+          children: ["", "install", "concept"],
+        },
+      ],
+      "/frameworks/git/": [
+        {
+          title: "Git",
+          collapsable: false,
+          children: ["", "ssh"],
+        },
+      ],
+      "/frameworks/vuejs/": [
+        {
+          title: "VueJS",
+          collapsable: false,
+          children: ["", "install", "concept"],
+        },
+      ],
+      "/frameworks/django/": [
         {
           title: "Django",
           collapsable: false,
@@ -100,14 +98,14 @@ module.exports = {
           ],
         },
       ],
-      "/learning/nuxtjs/": [
+      "/frameworks/nuxtjs/": [
         {
           title: "NuxtJS",
           collapsable: false,
           children: ["", "nuxt-install", "directory-structure", "concept"],
         },
       ],
-      "/learning/nestjs/": [
+      "/frameworks/nestjs/": [
         {
           title: "NestJS",
           collapsable: false,
@@ -115,28 +113,6 @@ module.exports = {
         },
       ],
 
-      "/bar/": [
-        {
-          title: "Group 1", // required
-          path: "/bar/", // optional, link of the title, which should be an absolute path and must exist
-          children: [["/bar/three", "three"]],
-        },
-        {
-          title: "Group 2", // required
-          path: "/bar/four/", // optional, link of the title, which should be an absolute path and must exist
-          children: [
-            ["/bar/four/five", "five"],
-            {
-              title: "subGroup 2", // required
-              path: "/bar/", // optional, link of the title, which should be an absolute path and must exist
-              children: [
-                ["/bar/three", "three"],
-                ["/bar/four/", "four"],
-              ],
-            },
-          ],
-        },
-      ],
 
       // fallback
       "/": ["" /* / */],

@@ -2,6 +2,13 @@
 
 모델은 저장하고 있는 데이터의 필수적인 필드와 동작을 포함하고 있습니다. 일반적으로, 각각의 모델은 하나의 데이터베이스 테이블에 매핑됩니다.
 
+학습 목표
+1. 필드 옵션
+2. Relationship
+3. Meta 옵션
+4. 모델 속성과 메소드
+5. 모델 상속
+
 ## Field Option
 
 필드의 타입별로 각기 다른 옵션들이 존재합니다. [Field Option Fully](https://docs.djangoproject.com/en/3.0/ref/models/fields/#common-model-field-options). 여기에서는 자주 사용되는 옵션을 소개하겠습니다.
@@ -402,57 +409,173 @@ class Example(models.Model):
 비슷한 이유로 필드 이름은 밑줄로 끝날 수 없습니다.
 
 ## Meta options
+모델 내부에 내부 클래스(class Meta)를 사용하여 metadata를 추가할 수 있습니다.
+```python
+from django.db import models
+
+class Ox(models.Model):
+    horn_length = models.IntegerField()
+
+    class Meta:
+        ordering = ["horn_length"]
+        verbose_name_plural = "oxen"
+```
+모델의 metadata는 필수 요소는 아닙니다. ordering, db_table, vorbose_name 과 같이 모델에 다양한 기능을 설정할 수 있습니다.  [Model Options](https://docs.djangoproject.com/en/3.0/ref/models/options/)
 
 ## Model attributes
+가장 중요한 속성은 objects 즉 Manager 입니다. Manager는 데이터베이스에서 인스턴스를 가져오기 위한 query 연산자를 제공합니다. 
 
 ## Model methods
+모델에 사용자 메소드를 row-level 기능을 objects에 추가하는 것 입니다. 반면에 Manager 메소드는 tabel-wide 에 사용되는 것 입니다. 모델에 비즈니스 로직을 사용할 수 있는 방법입니다. 다음의 마지막 메소드는 속성으로 모델의 속성으로 사용이 됩니다. 
+```python
+from django.db import models
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    birth_date = models.DateField()
+
+    def baby_boomer_status(self):
+        "Returns the person's baby-boomer status."
+        import datetime
+        if self.birth_date < datetime.date(1945, 8, 1):
+            return "Pre-boomer"
+        elif self.birth_date < datetime.date(1965, 1, 1):
+            return "Baby boomer"
+        else:
+            return "Post-boomer"
+
+    @property
+    def full_name(self):
+        "Returns the person's full name."
+        return '%s %s' % (self.first_name, self.last_name)
+```
 
 ### Overriding predefined model methods
+모델에 사전 정의된 메소드를 overriding 하여 사용할 수 있습니다. 특히 save(), delete() 를 사용하는 경우가 많습니다. 
+```python
+from django.db import models
+
+class Blog(models.Model):
+    name = models.CharField(max_length=100)
+    tagline = models.TextField()
+
+    def save(self, *args, **kwargs):
+        do_something()
+        super().save(*args, **kwargs)  # Call the "real" save() method.
+        do_something_else()
+```
+
 
 ## Executing custom SQL
 
-```python
+Raw sql 을 사용할 수 있습니다. [using raw SQL](https://docs.djangoproject.com/en/3.0/topics/db/sql/)
 
-```
+## Model inheritance
+Django 모델의 상속은 파이썬의 클래스 상속과 같은 방식으로 작동합니다. 그러나 부모 모델 클래스는 반드시 djagno.db.models.Model 의 자식 클래스이어야 합니다. 
 
-```python
+모델 상속의 다음의 세가지 스타일이 있습니다. 
+1. 자식 모델에서 반복해서 사용하는 정보를 가지는 부모 모델을 Abstract class 로 사용하는 경우 입니다. 
+2. 자식 모델을 사용하여 부모 모델에서 정보를 가지고 오지만 각 자식 모델이 자신으 데이터베이스 테이블을 가지려는 경우 입니다. (Multi-table inheritance)
+3. 마지막으로 파이썬 수준에서 모델을 수정하고 싶고  모델 필드의 chaning을 사용하지 않는 경우 입니다. (Proxy model) 
 
-```
-
-```python
-
-```
-
-```python
-
-```
+### Abstract class
+추상 모델은 다른 자식 모델들에 여러 공통 정보를 상속하기 위해 주로 사용합니다. 이 때, 부모 모델의 Meta 클래스에는 abstract = True 가 있어야 하며, 부모 모델을 기반으로 데이터베이스 테이블을 만들지 않습니다. 부모 모델의 필드는 자식 모델의 테이블에 추가가 됩니다. 
 
 ```python
+from django.db import models
 
+class CommonInfo(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.PositiveIntegerField()
+
+    class Meta:
+        abstract = True
+
+class Student(CommonInfo):
+    home_group = models.CharField(max_length=5)
 ```
+위의 경우 Student 모델은  name, age, home_group 필드를 가지게 됩니다. CommonInfo 모델은 일반적인 모델처럼(table, manager, save()) Django에서 사용되지 않습니다. 
+
+Fields inherited from abstract base classes can be overridden with another field or value, or be removed with None.
+
+#### meta inheritance
+추상 모델에 Meta 클래스를 만들수 있습니다. 만약 자식 모델이 Meta 클래스를 정의하지 않으면 부모의 Meta 를 상속 받습니다. 만약 자식 모델의 Meta에서 부모의 Meta 를 서브클래스 하면 확장하게 됩니다. 
 
 ```python
+from django.db import models
 
+class CommonInfo(models.Model):
+    # ...
+    class Meta:
+        abstract = True
+        ordering = ['name']
+
+class Student(CommonInfo):
+    # ...
+    class Meta(CommonInfo.Meta):
+        db_table = 'student_info'
 ```
+abstract=True 를 추가하는 것으로 추상 모델을 상속받는 모델을 추상 모델로 만들 수 있습니다.  db_table 처럼 추상모델의 Meta에 포함할 수 없는 속성이 있습니다. 
+
+
+### Multi-table inheritance
+두 번째 타입의 모델 상속은 부모, 자식 모델 각자 정상적인 모델로 작동하고 각자의 데이터베이스 테이블을 만드는 것 입니다. 자동으로 OneToOneField 가 생성됩니다.
 
 ```python
+from django.db import models
 
+class Place(models.Model):
+    name = models.CharField(max_length=50)
+    address = models.CharField(max_length=80)
+
+class Restaurant(Place):
+    serves_hot_dogs = models.BooleanField(default=False)
+    serves_pizza = models.BooleanField(default=False)
 ```
+Place의 모든 필드는 Restaurant 에서 직접 접근이 가능할 뿐만 아니라 데이터도 양쪽 테이블에 모두 존재합니다. 
+```python
+>>> Place.objects.filter(name="Bob's Cafe")
+>>> Restaurant.objects.filter(name="Bob's Cafe")
+```
+다중 테이블 상속 상황에서는 자식 클래스가 부모의 Meta 클래스에서 상속하는 것이 이치에 맞지 않습니다. 모든 메타 옵션이 이미 상위 클래스에 적용되었으며 다시 적용하면 모순되는 동작 만 발생합니다 (기본 클래스가 자체적으로 존재하지 않는 추상 기본 클래스 사례와 대조적 임).
+
+### Proxy model
+다중 테이블 상속을 사용하면 모델의 각 서브 클래스에 대해 새 데이터베이스 테이블이 작성됩니다. 서브 클래스는 기본 클래스에 존재하지 않는 추가 데이터 필드를 저장할 장소가 필요하기 때문에 이는 일반적으로 원하는 동작입니다. 그러나 때로는 모델의 objecs를 변경하거나 새 메소드 추가하는 정도의 테이블의 변동, 연계 없이 Python 상속 처럼 동작 변경하려고합니다.
+
+프록시 모델은 원래 모델에 대한 프록시 생성. 프록시 모델의 인스턴스를 생성, 삭제 및 업데이트 할 수 있으며 모든 데이터는 프록시되지 않은 원래 모델을 사용하는 것처럼 저장됩니다. 차이점은 원본을 변경하지 않고도 프록시에서 기본 모델 순서 또는 manager와 같은 항목을 변경할 수 있다는 것입니다.
+
+프록시 모델은 일반 모델처럼 선언됩니다. Meta 클래스의 proxy 속성을 True로 설정하여 장고에게 프록시 모델이라고 알려줍니다.
 
 ```python
+from django.db import models
 
+class Person(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+
+class MyPerson(Person):
+    class Meta:
+        proxy = True
+
+    def do_something(self):
+        # ...
+        pass
 ```
 
+MyPerson 클래스는 부모 Person 클래스와 동일한 데이터베이스 테이블에서 작동합니다. 특히, Person의 새로운 인스턴스는 MyPerson을 통해 액세스 할 수 있으며 그 반대의 경우도 마찬가지입니다.
 ```python
-
+>>> p = Person.objects.create(first_name="foobar")
+>>> MyPerson.objects.get(first_name="foobar")
+<MyPerson: foobar>
 ```
-
+프록시 모델을 사용하여 모델에 다른 기본 순서를 정의 할 수도 있습니다. 항상 Person 모델을 ordering 하고 싶지는 않지만 프록시를 사용할 때 OrderedPerson는 last_name 속성으로 ordering 합니다. .
 ```python
-
+class OrderedPerson(Person):
+    class Meta:
+        ordering = ["last_name"]
+        proxy = True
 ```
 
-```python
-
-```
 
 [Django Model](https://docs.djangoproject.com/en/3.0/topics/db/models/)
