@@ -43,7 +43,15 @@ DATABASES = {
 
 설치 파일을 다운로드 받습니다.
 [PostgreSQL Download](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-설치를 진행하면 데이터베이스 슈퍼유저의 패스워드를 입력하고 지역을 선택합니다. 포트는 5432로 유지합니다.
+
+### 설치 진행 (약 5~10분)
+1. 파일을 다운로드한 후에 더블클릭하여 설치를 시작합니다. 
+2. PostgreSQL Server, pgAdmin 4, Stack Builder, Command Line Tool 을 선택해서 설치할 수 있습니다.
+3. 설치를 진행하면 데이터베이스 슈퍼유저(postgres)의 패스워드를 입력하고 지역을 선택합니다. 포트는 5432로 유지합니다.
+4. 설치가 종료되면 pgAdmin 또는 SQL Shell을 실행합니다. 
+
+### Command Line Tool
+
 Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database, Port, Usename, Password 를 입력하여 psql 쉘에 접속이 가능합니다.
 
 ### database 만들기
@@ -64,13 +72,13 @@ Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database,
 
 ```python
 DATABASES = {
-    ‘default’: {
-        ‘ENGINE’: ‘django.db.backends.postgresql_psycopg2’,
-        ‘NAME’: sample_database,
-        ‘USER’: sample_user,
-        ‘PASSWORD’: ‘password’,
-        ‘HOST’: ‘localhost’,
-        ‘PORT’: ‘5432’,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'mydatabaseuser',
+        'PASSWORD': 'mypassword',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 ```
