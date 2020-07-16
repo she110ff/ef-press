@@ -351,9 +351,37 @@ Django는 SQL JOIN을 자동으로 관리하면서 조회(lookup)에서 관계(r
 Entry.objects.filter(blog__name='Beatles Blog')
 ```
 
+이 범위는 원하는 만큼 깊을 수 있습니다.
+
+역으로도 작동합니다. "역방향" 관계를 참조하려면 모델의 소문자 이름을 사용하십시오.
+
+이 예제는 헤드 라인에 'Lennon'이 포함 된 하나 이상의 Entry가 있는 모든 Blog 개체를 검색합니다.
+```python
+>>> Blog.objects.filter(entry__headline__contains='Lennon')
+```
+
+여러 관계에서 필터링하고 중간 모델 중 하나에 필터 조건을 충족하는 값이 없는 경우 Django는 비어있는 (모든 값이 NULL 임) 존재하지만 유효한 오브젝트 인 것처럼 처리합니다. 이 모든 것은 오류가 발생하지 않는다는 것입니다. 예를 들어이 필터에서
+```python
+Blog.objects.filter(entry__authors__name='Lennon')
+```
+
 ```python
 
 ```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+
 #### Spanning multi-valued relationships
 
 ```python
@@ -366,6 +394,25 @@ Entry.objects.filter(blog__name='Beatles Blog')
 
 ### Filters can reference fields on the model
 
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 ### The pk lookup shortcut
 
 ```python
@@ -378,6 +425,25 @@ Entry.objects.filter(blog__name='Beatles Blog')
 
 ### Escaping percent signs and underscores in LIKE statements
 
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 ### Caching and QuerySets
 
 ```python
@@ -390,6 +456,25 @@ Entry.objects.filter(blog__name='Beatles Blog')
 
 #### When QuerySets are not cached
 
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 ## Complex lookups with Q objects
 
 ## Comparing objects
@@ -418,10 +503,48 @@ Entry.objects.filter(blog__name='Beatles Blog')
 
 ## Copying model instances
 
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 ## Updating multiple objects at once
 
 ## Related objects
 
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
+
+```python
+
+```
 ### One-to-many relationships
 
 ```python
