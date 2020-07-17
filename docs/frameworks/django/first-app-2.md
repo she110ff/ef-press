@@ -57,13 +57,46 @@ Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database,
 ### database 만들기
 
 ```bash
-> psql
+# connect server as user 
+> psql -U postgres
 
-> CREATE USER sample_user WITH PASSWORD 'sample_password';
+# create user
+> CREATE USER tms_user WITH PASSWORD 'tms_pass';
 
-> CREATE DATABASE sample_database WITH OWNER sample_user;
+# create db
+> CREATE DATABASE tms_local WITH OWNER tms_user;
 
-> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sample_user;
+# create grant
+> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tms_user;
+
+# connect db
+> \c tms_local
+
+python manage.py migrate 이후에 
+
+# show table list
+> \dt
+
+                   List of relations
+ Schema |            Name            | Type  |  Owner
+--------+----------------------------+-------+----------
+ public | auth_group                 | table | tms_user
+ public | auth_group_permissions     | table | tms_user
+ public | auth_permission            | table | tms_user
+ public | auth_user                  | table | tms_user
+ public | auth_user_groups           | table | tms_user
+ public | auth_user_user_permissions | table | tms_user
+ public | blog_author                | table | tms_user
+ public | blog_blog                  | table | tms_user
+ public | blog_entry                 | table | tms_user
+ public | blog_entry_authors         | table | tms_user
+ public | django_admin_log           | table | tms_user
+ public | django_content_type        | table | tms_user
+ public | django_migrations          | table | tms_user
+ public | django_session             | table | tms_user
+ public | polls_choice               | table | tms_user
+ public | polls_question             | table | tms_user
+(16 rows)
 ```
 
 ### DB 세팅하기
@@ -74,10 +107,10 @@ Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database,
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydatabase',
-        'USER': 'mydatabaseuser',
-        'PASSWORD': 'mypassword',
-        'HOST': '127.0.0.1',
+        'NAME': 'tms_local',
+        'USER': 'tms_user',
+        'PASSWORD': 'tms_pass',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
