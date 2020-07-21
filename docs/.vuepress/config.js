@@ -22,6 +22,11 @@ module.exports = {
           { text: "NestJS", link: "/frameworks/nestjs/" },
         ],
       },
+      { text: "Tool & Module", 
+        items: [
+          { text: "Django-REST", link: "/tool-module/django-rest/" },
+        ],
+      },
       { text: "External", link: "https://google.com" },
     ],
 
@@ -109,6 +114,13 @@ module.exports = {
           title: "NestJS",
           collapsable: false,
           children: ["", "nest-install", "controllers"],
+        },
+      ],
+      "/tool-module/django-rest/": [
+        {
+          title: "Django REST",
+          collapsable: false,
+          children: ["", "tutorial-1-serialization", "serializer"],
         },
       ],
 

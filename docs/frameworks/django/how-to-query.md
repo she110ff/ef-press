@@ -130,9 +130,9 @@ COMMIT;
 
 
 ## 객체(레코드) 생성
-Django는 데이터베이스 테이블을 나타내기 위해서 모델을 사용합니다. 모델의 인스턴스는 테이블의 레코드를 의미합니다.
+Django는 데이터베이스 테이블을 나타내고 다루기 위해서 모델을 사용합니다. 모델의 인스턴스는 테이블의 레코드 집합을 의미합니다.
 
-키워드 인자를 모델 클래스에 전달하여 초기화하면 객체가 생성되고 save()를 호출하면 데이터베이스에 저장이 됩니다.
+키워드 인자를 모델 클래스에 전달하여 객체가 생성되고 save()를 호출하면 데이터베이스에 저장이 됩니다.
 ```python
 >>> from blog.models import Blog, Author, Entry
 >>> b1 = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
@@ -145,7 +145,7 @@ Django는 데이터베이스 테이블을 나타내기 위해서 모델을 사�
 
 ## Saving changes to objects
 
-변경값을 저장하기 위해서도 save()를 사용합니다. 다음은 name 의 값을 변경합니다.
+변경 값을 저장하기 위해서도 save()를 사용합니다. 다음은 name 의 값을 변경합니다.
 
 ```python
 >>> b2.name = 'Cheddar Talk'
@@ -158,7 +158,7 @@ Django는 데이터베이스 테이블을 나타내기 위해서 모델을 사�
 
 ForeinKey 필드를 저장하는 것은 일반적인 저장과 동일한 방식입니다.
 
-entry 인스턴스의 blog 속성을 변경합니다.
+entry 인스턴스의 blog 속성을 변경하고 save() 합니다.
 
 ```python
 >>> from django.utils import timezone
@@ -170,15 +170,13 @@ entry 인스턴스의 blog 속성을 변경합니다.
 ```
 
 ManyToManyField 필드의 추가는 약간 다른 방식으로 작동합니다. add() 메소드는 entry 테이블이 아닌 관련 테이블(EntryAuthor)에 레코드를 추가합니다.
-
 ```python
 >>> from blog.models import Author
 >>> joe = Author.objects.create(name="Joe")
 >>> entry.authors.add(joe)
 ```
 
-다수의 ManyToManyField 필드를 추가합니다.
-
+다음은 다수의 ManyToManyField 필드를 추가하는 방식입니다.
 ```python
 >>> john = Author.objects.create(name="John")
 >>> paul = Author.objects.create(name="Paul")
@@ -189,8 +187,8 @@ ManyToManyField 필드의 추가는 약간 다른 방식으로 작동합니다. 
 
 ## 객체 가져오기
 
-데이터베이스에서 데이터를 가져오기 위해서는 모델 클래스의 매니저를 통해 queryset를 만들어야 합니다.
-QuerySet은 데이터베이스의 개체 모음 그리고 API를 중의적으로 나타냅니다. 0 개, 하나 이상의 필터를 가질 수 있습니다. 필터는 주어진 매개 변수에 따라 쿼리 결과를 좁혀줍니다. SQL 용어에서 QuerySet은 SELECT 문과 같으며 필터는 WHERE 또는 LIMIT와 같은 제한 절입니다.
+데이터베이스에서 데이터를 가져오기 위해서는 모델 클래스의 매니저를 통해 queryset을 만들어야 합니다.
+QuerySet은 데이터베이스의 개체 모음에 대한 API를 의미합니다. 0개 이상의 필터를 가질 수 있습니다. 필터는 주어진 매개 변수에 따라 쿼리 결과를 좁혀 줍니다. SQL 용어에서 QuerySet은 SELECT 문과 같으며 필터는 WHERE 또는 LIMIT와 같은 제한 절입니다.
 
 모델은 하나 이상의 매니저를 가지고 있습니다. 기본 매니저는 objects 입니다.
 
@@ -210,26 +208,25 @@ objects(매니저)는 인스턴스가 아닌 클래스를 통해서만 접근이
 
 all()에 의해 반환 된 QuerySet은 데이터베이스 테이블의 전체 개체를 가리킵니다. 그러나 일반적으로 전체 개체 집합의 하위 집합만 선택해야 할 필요가 있습니다.
 
-이러한 하위 집합을 만들려면 필터 조건을 추가하여 초기 QuerySet을 세분화합니다. QuerySet을 구체화하는 가장 일반적인 두 가지 방법은 다음과 같습니다.
+이러한 하위 집합을 만들려면 필터 조건을 추가하여 초기 QuerySet을 구체화 합니다.가장 일반적인 두 가지 방법은 다음과 같습니다.
 
 filter (** kwargs) : 주어진 조회(lookup) 매개 변수와 일치하는 개체를 포함하는 새로운 QuerySet을 반환합니다.
+
 exclude (** kwargs) : 주어진 조회 매개 변수와 일치하지 않는 개체를 포함하는 새로운 QuerySet을 반환합니다.
 
-예를 들어 2006년 Blog Entry 의 QuerySet을 가져 오려면 다음과 같이 filter()를 사용하십시오.
-
+예를 들어 2006년 발간된 Entry의 QuerySet을 가져 오려면 다음과 같이 filter()를 사용하십시오.
 ```python
 Entry.objects.filter(pub_date__year=2006)
 ```
 
 위의 조회와 동일합니다.
-
 ```python
 Entry.objects.all().filter(pub_date__year=2006)
 ```
 
-#### Chaining filters
+#### 필터 체이닝 
 
-QuerySet을 구체화 한 결과 자체가 QuerySet이므로 chaining으로 연결해 사용할 수 있습니다.
+QuerySet을 구체화 한 결과가 QuerySet이므로 chaining으로 연결해 사용할 수 있습니다.
 
 ```python
 >>> Entry.objects.filter(
@@ -241,9 +238,9 @@ QuerySet을 구체화 한 결과 자체가 QuerySet이므로 chaining으로 연�
 ... )
 ```
 
-#### Filtered QuerySets are unique
+#### 필터의 고유한 QuerySets  
 
-QuerySet을 구체화 할 때마다 이전 QuerySet에 바인딩되지 않은 완전히 새로운 QuerySet을 얻게 됩니다. 각 구체와의 결과로 저장, 사용 및 재사용 할 수 있는 별도의 고유한 QuerySet을 작성합니다.
+QuerySet을 구체화 할 때마다 이전 QuerySet에 바인딩되지 않은 완전히 새로운 QuerySet을 얻게 됩니다. 각 구체화의 결과로 저장, 사용 및 재사용 할 수 있는 별도의 고유한 QuerySet을 작성 합니다.
 
 ```python
 >>> q1 = Entry.objects.filter(headline__startswith="What")
@@ -251,12 +248,11 @@ QuerySet을 구체화 할 때마다 이전 QuerySet에 바인딩되지 않은 �
 >>> q3 = q1.filter(pub_date__gte=datetime.date.today())
 ```
 
-이 세 가지 QuerySet은 서로 다릅니다. 첫 번째는 "What"로 시작하는 헤드 라인을 포함하는 모든 항목을 포함하는 기본 QuerySet입니다. 두 번째는 첫 번째의 하위 집합이며 pub_date가 오늘 또는 이후인 레코드를 제외하는 추가 기준이 있습니다. 세 번째는 첫 번째의 하위 집합이며 pub_date가 오늘 또는 이후인 레코드만 선택하는 추가 기준이 있습니다. 초기 QuerySet (q1)은 구체화 프로세스의 영향을 받지 않습니다.
+위 세 개의 QuerySet은 서로 다릅니다. 첫 번째는 "What"로 시작하는 헤드 라인을 포함하는 모든 항목을 포함하는 기본 QuerySet입니다. 두 번째는 첫 번째의 하위 집합이며 pub_date가 오늘 또는 이후인 레코드를 제외하는 추가 기준이 있습니다. 세 번째는 첫 번째의 하위 집합이며 pub_date가 오늘 또는 이후인 레코드만 선택하는 추가 기준이 있습니다. 초기 QuerySet (q1)은 구체화 프로세스의 영향을 받지 않습니다.
 
-#### QuerySets are lazy
+#### 게으른 QuerySets 
 
-QuerySet은 게으르다 – QuerySet을 만드는 것은 데이터베이스 활동과 관련이 없다. 하루 종일 필터를 쌓을 수 있으며 Django는 QuerySet이 평가 될 때까지 실제로 쿼리를 실행하지 않습니다. 이 예제를 살펴보십시오
-
+QuerySet은 게으르다 – QuerySet을 만드는 것은 데이터베이스 활동과 관련이 없습니다. 게속해서 필터를 연결하더라도 Django는 QuerySet이 평가 될 때까지 실제로 쿼리를 실행하지 않습니다. 이 예제를 살펴보십시오.
 ```python
 >>> q = Entry.objects.filter(headline__startswith="What")
 >>> q = q.filter(pub_date__lte=datetime.date.today())
@@ -266,31 +262,28 @@ QuerySet은 게으르다 – QuerySet을 만드는 것은 데이터베이스 활
 
 이것은 세 번의 데이터베이스 hit 처럼 보이지만 실제로 마지막 줄 (print (q))에서 한 번만 데이터베이스에 hit 합니다. 일반적으로 QuerySet의 결과는 "요청"할 때까지 데이터베이스에서 가져 오지 않습니다. 요청하면 데이터베이스에 액세스하여 QuerySet이 평가됩니다. 정확한 평가 시기에 대한 자세한 내용은 [QuerySet 평가시기](https://docs.djangoproject.com/en/3.0/topics/db/queries/)를 참조하십시오.
 
-```python
 
-```
 
-### Retrieving a single object with get()
+### get()으로 단일 개체 조회
 
 filter()는 단일 개체만 쿼리와 일치하더라도 QuerySet을 항상 제공합니다.이 경우 단일 요소를 포함하는 QuerySet이 됩니다.
 
 쿼리와 일치하는 개체가 하나만 있는 경우 Manager에서 객체를 직접 반환하는 get() 메서드를 사용할 수 있습니다.
-
 ```python
 >>> one_entry = Entry.objects.get(pk=1)
 ```
 
-get() 사용과 [0] 슬라이스로 filter() 사용에는 차이가 있습니다. 쿼리와 일치하는 결과가 없으면 get()은 DoesNotExist 예외를 발생시킵니다. 이 예외는 쿼리가 수행되는 모델 클래스의 속성이므로 위 코드에서 기본 키가 1 인 Entry 개체가 없으면 Django는 Entry.DoesNotExist를 발생시킵니다.
+get() 사용과  filter()네서 [0] 슬라이스로 사용에는 차이가 있습니다. 쿼리와 일치하는 결과가 없으면 get()은 DoesNotExist 예외를 발생시킵니다. 이 예외는 쿼리가 수행되는 모델 클래스의 속성이므로 위 코드에서 기본 키가 1 인 Entry 개체가 없으면 Django는 Entry.DoesNotExist를 발생시킵니다.
 
 마찬가지로 둘 이상의 항목이 get() 쿼리와 일치하면 MultipleObjectsReturned가 발생합니다.
 
-### Other QuerySet methods
+### QuerySet 메소드 
 
 대부분 데이터베이스에서 객체를 찾아야 할 때 all(), get(), filter() 및 exclude()를 사용합니다. 다양한 QuerySet 메소드의 전체 목록은 [QuerySet API Reference](https://docs.djangoproject.com/en/3.0/ref/models/querysets/#queryset-api-reference)를 참조하십시오.
 
-### Limiting QuerySets
+### QuerySets 분할 조회
 
-Python의 배열 분할 구문으로 QuerySet을 하위 집합을 사용할 수 있습니다. 이는 SQL의 LIMIT 및 OFFSET 절과 동일합니다.
+Python의 배열 분할(slice) 구문으로 QuerySet을 하위 집합을 조회할 수 있습니다. 이는 SQL의 LIMIT 및 OFFSET 절과 동일합니다.
 
 처음 5개 개체를 반환합니다. (LIMIT 5)
 
@@ -328,9 +321,9 @@ Entry.objects.order_by('headline')[0:1].get()
 
 지정된 기준과 일치하는 개체가 없으면 첫 번째는 order_by는 IndexError를 발생시키고 두 번째는 get()은 DoesNotExist를 발생 시킵니다.
 
-### Field lookups
+### 필드 lookups
 
-필드 조회는 SQL WHERE 절을 지정하는 방법입니다. 이들은 QuerySet 메소드 filter(), exclude() 및 get()에 키워드 인수로 지정됩니다.
+필드 조회(lookup)는 SQL WHERE 절을 지정하는 방법입니다. 이들은 QuerySet 메소드 filter(), exclude() 및 get()에 키워드 인수로 지정됩니다.
 
 기본 조회 키워드 인수는 field\_\_lookuptype = value 형식을 사용합니다. (이중 밑줄을 사용합니다). 예를 들면 다음과 같습니다.
 
@@ -345,21 +338,21 @@ SELECT * FROM blog_entry WHERE pub_date <= '2006-01-01';
 ```
 
 :::tip
-파이썬은 런타임에 이름과 값이 평가되는 임의의 키워드 인수(이름-값)를 허용하는 함수를 정의 할 수 있습니다.
+파이썬은 런타임에 이름과 값이 평가되는 임의의 키워드 인수(이름-값, **kwargs)를 허용하는 함수를 정의 할 수 있습니다.
 :::
 
-조회에 지정된 필드는 모델 필드의 이름이어야합니다. 단, ForeignKey의 경우 \_id 접미사로 필드 이름을 지정할 수 있습니다. 이 경우에는 value 매개 변수는 외부 모델 기본 키의 원시 값을 포함해야합니다. 예를 들면 다음과 같습니다.
+조회에 지정된 필드는 모델 필드의 이름이어야 합니다. 단, ForeignKey의 경우 \_id 접미사로 필드 이름을 지정할 수 있습니다. 이 경우 value 매개 변수는 외부 모델 기본 키의 원시 값을 포함해야합니다. 예를 들면 다음과 같습니다.
 
 ```python
 >>> Entry.objects.filter(blog_id=4)
 ```
 
-잘못된 키워드 인수를 전달하면 조회 함수가 TypeError를 발생시킵니다.
+잘못된 키워드 인수를 전달하면 조회 함수가 TypeError를 발생 시킵니다.
 
-데이터베이스 API는 약 24 가지 조회 유형을 지원합니다. 전체 참조는 [Lookup Field Ref](https://docs.djangoproject.com/en/3.0/ref/models/querysets/#field-lookups)에서 찾을 수 있습니다.
+데이터베이스 Lookup Field API는 약 24 가지 조회 유형을 지원합니다. 전체 참조는 [Lookup Field Ref](https://docs.djangoproject.com/en/3.0/ref/models/querysets/#field-lookups)에서 찾을 수 있습니다.
+
 
 자주 사용되는 몇가지를 살펴 보겠습니다.
-
 exact :
 
 ```python
@@ -367,18 +360,18 @@ exact :
 ```
 
 다음과 같은 SQL이 생성될 것 입니다.
-
 ```python
 SELECT ... WHERE headline = 'Cat bites dog';
 ```
-
 조회 유형(lookup type)을 제공하지 않는 경우, 즉 키워드 인수에 이중 밑줄이 없는 경우 조회 유형은 exact 으로 간주됩니다
+
 
 iexact : case-insensitive match
 ```python
 >>> Blog.objects.get(name__iexact="beatles blog")
 ```
 "Beatles Blog", "beatles blog"또는 "BeAtlES blOG"라는 제목의 블로그와 일치합니다.
+
 
 contains : Case-sensitive containment
 ```python
@@ -390,10 +383,10 @@ Entry.objects.get(headline__contains='Lennon')
 startswith, endswith : 각각 시작, 끝을 검색합니다. istartswith 및 iendswith라는 대소 문자를 구분하지 않는 버전도 있습니다.
 
 
-### Lookups that span relationships
+### 필드 조회의 관계 확장
 Django는 SQL JOIN을 자동으로 관리하면서 조회(lookup)에서 관계(relationship)를 "따르가는" 강력하고 직관적인 방법을 제공합니다. 관계를 확장하려면 원하는 필드에 도달 할 때까지 모델에서 관련 필드 이름을 이중 밑줄로 구분하여 사용합니다.
 
-이 예제는 이름이 'Beatles Blog'인 블로그를 가진 모든 Entry 개체를 검색합니다.
+이 예제는 이름이 'Beatles Blog'인 Blog를 가진 모든 Entry 개체를 검색합니다.
 ```python
 Entry.objects.filter(blog__name='Beatles Blog')
 ```
@@ -402,7 +395,7 @@ Entry.objects.filter(blog__name='Beatles Blog')
 
 역으로도 작동합니다. "역방향" 관계를 참조하려면 모델의 소문자 이름을 사용하십시오.
 
-이 예제는 헤드 라인에 'Lennon'이 포함 된 하나 이상의 Entry가 있는 모든 Blog 개체를 검색합니다.
+이 예제는 headline 에 'Lennon'이 포함 된 하나 이상의 Entry를 포함하는 모든 Blog 개체를 검색합니다.
 ```python
 >>> Blog.objects.filter(entry__headline__contains='Lennon')
 ```
@@ -411,18 +404,17 @@ Entry.objects.filter(blog__name='Beatles Blog')
 ```python
 Blog.objects.filter(entry__authors__name='Lennon')
 ```
-(관련 Author모델 이있는 경우) author 항목과 연관된 항목 name 이 없으면 누락으로 인해 오류가 발생 하지 않고 첨부 된 항목이 없는 것처럼 처리됩니다 author. 일반적으로 이것은 정확히 당신이 원하는 것입니다. 혼란 스러울 수 있는 유일한 경우는 isnull 사용하는 경우 입니다. 그러므로:
+(관련 Author모델 이있는 경우) author 항목과 연관된 항목 name 이 없으면 누락으로 인해 오류가 발생 하지 않고 첨부 된 항목이 없는 것처럼 처리됩니다. 혼란스러울 수 있는 유일한 경우는 isnull 사용하는 경우 입니다. :
 ```python
 Blog.objects.filter(entry__authors__name__isnull=True)
 ```
-author가 비어 있는 name을 가지고 있고 또한 entry가 비어 있는 author를 가지고 있는 blog 개체를 반환합니다. 만약 후자의 객체를 원하지 않으면 다음과 같이 쓸 수 있습니다.
-
+author가 비어 있는 name을 가지고 있고, 또한(and) entry가 비어 있는 author를 가지고 있는 blog 개체를 반환합니다. 만약 entry가 비어 있는 author를 가지고 있는 blog 개체 원하지 않으면 다음과 같이 쓸 수 있습니다.
 ```python
 Blog.objects.filter(entry__authors__isnull=False, entry__authors__name__isnull=True)
 ```
 
 
-#### Spanning multi-valued relationships
+#### multi-valued 필터로 관계 확장 
 ManyToManyField 또는 reverse ForeignKey의 객체를 필터링 하는 경우, 필터는 두 가지 종류가 있습니다.  Blog, Entry의 관계를 생각해 보면( Blog는 Entry에 일 대 다 관계입니다). 
 
 headline에 "Lennon"이 있고 2008년에 출판 된 항목(pub_date)이 있는 블로그를 찾는 데 관심이 있을 수 있습니다. 또는 headline에 "Lennon" 이 있는 항목에서 2008년에 출판 된 항목(pub_date)이 있는  블로그 항목을 찾을 수도 있습니다. 
@@ -438,18 +430,17 @@ Blog.objects.filter(entry__headline__contains='Lennon').filter(entry__pub_date__
 ```
 "Lennon" 을 모두 가지고 있는 두 개의 entry가 한 블로그에 연결되어 있다고 하겠습니다. 그러나 이 중에 어떤 entry 도 2008 년이 아닙니다. 이때, 첫 번째 쿼리는 블로그를 반환하지 않지만 두 번째 쿼리는 해당 블로그를 반환합니다.
 
-두번째 쿼리 예에서, 첫번째 필터는 
 두 번째 예에서 첫 번째 필터 는 headlin 에서 “Lennon”이 있는 entry에 연결된 모든 블로그로 쿼리 세트를 제한합니다. 두 번째 필터는 2008 년에 게시 된 entry에 연결된 블로그로 제한합니다. 두 번째 필터에 의해 선택된 entry는 첫 번째 필터의 entry와 같거나 같지 않을 수 있습니다. Entry를 필터링하는 것이 아니라 각 필터와 연결된 Blog 를 필터링하는 것 입니다.
 
 
-multi-value relationships에서 exclude()는 위에서 언급한 filter()의 방식과 같이 작동하지는 않습니다. exclude() 경우는 모든 lookup을 다 만족할 필요가 없습니다. 
+multi-value relationships에서 exclude()는 위에서 언급한 filter()의 같은 방식으로 작동하지는 않습니다. exclude() 경우는 모든 lookup을 다 만족할 필요가 없습니다. 
 ```python
 Blog.objects.exclude(
     entry__headline__contains='Lennon',
     entry__pub_date__year=2008,
 )
 ```
-filter() 사용할 때의 동작과 달리 두 조건을 모두 만족하는 entry를 기반으로 블로그를 제한 하지는 않습니다. 반대로 제한하기 위해서는 아래와 같이 두 가지 쿼리를 작성해야 합니다
+filter() 동작과 달리 두 조건을 모두 만족하는 entry를 기반으로 블로그를 제한 하지는 않습니다. 반대로 제한하기 위해서는 아래와 같이 두 가지 쿼리를 작성해야 합니다
 ```python
 Blog.objects.exclude(
     entry__in=Entry.objects.filter(
@@ -464,13 +455,13 @@ Blog.objects.exclude(
 
 Django는 F expressions을 사용하여 그러 비교를 사용할 수 있습니다. F() 인스턴스는 쿼리 내에서 모델 필드에 대한 참조 역할을 합니다. 이러한 참조를 쿼리 필터에서 사용하여 동일한 모델 인스턴스에서 서로 다른 두 필드의 값을 비교할 수 있습니다.
 
-예를 들어, pingbacks보다 더 큰 number_of_comments 이 있는 entry 의 목록을 찾으려면 number_of_pingbacks를 참조 할 F() 객체를 구성하고 쿼리에서 해당 객체를 사용 합니다.
+예를 들어, pingbacks 보다 더 큰 number_of_comments 이 있는 entry 의 목록을 찾으려면 number_of_pingbacks를 참조 할 F() 객체를 구성하고 쿼리에서 해당 객체를 사용 합니다.
 ```python
 >>> from django.db.models import F
 >>> Entry.objects.filter(number_of_comments__gt=F('number_of_pingbacks'))
 ```
 
-Django는 상수, F()객체와 함께 더하기, 빼기, 곱하기, 나누기, 모듈로 및 거듭 제곱 연산을 지원 합니다. 핑백 보다 두 배 이상의 주석 이있는 모든 entry를 찾으려면 쿼리를 다음과 같이 작성합니다.
+Django는 상수, F()객체와 함께 더하기, 빼기, 곱하기, 나누기, 모듈로 및 거듭 제곱 연산을 지원 합니다. pingbacks 보다 두 배 이상의 주석이 있는 모든 entry를 찾으려면 쿼리를 다음과 같이 작성합니다.
 ```python
 >>> Entry.objects.filter(number_of_comments__gt=F('number_of_pingbacks') * 2)
 ```
@@ -480,7 +471,7 @@ rating이 number_of_pingbacks, number_of_comments 수의 합 보다 작은 모�
 >>> Entry.objects.filter(rating__lt=F('number_of_comments') + F('number_of_pingbacks'))
 ```
 
-이중 밑줄 표기법을 사용하여 F()개체의 관계를 확장 할 수도 있습니다 . 이중 밑줄 객체을 포함하는 F()는 관련 개체에 접근하는 데 필요한 조인 나타냅니다. 예를 들어, 저자 이름이 블로그 이름과 동일한 모든 entry을 검색하기 위해 다음과 같은 쿼리를 작성 할 수 있습니다.
+이중 밑줄 표기법을 사용하여 F()개체의 관계를 확장 할 수도 있습니다 . 이중 밑줄 객체을 포함하는 F()는 관련 개체에 접근하는 데 필요한 조인 나타냅니다. 예를 들어, Author 이름이 Blog 이름과 동일한 모든 entry을 검색하기 위해 다음과 같은 쿼리를 작성 할 수 있습니다.
 ```python
 >>> Entry.objects.filter(authors__name=F('blog__name'))
 ```
@@ -498,8 +489,8 @@ F()객체에 의해 비트 연산을 지원 .bitand(), .bitor(), .bitrightshift(
 
 
 
-### The pk lookup shortcut
-편의상 Django는 pk(기본 키)를 나타내는 조회 바로 가기를 제공합니다.
+### pk 필드 조회 shortcut
+편의상 Django는 pk(기본 키)를 나타내는 shortcut을 제공합니다.
 
 예제 Blog 모델에서 기본 키는 id 필드 이므로 이 세 명령문은 동일합니다
 ```python
@@ -526,10 +517,10 @@ pk 조회(lookup)는 join 에서도 작동합니다. 예를 들어, 이 세 문�
 
 
 
-### Escaping percent signs and underscores in LIKE statements
-LIKE 조회를 SQL 문에 사용하는 경우에 ( iexact, contains, icontains, startswith, istartswith, endswith 와 iendswith), 자동으로 사용되는 두 개의 특수 문자 이스케이프(퍼센트 기호)와 밑줄을- 퍼센트 기호는 여러 문자 와일드 카드와 밑줄은 의미 단일 문자 와일드 카드를 의미- 가 있습니다.
+### 백분율 기호와 밑줄 이스케이프 
+LIKE 조회를 SQL 문에 사용하는 경우에 ( iexact, contains, icontains, startswith, istartswith, endswith 와 iendswith), 두 개의 특수 문자, 퍼센트 기호와 밑줄을 자동으로 이스케이프 합니다.  퍼센트 기호는 여러 문자 와일드 카드와 밑줄은 의미 단일 문자 와일드 카드를 의미가 있습니다.
 
-예를 들어, 백분율 기호가 포함 된 모든 항목을 검색하려면 백분율 기호를 다른 문자로 사용하십시오.
+예를 들어, 백분율 기호가 포함 된 모든 항목을 검색하려면 백분율 기호를 사용할 수 있습니다.
 ```python
 >>> Entry.objects.filter(headline__contains='%')
 ```
@@ -538,17 +529,18 @@ LIKE 조회를 SQL 문에 사용하는 경우에 ( iexact, contains, icontains, 
 SELECT ... WHERE headline LIKE '%\%%';
 ```
 
-### Caching and QuerySets
+### 캐싱과 QuerySets
 각각 QuerySet은 데이터베이스 액세스를 최소화하기 위한 캐시를 포함합니다. 작동 방식을 이해하면 가장 효율적인 코드를 작성할 수 있습니다.
 
-새로 작성된 QuerySet에서 캐시가 비어 있습니다. 처음 QuerySet을 평가할 때 ( 따라서 데이터베이스 쿼리가 발생하면) Django는 쿼리 결과를 QuerySet 캐시에 저장하고 명시적으로 요청 된 결과 (예 : QuerySet 반복되는 경우 다음 요소)를 반환합니다 . QuerySet 캐시 된 결과의 재사용에 대한 후속 평가 .
+새로 작성된 QuerySet에서 캐시가 비어 있습니다. 처음 QuerySet을 평가할 때 ( 따라서 데이터베이스 쿼리가 발생하면) Django는 쿼리 결과를 QuerySet 캐시에 저장하고 명시적으로 요청 된 결과 (예 : QuerySet 반복되는 경우 다음 요소)를 반환합니다.
 
-이 캐싱 동작을 명심하십시오. 예를 들어, 다음은 두 개의 QuerySet을 만들어 평가하고 버립니다.
+
+예를 들어, 다음은 두 개의 QuerySet을 만들어 평가하고 버립니다.
 ```python
 >>> print([e.headline for e in Entry.objects.all()])
 >>> print([e.pub_date for e in Entry.objects.all()])
 ```
-즉, 동일한 데이터베이스 쿼리가 두 번 실행되어 데이터베이스 로드가 두 배가 됩니다. 또한 Entry 두 요청 사이에 초 단위로 추가되거나 삭제되었을 수 있으므로 두 목록에 동일한 데이터베이스 레코드가 포함되지 않을 수 있습니다.
+즉, 동일한 데이터베이스 쿼리가 두 번 실행되어 데이터베이스 hit이 두 배가 됩니다. 또한 두 Entry  요청 사이에 초 단위로 추가되거나 삭제되었을 수 있으므로 동일한 데이터베이스 레코드가 포함되지 않을 수 있습니다.
 
 이 문제를 피하려면  QuerySet를 저장하고 재사용 하십시오.
 ```python
@@ -557,10 +549,10 @@ SELECT ... WHERE headline LIKE '%\%%';
 >>> print([p.pub_date for p in queryset]) # Re-use the cache from the evaluation.
 ```
 
-#### When QuerySets are not cached
-쿼리 집합이 항상 결과를 캐시하지는 않습니다. 쿼리 집합의 일부만 평가할 때 캐시가 검사되지만 캐시되지 않습니다. 특히, 이는 배열의 슬라이스 또는 인덱스를 사용하여 쿼리 집합을 제한하면 캐시가 채워지지 않습니다.
+#### 캐싱 되지 안는 QuerySets
+QuerySets이 항상 결과를 캐시하지는 않습니다. QuerySets의 일부만 평가할 때 캐시가 검사는 되지만 캐시가 채워지지 않습니다. 특히, 배열의 슬라이스 또는 인덱스를 사용하여 쿼리 집합을 제한하면 캐시가 채워지지 않습니다.
 
-예를 들어 queryset 객체에서 특정 인덱스를 반복적으로 가져오면 매번 데이터베이스를 쿼리합니다.
+예를 들어 QuerySets 객체에서 특정 인덱스를 반복적으로 가져오면 매번 데이터베이스를 쿼리합니다.
 ```python
 >>> queryset = Entry.objects.all()
 >>> print(queryset[5]) # Queries the database
@@ -583,11 +575,11 @@ SELECT ... WHERE headline LIKE '%\%%';
 >>> list(queryset)
 ```
 :::tip
-queryset을 인쇄하는 것만으로는 캐시가 채워지지 않습니다. __repr__()를 호출하여 전체 쿼리 집합의 슬라이스 만 반환 하기 때문 입니다.
+QuerySets 인쇄하는 것만으로는 캐시가 채워지지 않습니다. __repr__()를 호출하여 전체 쿼리 집합의 슬라이스만 반환하기 때문 입니다.
 :::
 
 
-## Complex lookups with Q objects
+## 복잡한 필드조회를 위한 Q objects
 filter() 등의 키워드 인수 쿼리 는 "AND"로 되어 있습니다. 보다 복잡한 쿼리 (예 : OR문이있는 쿼리)를 실행해야하는 경우 Q objects을 사용할 수 있습니다.
 
 Q object(django.db.models.Q)는 키워드 인자의 컬렉션을 캡슐화하는 데 사용되는 개체입니다. 이러한 키워드 인수는 위의 "필드 조회"와 같이 지정됩니다.
@@ -778,242 +770,210 @@ for item in my_queryset:
 >>> Entry.objects.update(headline=F('blog__name'))
 ```
 ## Related objects
+모델의 관계를 정의 할 때 (즉, ForeignKey, OneToOneField나 ManyToManyField), 모델의 인스턴스들은 관련 개체에 액세스할 수 있는 API를 갖게 됩니다.
 
-```python
-# This will raise a FieldError
->>> Entry.objects.update(headline=F('blog__name'))
-```
+이 페이지의 상단에 있는 모델을 사용하여, 예를 들어, Entry객체는 e는  blog의 속성 e.blog에 접근하여 Blog 개체를 관련 얻을 수 있었습니다.
 
-```python
+Django는 또한 “다른” 관계의 측면에 대한 API 접근자를 만듭니다. 관련 모델에서 관계를 정의하는 모델로의 링크입니다. 예를 들어, Blog객체 b는  entry_set(b.entry_set.all()) 통해 Entry 관련 객체의 목록에 액세스 할 수 있습니다.
 
-```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 ### One-to-many relationships
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
-
 #### Forward
+모델에 ForeignKey가 있는 경우 해당 모델의 인스턴스는 모델의 속성을 통해 관련(외부) 객체에 액세스 할 수 있습니다.
 
 ```python
-
+>>> e = Entry.objects.get(id=2)
+>>> e.blog # Returns the related Blog object.
 ```
 
+외래 키의 속성을 통해 가져오고 설정할 수 있습니다. 외래 키에 대한 변경 사항은 save()을 호출 할 때까지 데이터베이스에 저장되지 않습니다. 
 ```python
-
+>>> e = Entry.objects.get(id=2)
+>>> e.blog = some_blog
+>>> e.save()
 ```
 
+ForeignKey 필드가  null=True 인 경우(즉, NULL값을 수 설정 있는), None 을 할당하여 관계를 제거 할 수 있습니다. 예:
 ```python
-
+>>> e = Entry.objects.get(id=2)
+>>> e.blog = None
+>>> e.save() # "UPDATE blog_entry SET blog_id = NULL ...;"
 ```
 
+일대 다 관계에 정방향 액세스는 관련 개체에 처음 액세스 할 때 캐시됩니다. 동일한 객체 인스턴스에서 외래 키에 대한 후속 액세스에서는 캐시된 개체에 접근합니다. 예:
 ```python
-
+>>> e = Entry.objects.get(id=2)
+>>> print(e.blog)  # Hits the database to retrieve the associated Blog.
+>>> print(e.blog)  # Doesn't hit the database; uses cached version.
 ```
 
+다음 방법은 모든 일대 다 관계의 캐시를 미리 재귀 적으로 미리 채 웁니다. 예:select_related() QuerySet
 ```python
-
+>>> e = Entry.objects.select_related().get(id=2)
+>>> print(e.blog)  # Doesn't hit the database; uses cached version.
+>>> print(e.blog)  # Doesn't hit the database; uses cached version.
 ```
+
 #### Following relationships “backward”
-
+모델에 ForeignKey가 있는 경우 외래 키 모델의 인스턴스는 첫 번째 모델의 모든 인스턴스를 반환 하는에 액세스 할 수 있습니다. 기본적으로 Manager 이름은 FOO_set이며 여기서 FOO는 소스 모델 이름으로 소문자입니다. 이 Manager 는 QuerySets 를 반환하며 필터링하고 조작 할 수 있습니다.
 ```python
+>>> b = Blog.objects.get(id=1)
+>>> b.entry_set.all() # Returns all Entry objects related to Blog.
 
+# b.entry_set is a Manager that returns QuerySets.
+>>> b.entry_set.filter(headline__contains='Lennon')
+>>> b.entry_set.count()
 ```
 
+FOO_set에서 ForeignKey의 매개 변수(related_name)를 설정 하여 이름을 대체 할 수 있습니다. 예를 들어, Entry 모델이 "blog = ForeignKey(Blog, on_delete=models.CASCADE, related_name='entries')" 로 변경 되면 위의 예제 코드는 다음과 같이 사용할 수 있습니다.
 ```python
+>>> b = Blog.objects.get(id=1)
+>>> b.entries.all() # Returns all Entry objects related to Blog.
 
+# b.entries is a Manager that returns QuerySets.
+>>> b.entries.filter(headline__contains='Lennon')
+>>> b.entries.count()
 ```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 #### Using a custom reverse manager
+기본적으로 역 관계 참조에 사용되는 RelatedManager 는 것은 해당 모델이 갖는 기본 Manager 의 서브 클래스 입니다 . 주어진 쿼리에 다른 Manager를 지정하려면 다음 구문을 사용할 수 있습니다.
 
 ```python
+from django.db import models
 
+class Entry(models.Model):
+    #...
+    objects = models.Manager()  # Default Manager
+    entries = EntryManager()    # Custom Manager
+
+b = Blog.objects.get(id=1)
+b.entry_set(manager='entries').all()
 ```
 
+EntryManager에서 기본 필터링을 수행하면 get_queryset() 메소드에 해당 필터링이 all()호출에 적용됩니다.
+
+물론 사용자 정의 리버스 Manager 를 지정하면 해당 사용자 정의 메소드를 호출 할 수도 있습니다.
 ```python
-
+b.entry_set(manager='entries').is_published()
 ```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 #### Additional methods to handle related objects
+QuerySet은 "개체 검색"에 정의 된 방법 외에도 ForeignKey Manager는 관련 개체 집합을 처리하는 데 사용되는 추가 방법을 제공하고 있습니다. 각각의 개요는 다음과 같으며 자세한 내용은 [관련 객체 참조](https://docs.djangoproject.com/en/3.0/ref/models/relations/) 에서 찾을 수 있습니다.
 
+add(obj1, obj2, ...) : 
+지정된 모델 객체를 관련 객체 세트에 추가합니다.
+
+create(**kwargs) : 
+새 객체를 만들어 저장하고 관련 객체 세트에 넣습니다. 새로 만든 개체를 반환합니다.
+
+remove(obj1, obj2, ...) : 
+관련 객체 세트에서 지정된 모델 객체를 제거합니다.
+
+clear() : 
+관련 객체 세트에서 모든 객체를 제거합니다.
+
+set(objs) : 
+관련 개체 세트를 교체하십시오.
+
+
+관련 세트의 멤버를 지정하려면 set()에 반복 가능한(iterable) 오브젝트 인스턴스와 함께 메소드를 사용하십시오. 예를 들어, e1 과 e2가 Entry 인스턴스 인 경우 :
 ```python
-
+b = Blog.objects.get(id=1)
+b.entry_set.set([e1, e2])
 ```
 
-```python
 
-```
+::: tip
+remove(), clear() 는 ForeignKeys 가 null=True 때만 작동됩니다.
+:::
 
-```python
 
-```
+만약 clear() 가 사용 가능하다면 entry_set 의 기존의 객체가 모두 제거한 후에 iterable 객체(이 경우,리스트)를 세트에 추가된다. clear() 가 가능하지 않은 경우 모든 객체는 기존의 요소를 제거하지 않고 추가됩니다.
 
-```python
 
-```
+이 섹션에 설명 된 각 "역방향" 작업은 데이터베이스에 즉시 영향을 줍니다. 모든 추가, 작성 및 삭제는 즉시 자동으로 데이터베이스에 저장됩니다.
 
-```python
 
-```
 ### Many-to-many relationships
+다 대 다 관계의 양쪽 끝은 다른 쪽 끝에 자동 API 액세스를 얻습니다. API는 위의 "뒤로"일대 다 관계와 유사하게 작동합니다.
 
+한 가지 차이점은 속성 이름 지정에 있습니다. ManyToManyField 필드를 정의하는 모델은 해당 필드 자체의 속성 이름을 사용하지만 "역" 모델은 원래 모델의 소문자 모델 이름과 '_set' 을 합하여 역 일대 다 관계와 동일하게 사용합니다. 예를 들어 
 ```python
+e = Entry.objects.get(id=3)
+e.authors.all() # Returns all Author objects for this Entry.
+e.authors.count()
+e.authors.filter(name__contains='John')
 
+a = Author.objects.get(id=5)
+a.entry_set.all() # Returns all Entry objects for this Author.
 ```
 
-```python
+ForeignKey와 마찬가지로, ManyToManyField 도 related_name을 지정할 수 있습니다. 위의 예에서 Entry의 ManyToManyField에 related_name='entries' 로 지정된 경우 각 Author 인스턴스는 entry_set 대신 entries 속성을 갖습니다.
 
+일대 다 관계와의 또 다른 차이점은  add(), set() 그리고 remove() 메소드에 모델 인스턴스는 뿐만 아니라 기본 키 값도 사용이 가능하다는 것 입니다. 예를 들어 다음의 set() 호출은 동일하게 작동합니다.
+```python
+a = Author.objects.get(id=5)
+a.entry_set.set([e1, e2])
+a.entry_set.set([e1.pk, e2.pk])
 ```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 
 ### One-to-one relationships
+일대일 관계는 다 대일 관계와 매우 유사합니다. 모델에서 OneToOneField을 정의하면 해당 모델의 인스턴스는 모델의 속성을 통해 관련 객체에 액세스 할 수 있습니다.
 
+예를 들면 다음과 같습니다.
 ```python
+class EntryDetail(models.Model):
+    entry = models.OneToOneField(Entry, on_delete=models.CASCADE)
+    details = models.TextField()
 
+ed = EntryDetail.objects.get(id=2)
+ed.entry # Returns the related Entry object.
 ```
 
+차이점은 "역방향" 쿼리에서 발생합니다. 일대일 관계의 관련 모델도 Manager 객체에 액세스 할 수 있지만 Manager 객체 모음이 아닌 단일 객체 를 나타냅니다.
 ```python
-
+e = Entry.objects.get(id=2)
+e.entrydetail # returns the related EntryDetail object
 ```
 
+이 관계에 객체가 할당되어 있지 않으면 Django는 DoesNotExist예외를 발생시킵니다.
+순방향 관계를 지정할 때와 같은 방법으로 인스턴스를 역관계에 지정할 수 있습니다.
 ```python
-
+e.entrydetail = ed
 ```
 
-```python
-
-```
-
-```python
-
-```
 
 ### How are the backward relationships possible?
 
-```python
+다른 객체 관계형 매퍼는 양쪽에 관계를 정의해야합니다. Django 개발자는 이것이 DRY (Do n't Repeat Yourself) 원칙을 위반한다고 생각하므로 Django는 한쪽 끝의 관계 만 정의하면 됩니다.
 
-```
+그러나 모델 클래스가 다른 모델 클래스가 로드 될 때까지 어떤 모델 클래스가 관련되어 있는지 알지 못한다면 어떻게 이것이 가능합니까?
 
-```python
+대답은 app registry에 있습니다. Django가 시작되면 INSTALLED_APPS에 나열된 각 응용 프로그램을 가져온 다음 각 응용 프로그램 내부 models의 모듈을 가져옵니다. 새로운 모델 클래스가 생성 될 때마다 Django는 관련 모델에 역관계를 추가합니다. 관련 모델을 아직 import 하지 않은 경우 Django는 관계를 추적하고 관련 모델을 import 할 때 관계를 추가합니다.
 
-```
+이러한 이유로 사용중인 모든 모델을 INSTALLED_APPS에 응용 프로그램으로 정의해야 합니다. 그렇지 않으면 역방향 관계가 제대로 작동하지 않을 수 있습니다.
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 
 ### Queries over related objects
+관련 개체와 관련된 쿼리는 일반 값 필드의 쿼리와 동일한 규칙을 따릅니다. 일치하는 쿼리 값을 지정할 때 객체 인스턴스 자체 또는 객체의 기본 키 값을 사용할 수 있습니다.
 
+다음과 같은 세 가지 쿼리는 동일 할 것이다 :
 ```python
-
+Entry.objects.filter(blog=b) # Query using object instance
+Entry.objects.filter(blog=b.id) # Query using id from instance
+Entry.objects.filter(blog=5) # Query using id directly
 ```
 
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 
 ## Falling back to raw SQL
+Django의 데이터베이스 맵퍼가 처리하기에 너무 복잡한 SQL 쿼리를 작성해야하는 경우 수동으로 SQL을 작성할 수 있습니다. Django에는 원시 SQL 쿼리를 작성하기 위한 몇 가지 옵션이 있습니다. [원시 SQL 쿼리](https://docs.djangoproject.com/en/3.0/topics/db/sql/) 수행을 참조하십시오 .
 
-```python
+마지막으로 Django 데이터베이스 계층은 데이터베이스에 대한 인터페이스 일뿐입니다. 다른 도구, 프로그래밍 언어 또는 데이터베이스 프레임 워크를 통해 데이터베이스에 액세스 할 수 있습니다. 데이터베이스에 대해 Django 고유의 것은 없습니다.
 
-```
 
-```python
 
-```
-
-```python
-
-```
-
-```python
-
-```
-
-```python
-
-```
 
 ## filter(A).filter(B) vs filter(A, B)
 
