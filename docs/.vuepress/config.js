@@ -5,10 +5,9 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: "Home", link: "/" },
-      { text: "Languages", 
-        items: [
-          { text: "Python", link: "/languages/python/" },
-        ],
+      {
+        text: "Languages",
+        items: [{ text: "Python", link: "/languages/python/" }],
       },
       {
         text: "Frameworks",
@@ -22,16 +21,14 @@ module.exports = {
           { text: "NestJS", link: "/frameworks/nestjs/" },
         ],
       },
-      { text: "Tool & Module", 
-        items: [
-          { text: "Django-REST", link: "/tool-module/django-rest/" },
-        ],
+      {
+        text: "Tool & Module",
+        items: [{ text: "Django-REST", link: "/tool-module/django-rest/" }],
       },
       { text: "External", link: "https://google.com" },
     ],
 
     sidebar: {
-      
       "/languages/python/": [
         {
           title: "Python",
@@ -113,7 +110,16 @@ module.exports = {
         {
           title: "Django REST",
           collapsable: false,
-          children: ["", "tutorial-1-serialization", "serializer"],
+          children: [
+            "",
+            "tutorial-1-serialization",
+            "tutorial-2-request",
+            "tutorial-3-classbase",
+            "tutorial-4-authentication",
+            "tutorial-5-relationship",
+            "tutorial-6-viewsets",
+            "serializer",
+          ],
         },
       ],
       "/tool-module/git/": [
@@ -123,7 +129,6 @@ module.exports = {
           children: ["", "git-flow", "ssh"],
         },
       ],
-
 
       // fallback
       "/": ["" /* / */],

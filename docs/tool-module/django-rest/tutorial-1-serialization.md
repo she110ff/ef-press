@@ -1,4 +1,4 @@
-# 직렬화(T1)
+# 직렬화(Tutorial 1)
 이 튜토리얼은 웹 API를 뼈대가 되는 코드 작성을 다룹니다. 그 과정에서 REST 프레임워크를 구성하는 다양한 구성 요소를 소개하고 모든 구성 요소가 어떻게 결합되는지 포괄적으로 이해합니다.
 
 이 튜토리얼의 코드는 GitHub 의 [encode/rest-framework-tutorial](https://github.com/encode/rest-framework-tutorial) 저장소에서 사용할 수 있습니다. 완성 된 구현은 테스트를 위해 샌드박스 버전으로 온라인으로 제공됩니다. [데모](https://restframework.herokuapp.com/)
