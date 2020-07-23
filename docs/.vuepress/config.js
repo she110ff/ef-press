@@ -63,13 +63,6 @@ module.exports = {
           children: ["", "install", "concept"],
         },
       ],
-      "/frameworks/git/": [
-        {
-          title: "Git",
-          collapsable: false,
-          children: ["", "ssh"],
-        },
-      ],
       "/frameworks/vuejs/": [
         {
           title: "VueJS",
@@ -121,6 +114,13 @@ module.exports = {
           title: "Django REST",
           collapsable: false,
           children: ["", "tutorial-1-serialization", "serializer"],
+        },
+      ],
+      "/tool-module/git/": [
+        {
+          title: "Git",
+          collapsable: false,
+          children: ["", "git-flow", "ssh"],
         },
       ],
 

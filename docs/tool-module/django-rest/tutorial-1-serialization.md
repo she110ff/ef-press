@@ -16,7 +16,7 @@ pip install django
 pip install djangorestframework
 pip install pygments  # We'll be using this for the code highlighting
 ```
-언제든지 가상 환경을 종료하려면을 deactivate를 입력 하십시오. 자세한 내용은 [venv](https://docs.python.org/3/library/venv.html) 설명서를 참조하십시오.
+가상 환경을 종료하려면 deactivate를 입력 하십시오. 자세한 내용은 [venv](https://docs.python.org/3/library/venv.html) 설명서를 참조하십시오.
 
 
 ## 시작하기 

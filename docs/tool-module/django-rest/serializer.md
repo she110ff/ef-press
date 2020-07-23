@@ -4,7 +4,7 @@
 > 
 > -- Django users group, Russell Keith-Magee
 
-Serializer를 사용하면 QuerySets 및 모델 인스턴스와 같은 복잡한 데이터를 네이티브 Python 데이터 유형으로 변환한 다음 JSON, XML 또는 다른 콘텐츠 유형으로 쉽게 렌더링 할 수 있습니다. Serializer는 역 직렬화 기능을 제공하여 들어오는 데이터를 먼저 검증한 후 파싱 된 데이터를 복잡한 유형으로 다시 변환 할 수 있습니다.
+Serializer를 사용하면 QuerySets 및 모델 인스턴스와 같은 복잡한 데이터를 네이티브 Python 데이터 유형으로 변환한 다음 JSON, XML 또는 다른 콘텐츠 유형으로 쉽게 렌더링 할 수 있습니다. Serializer는 역 직렬화 기능을 제공하여 들어오는 데이터를 검증하고 파싱하여 복잡한 유형으로 다시 변환 할 수 있습니다.
 
 REST 프레임 워크의 serializer는 Django ``Form`` 및 ``ModelForm`` 클래스와 매우 유사하게 작동합니다. ``Serializer``클래스는 serializer를 만들기 위해 모델과 QuerySets을 사용하는 shortcut을 제공하는 ModelSerializer 클래스 뿐만 아니라 응답의 출력을 제어 할 수 있는 강력하고 포괄적인 방법들을 제공합니다.
 
@@ -25,9 +25,9 @@ class Comment(object):
 
 comment = Comment(email='leila@example.com', content='foo bar')
 ```
-Comment객체에 해당하는 데이터를 직렬화하고 역 직렬화하는 데 사용할 수있는 직렬화기를 선언 합니다.
+Comment 객체의 데이터를 직렬화/역 직렬화 하는데 사용할 수 있는 Serializer를 선언합니다.
 
-시리얼 라이저 선언은 폼 선언과 매우 유사합니다 :
+Serializer 선언은 폼 선언과 매우 유사합니다 :
 ```python
 from rest_framework import serializers
 
@@ -40,15 +40,14 @@ class CommentSerializer(serializers.Serializer):
 
 
 ### objects 직렬화 
-CommentSerializer주석 또는 주석 목록을 직렬화하는 데 사용할 수 있습니다 . 다시, 사용하는 Serializer클래스 것은 사용처럼 많이 보이는 Form클래스를.
-
+CommentSerializer는 comment 또는 comment list를 직렬화하는 데 사용할 수 있습니다 . 
 ```python
 serializer = CommentSerializer(comment)
 serializer.data
 # {'email': 'leila@example.com', 'content': 'foo bar', 'created': '2016-01-27T15:17:10.375877'}
 ```
 
-이 시점에서 모델 인스턴스를 Python 기본 데이터 유형으로 변환했습니다. 직렬화 프로세스를 마무리하기 위해 데이터를로 렌더링합니다 json.
+직렬화 프로세스를 마무리하기 위해 데이터를로 렌더링합니다 json.
 ```python
 from rest_framework.renderers import JSONRenderer
 
@@ -60,7 +59,7 @@ json
 
 
 ### objects 역직렬화
-역 직렬화는 비슷합니다. 먼저 스트림을 Python 기본 데이터 유형으로 구문 분석합니다.
+역 직렬화는 비슷합니다. 먼저 스트림을 Python 기본 데이터 유형으로 파싱합니다.
 
 ```python
 import io
@@ -70,7 +69,7 @@ stream = io.BytesIO(json)
 data = JSONParser().parse(stream)
 ```
 
-그러면 원시 데이터 유형을 검증 된 데이터 사전으로 복원합니다.
+native 데이터 유형을 dictionary 유형의 validated_data 로 복원합니다.
 ```python
 serializer = CommentSerializer(data=data)
 serializer.is_valid()
@@ -80,7 +79,7 @@ serializer.validated_data
 ```
 
 ### instances 저장
-검증 된 데이터를 기반으로 완전한 객체 인스턴스를 반환하려면 .create()and .update()메소드 중 하나 또는 둘 다를 구현해야 합니다. 예를 들면 다음과 같습니다.
+검증 된 데이터를 기반으로 완전한 객체 인스턴스를 반환하려면 .create()와 .update() 메소드 중 하나 또는 둘 다를 구현해야 합니다. 예를 들면 다음과 같습니다.
 
 ```python
 class CommentSerializer(serializers.Serializer):
@@ -98,7 +97,7 @@ class CommentSerializer(serializers.Serializer):
         return instance
 ```
 
-객체 인스턴스가 Django 모델에 해당하는 경우 이러한 메소드가 객체를 데이터베이스에 저장하도록해야합니다. 예를 들어 CommentDjango 모델 인 경우 방법은 다음과 같습니다.
+객체 인스턴스가 Django 모델에 해당하는 경우 이러한 메소드가 객체를 데이터베이스에 저장하도록 해야합니다. 예를 들어 CommentDjango 모델인 경우 방법은 다음과 같습니다.
 ```python
     def create(self, validated_data):
         return Comment.objects.create(**validated_data)
@@ -111,12 +110,12 @@ class CommentSerializer(serializers.Serializer):
         return instance
 ```
 
-이제 데이터를 직렬화 해제 할 때 .save()확인 된 데이터를 기반으로 객체 인스턴스를 반환하도록 호출 할 수 있습니다 .
+이제 데이터의 역 직렬화 과정에서 확인된 데이터를 기반으로 객체 인스턴스를 반환하도록 ``.save()``  호출할 수 있습니다 .
 ```python
 comment = serializer.save()
 ```
 
-호출 .save()하면 serializer 클래스를 인스턴스화 할 때 기존 인스턴스가 전달되었는지 여부에 따라 새 인스턴스를 만들거나 기존 인스턴스를 업데이트합니다.
+``.save()`` 를 호출하면 serializer 클래스를 인스턴스화 할 때 기존 인스턴스가 전달되었는지 여부에 따라 새 인스턴스를 만들거나 기존 인스턴스를 업데이트 합니다.
 ```python
 # .save() will create a new instance.
 serializer = CommentSerializer(data=data)
@@ -125,22 +124,21 @@ serializer = CommentSerializer(data=data)
 serializer = CommentSerializer(comment, data=data)
 ```
 
-모두 .create()와 .update()방법은 선택 사항입니다. 직렬 변환기 클래스의 유스 케이스에 따라 둘 중 하나 또는 둘 다를 구현할 수 있습니다.
+``.create()``와 ``.update()`` 모두 선택 사항입니다. serializer 클래스의 유스 케이스에 따라 둘 중 하나 또는 둘 다를 구현할 수 있습니다.
 
-에 추가 속성 전달 .save()
-때로는 인스턴스를 저장할 때 뷰 코드가 추가 데이터를 주입 할 수 있기를 원할 수도 있습니다. 이 추가 데이터에는 현재 사용자, 현재 시간 또는 요청 데이터의 일부가 아닌 다른 정보가 포함될 수 있습니다.
+#### .save()에 추가 속성 전달
+때로는 인스턴스를 저장할 때 뷰 코드에서 추가 데이터를 주입해야 할 수도 있습니다. 이 추가 데이터에는 현재 사용자, 현재 시간 또는 요청 데이터의 일부가 아닌 다른 정보가 포함될 수 있습니다.
 
-를 호출 할 때 추가 키워드 인수를 포함하면됩니다 .save(). 예를 들면 다음과 같습니다.
+.save()를 호출할 때 추가 키워드 인수를 포함하면 됩니다. 예를 들면 다음과 같습니다.
 ```python
 serializer.save(owner=request.user)
 ```
+.create() 또는 .update() 가 호출될 때 추가 키워드 인수가 validated_data 에 포함됩니다.
 
-또는 호출 validated_data시 추가 키워드 인수가 인수에 포함됩니다 ..create().update()
+#### .save() 재정의
+경우에 따라 .create()및 .update()가 필요하지 않은 경우가 있을 수 있습니다. 예를 들어, contact form 의 새 인스턴스를 만들지 않고 대신 전자 메일을 보내려고 합니다.
 
-.save()직접 재정의 .
-경우에 따라 .create()및 .update()메소드 이름이 의미가 없을 수 있습니다. 예를 들어, 문의 양식에서 새 인스턴스를 만들지 않고 대신 전자 메일이나 다른 메시지를 보낼 수 있습니다.
-
-이 경우 .save()보다 읽기 쉽고 의미있는 것으로 직접 대체하도록 선택할 수 있습니다 .
+이 경우 .save()를 대체하도록 선택할 수 있습니다.
 
 예를 들면 다음과 같습니다.
 ```python
@@ -153,13 +151,13 @@ class ContactForm(serializers.Serializer):
         message = self.validated_data['message']
         send_email(from=email, message=message)
 ```
-위의 경우 serializer .validated_data속성에 직접 액세스해야 합니다.
+위의 경우 serializer의 .validated_data 속성에 직접 액세스해야 합니다.
 
 
 
-### 검증 
+### 유효성 검사 
 
-데이터를 직렬화 해제 할 때는 항상 is_valid()유효성 검사 된 데이터에 액세스하거나 객체 인스턴스를 저장하기 전에 호출해야 합니다. 유효성 검사 오류가 발생하면 .errors속성에 결과 오류 메시지를 나타내는 사전이 포함됩니다. 예를 들면 다음과 같습니다.
+데이터를 역 직렬화 할 때, validated_data 데이터에 액세스하거나 객체 인스턴스를 저장하기 전에 항상 ``is_valid()``를 호출해야 합니다. 유효성 검사 오류가 발생하면 ``.errors`` 속성에 결과 오류 메시지를 나타내는 dictionary 가 포함됩니다. 예를 들면 다음과 같습니다.
 ```python
 serializer = CommentSerializer(data={'email': 'foobar', 'content': 'baz'})
 serializer.is_valid()
@@ -168,25 +166,26 @@ serializer.errors
 # {'email': ['Enter a valid e-mail address.'], 'created': ['This field is required.']}
 ```
 
-사전의 각 키는 필드 이름이되고 값은 해당 필드에 해당하는 오류 메시지의 문자열 목록이됩니다. non_field_errors키는 존재할 수, 및 일반 유효성 검사 오류를 나열합니다. non_field_errors키 의 이름은 NON_FIELD_ERRORS_KEYREST 프레임 워크 설정을 사용하여 사용자 정의 할 수 있습니다 .
+dictionary의 각 키는 필드 이름이되고 값은 해당 필드에 오류 메시지의 문자열 목록이 됩니다. ``non_field_errors`` 키는 있을 수 있으며 일반적 유효성 검사 오류를 나열합니다. ``non_field_errors `` 키의 이름은 ``NON_FIELD_ERRORS_KEYREST`` REST 프레임워크 설정을 사용하여 사용자 정의 할 수 있습니다.
 
-항목 목록을 역 직렬화하면 각 역 직렬화 된 항목을 나타내는 사전 목록으로 오류가 반환됩니다.
+list의 item을 역 직렬화하면 각 역 직렬화 된 항목을 나타내는 dictionary list 형태로 오류가 반환됩니다.
 
-유효하지 않은 데이터에 대한 예외 발생
-이 .is_valid()메소드 는 유효성 검증 오류가있는 경우 예외 raise_exception를 발생 시키는 선택적 플래그를 사용 serializers.ValidationError합니다.
 
-이러한 예외는 REST 프레임 워크가 제공하는 기본 예외 핸들러에 의해 자동으로 처리 HTTP 400 Bad Request되며 기본적으로 응답을 리턴 합니다.
+#### 유효하지 않은 데이터에 대한 예외 발생
+이 ``.is_valid()`` 메소드는 유효성 검증 오류가 있는 경우 예외 ``serializers.ValidationError``를 발생 시키는 ``raise_exception``플래그를 사용할 수 있습니다.
+
+이러한 예외는 REST 프레임워크가 제공하는 기본 예외 핸들러에 의해 자동으로 처리되며 기본적으로 ``HTTP 400 Bad Request`` 응답을 리턴 합니다.
 ```python
 # Return a 400 response if the data was invalid.
 serializer.is_valid(raise_exception=True)
 ```
 
 #### 필드 레벨 검증
-서브 클래스에 .validate_<field_name>메소드를 추가하여 사용자 정의 필드 레벨 유효성 검증을 지정할 수 있습니다 Serializer. 이들은 .clean_<field_name>장고 양식 의 방법 과 유사 합니다.
+Serializer의 서브 클래스에 .validate_<field_name>메소드를 추가하여 사용자 정의 필드 레벨 유효성 검증을 지정할 수 있습니다. 이들은 .clean_<field_name> 의 django form 방법과 유사합니다.
 
 이러한 메소드는 단일 인수를 사용하는데, 이는 유효성 검증이 필요한 필드 값입니다.
 
-귀하의 validate_<field_name>방법은 유효 값을 반환하거나 인상한다 serializers.ValidationError. 예를 들면 다음과 같습니다.
+validate_<field_name>은 유효 값을 반환하거나 serializers.ValidationError 를 발생시켜야 합니다. 예를 들면 다음과 같습니다.
 ```python
 from rest_framework import serializers
 
@@ -202,11 +201,10 @@ class BlogPostSerializer(serializers.Serializer):
             raise serializers.ValidationError("Blog post is not about Django")
         return value
 ```
-참고 : 귀하의 경우 <field_name>IS는 매개 변수와 시리얼에 선언 된 required=False필드가 포함되어 있지 않은 경우 다음이 검증 단계가 수행되지 않습니다.
+참고 :  <field_name>이 ``required=False`` 매개 변수 선언된 필드의 경우 필드가 포함되어 있지 않은 경우 이 검증 단계가 수행되지 않습니다.
 
 #### 객체 레벨 검증
-여러 필드에 액세스해야하는 다른 유효성 검증을 수행하려면 서브 클래스에 호출 된 메소드를 추가 .validate()하십시오 Serializer. 이 메소드는 단일 인수를 사용하는데, 이는 필드 값의 사전입니다. serializers.ValidationError필요한 경우 값을 올리 거나 확인 된 값을 반환해야합니다. 예를 들면 다음과 같습니다.
-
+여러 필드에 접근하여 다른 유효성 검증을 수행하려면 Serializer 서브 클래스에 ``.validate()`` 메소드를 추가하십시오. 이 메소드는 단일 인수를 사용하는데, 이는 필드 값의 dictionary 입니다.  필요한 경우 값을 serializers.ValidationError 발생 시키거나 확인된 값을 반환해야 합니다. 예를 들면 다음과 같습니다.
 ```python
 from rest_framework import serializers
 
@@ -225,13 +223,9 @@ class EventSerializer(serializers.Serializer):
 ```
 
 
-```python
 
-```
-
-#### 검사기
-시리얼 라이저의 개별 필드는 필드 인스턴스에서 선언하여 유효성 검사기를 포함 할 수 있습니다. 예를 들면 다음과 같습니다.
-
+#### 유효성 검사기(Validators)
+Serializer의 개별 필드에 유효성 검사기를 포함할 수 있습니다. 예를 들면 다음과 같습니다.
 ```python
 def multiple_of_ten(value):
     if value % 10 != 0:
@@ -241,7 +235,7 @@ class GameRecord(serializers.Serializer):
     score = IntegerField(validators=[multiple_of_ten])
 ```
 
-시리얼 라이저 클래스에는 전체 필드 데이터 세트에 적용되는 재사용 가능한 유효성 검사기가 포함될 수도 있습니다. 이 유효성 검사기는 내부 Meta클래스에서 다음과 같이 선언하여 포함됩니다 .
+Serializer 클래스에는 전체 필드 데이터 세트에 적용되는 재사용 가능한 유효성 검사기가 포함될 수도 있습니다. 이 유효성 검사기는 내부 Meta클래스에서 다음과 같이 선언하여 포함됩니다 .
 ```python
 class EventSerializer(serializers.Serializer):
     name = serializers.CharField()
@@ -255,14 +249,16 @@ class EventSerializer(serializers.Serializer):
             fields=['room_number', 'date']
         )
 ```
+더 많은 정보 [validators documentation](https://www.django-rest-framework.org/api-guide/validators/).
+
 
 ### 초기 데이터 및 인스턴스에 접근
-초기 객체 또는 쿼리 셋을 serializer 인스턴스에 전달하면 객체를로 사용할 수있게됩니다 .instance. 초기 객체가 전달되지 않으면 .instance속성은입니다 None.
+초기 객체 또는 쿼리 셋을 serializer 인스턴스에 전달하면 객체를 ``.instance``로 사용할 수 있게 됩니다. 초기 객체가 전달되지 않으면 ``.instance`` 속성은 None 입니다.
 
-시리얼 라이저 인스턴스로 데이터를 전달할 때 수정되지 않은 데이터는로 사용할 수 있습니다 .initial_data. 데이터 키워드 인수가 전달 .initial_data되지 않으면 속성이 존재하지 않습니다.
+serializer 인스턴스로 데이터를 전달할 때 수정되지 않은 데이터는 ``.initial_data``로 사용할 수 있습니다. 데이터 키워드 인수가 전달되지 않으면  ``.initial_data``속성이 존재하지 않습니다.
 
 ### 부분 업데이트
-기본적으로 serializer는 모든 필수 필드에 대해 값을 전달해야합니다. 그렇지 않으면 유효성 검사 오류가 발생합니다. partial부분 업데이트를 허용하기 위해 인수를 사용할 수 있습니다 .
+기본적으로 serializer의 모든 필수 필드에 대해 값을 전달해야 합니다. 그렇지 않으면 유효성 검사 오류가 발생합니다. 부분 업데이트를 허용하기 위해 partial 인수를 사용할 수 있습니다 .
 
 ```python
 # Update `comment` with partial data
@@ -272,9 +268,9 @@ serializer = CommentSerializer(comment, data={'content': 'foo bar'}, partial=Tru
 
 
 ### 중첩 객체 다루기 
-앞의 예제는 단순한 데이터 유형 만있는 객체를 처리하는 데 적합하지만 때로는 객체의 일부 속성이 문자열, 날짜 또는 정수와 같은 간단한 데이터 유형이 아닌 더 복잡한 객체를 나타낼 수도 있어야합니다.
+앞의 예제는 단순한 데이터 유형 만있는 객체를 처리하는 데 적합하지만 때로는 객체의 일부 속성이 문자열, 날짜 또는 정수와 같은 간단한 데이터 유형이 아닌 더 복잡한 객체를 나타낼 수도 있어야 합니다.
 
-Serializer클래스의 형태 자체가 Field, 하나 개의 오브젝트 타입은 다른 내부 중첩 관계를 나타내는 데 사용될 수있다.
+``Serializer`` 클래스 자체가 Field 형태로 사용될 수 있습니다. 하나 개의 오브젝트 타입은 다른 내부 중첩 관계를 나타내는 데 사용될 수있다.
 
 ```python
 class UserSerializer(serializers.Serializer):
@@ -287,7 +283,7 @@ class CommentSerializer(serializers.Serializer):
     created = serializers.DateTimeField()
 ```
 
-중첩 표현이 None값을 선택적으로 받아 들일 수 있으면 required=False플래그를 중첩 직렬 변환기에 전달해야합니다 .
+중첩 표현이 ``None`` 값을 선택적으로 받아 들일 수 있으며, 이 경우는 ``required=False`` 플래그를 중첩 ``Serializer`에 전달해야 합니다.
 ```python
 class CommentSerializer(serializers.Serializer):
     user = UserSerializer(required=False)  # May be an anonymous user.
@@ -295,7 +291,7 @@ class CommentSerializer(serializers.Serializer):
     created = serializers.DateTimeField()
 ```
 
-마찬가지로 중첩 표현이 항목 목록이어야 many=True하는 경우 중첩 된 직렬화에 플래그를 전달해야합니다 .
+마찬가지로 중첩 객체가 List 인 경우 중첩 된 ``Serializer`` 에 ``many=True`` 플래그를 전달해야 합니다 .
 ```python
 class CommentSerializer(serializers.Serializer):
     user = UserSerializer(required=False)
@@ -305,7 +301,7 @@ class CommentSerializer(serializers.Serializer):
 ```
 
 ### 쓰기 가능한 중첩 표현
-데이터 역 직렬화를 지원하는 중첩 표현을 처리 할 때 중첩 객체의 오류는 중첩 객체의 필드 이름 아래에 중첩됩니다.
+데이터 역 직렬화를 지원하는 중첩 표현을 처리할 때 중첩 객체의 오류는 중첩 객체의 필드 이름 아래에 표시됩니다.
 
 ```python
 serializer = CommentSerializer(data={'user': {'email': 'foobar', 'username': 'doe'}, 'content': 'baz'})
@@ -314,13 +310,12 @@ serializer.is_valid()
 serializer.errors
 # {'user': {'email': ['Enter a valid e-mail address.']}, 'created': ['This field is required.']}
 ```
+마찬가지로 ``.validated_data`` 속성에는 중첩된 데이터 구조가 포함됩니다.
 
-마찬가지로이 .validated_data속성에는 중첩 된 데이터 구조가 포함됩니다.
+#### 중첩 표현을 위한 .create() 작성 방법
+쓰기 가능한 중첩 표현을 지원하는 경우 여러 객체 저장을 처리하는 ``.create()`` 또는 ``.update()`` 메소드를 작성해야 합니다.
 
-.create()중첩 표현을위한 작성 방법
-쓰기 가능한 중첩 표현을 지원하는 경우 여러 객체 저장을 처리하는 메소드 .create()또는 .update()메소드 를 작성해야 합니다.
-
-다음 예제는 중첩 된 프로파일 오브젝트로 사용자 작성을 처리하는 방법을 보여줍니다.
+다음 예제는 중첩된 profile 오브젝트로 user 작성을 처리하는 방법을 보여줍니다.
 ```python
 class UserSerializer(serializers.ModelSerializer):
     profile = ProfileSerializer()
@@ -336,14 +331,15 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 ```
 
-.update()중첩 표현을위한 작성 방법
-업데이트의 경우 관계 업데이트를 처리하는 방법에 대해 신중하게 생각해야합니다. 예를 들어 관계에 대한 데이터가 None제공되거나 제공되지 않은 경우 다음 중 어떤 것이 발생해야합니까?
+#### 중첩 표현을 위한 .update() 작성 방법
+업데이트의 경우 relationships 업데이트를 처리하는 방법에 대해 신중하게 생각해야 합니다. 예를 들어 relationships에 대한 데이터가 None 제공되거나 제공되지 않은 경우 다음 중 어떤 것이 발생해야 합니까?
 
-NULL데이터베이스에서 관계를 설정하십시오 .
-연관된 인스턴스를 삭제하십시오.
-데이터를 무시하고 인스턴스를 그대로 둡니다.
-유효성 검사 오류를 발생시킵니다.
-다음은 .update()이전 UserSerializer클래스 의 메소드에 대한 예입니다 .
+* 데이터베이스에서 relationships을 NULL로 설정
+* 연관된 인스턴스를 삭제
+* 데이터를 무시하고 인스턴스를 그대로 유지
+* 유효성 검사 오류를 발생
+
+다음은 이전 ``UserSerializer`` 클래스 ``.update()``의 메소드에 대한 예 입니다.
 ```python
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
@@ -370,14 +366,14 @@ NULL데이터베이스에서 관계를 설정하십시오 .
 ```
 
 
-중첩 된 작성 및 업데이트의 동작이 모호 할 수 있고 관련 모델간에 복잡한 종속성이 필요할 수 있으므로 REST 프레임 워크 3에서는 항상 이러한 메소드를 명시 적으로 작성해야합니다. 기본 ModelSerializer .create()및 .update()메소드에는 쓰기 가능한 중첩 표현에 대한 지원이 포함되지 않습니다.
+중첩된 인스턴스의 create 및 update의 동작이 모호할 수 있고 관련 모델 간에 복잡한 종속성이 필요할 수 있으므로 REST 프레임워크에서는 항상 이러한 메소드를 명시적으로 작성해야 합니다. 기본 ``ModelSerializer`` ``.create()`` 및 ``.update()`` 메소드에는 쓰기 가능한( writable nested representations) 중첩 표현에 대한 지원이 포함되지 않습니다.
 
-그러나 자동 쓰기 가능 중첩 표현을 지원하는 DRF Writable Nested 와 같은 타사 패키지를 사용할 수 있습니다 .
+그러나 자동 쓰기 가능 중첩 표현을 지원하는 [DRF Writable Nested](https://www.django-rest-framework.org/api-guide/serializers/#drf-writable-nested) 와 같은 타사 패키지를 사용할 수 있습니다.
 
-모델 관리자 클래스에서 관련 인스턴스 저장 처리
-직렬 변환기에 여러 관련 인스턴스를 저장하는 대신 올바른 인스턴스 작성을 처리하는 사용자 정의 모델 관리자 클래스를 작성하는 것입니다.
+#### 모델 Manager 클래스에서 관련 인스턴스 저장 처리
+Serializer 에 여러 관련 인스턴스를 저장하는 대신 올바른 인스턴스 작성을 처리하는 사용자 정의 모델 Manager 클래스를 작성하는 것입니다.
 
-예를 들어, User인스턴스와 Profile인스턴스가 항상 한 쌍으로 생성 되도록하고 싶다고 가정 합니다. 다음과 같은 사용자 정의 관리자 클래스를 작성할 수 있습니다.
+예를 들어, User 인스턴스와 Profile 인스턴스가 항상 한 쌍으로 생성되도록 하고 싶다고 가정합니다. 다음과 같은 사용자 정의 Manager 클래스를 작성할 수 있습니다.
 ```python
 class UserManager(models.Manager):
     ...
@@ -394,7 +390,7 @@ class UserManager(models.Manager):
         return user
 ```
 
-이 관리자 클래스는 이제 사용자 인스턴스와 프로파일 인스턴스가 항상 동시에 작성되도록보다 잘 캡슐화합니다. .create()serializer 클래스 의 메소드를 새 관리자 메소드를 사용하도록 다시 작성할 수 있습니다.
+이 Manager 클래스에서 User 인스턴스와 Profile 인스턴스가 항상 동시에 작성되도록 캡슐화합니다. serializer 클래스의 .create() 메소드를 새 Manager 메소드를 사용하도록 다시 작성할 수 있습니다.
 ```python
 def create(self, validated_data):
     return User.objects.create(
@@ -404,16 +400,15 @@ def create(self, validated_data):
         has_support_contract=validated_data['profile']['has_support_contract']
     )
 ```
-이 방법에 대한 자세한 내용은 모델 관리자 에 대한 Django 설명서 및 모델 및 관리자 클래스 사용에 대한이 블로그 게시물을 참조하십시오 .
+이 방법에 대한 자세한 내용은 모델 Manager에 대한 Django 설명서 및 Model 및 Manager클래스 사용에 대한 [블로그](https://www.dabapps.com/blog/django-models-and-encapsulation/)을 참조 하십시오.
 
 
 
 ### 여러 객체 다루기 
-Serializer클래스는 직렬화 또는 객체의 목록을 역 직렬화 처리 할 수 있습니다.
+``Serializer`` 클래스는 객체의 목록(list)을 직렬화 또는 역 직렬화하여 처리 할 수 있습니다.
 
-여러 객체 직렬화
-단일 객체 인스턴스 대신 쿼리 세트 또는 객체 목록을 직렬화하려면 직렬화 many=True기를 인스턴스화 할 때 플래그를 전달해야합니다 . 그런 다음 직렬화 할 쿼리 집합 또는 개체 목록을 전달할 수 있습니다.
-
+#### 여러 객체 직렬화
+단일 객체 인스턴스 대신 QuerySets 또는 List 를 직렬화 하려면 ``Serializer`` 를 인스턴스화 할 때 ``many=True`` 플래그를 전달해야 합니다. 그런 다음 직렬화 할 QuerySets 또는 List 를 전달할 수 있습니다.
 ```python
 queryset = Book.objects.all()
 serializer = BookSerializer(queryset, many=True)
@@ -425,48 +420,49 @@ serializer.data
 # ]
 ```
 #### 여러 객체의 역 직렬화
-여러 개체를 역 직렬화하는 기본 동작은 여러 개체 생성을 지원하지만 여러 개체 업데이트는 지원하지 않는 것입니다. 이러한 경우를 지원하거나 사용자 지정하는 방법에 대한 자세한 내용은 아래 ListSerializer 설명서를 참조하십시오.
+여러 개체를 역 직렬화하는 기본 동작은 여러 개체 생성(creation)을 지원하지만 여러 개체 업데이트(update)는 지원하지 않습니다. 이러한 경우를 대한 자세한 내용은 [ListSerializer](https://www.django-rest-framework.org/api-guide/serializers/#listserializer) 설명서를 참조 하십시오.
 
 
 
 ### 추가 컨텍스트 포함
-직렬화되는 객체 외에 직렬 변환기에 추가 컨텍스트를 제공해야하는 경우가 있습니다. 한 가지 일반적인 경우는 하이퍼 링크 관계가 포함 된 직렬 변환기를 사용하는 경우입니다. 직렬 변환기는 정규화 된 URL을 올바르게 생성 할 수 있도록 현재 요청에 액세스 할 수 있어야합니다.
+직렬화 되는 객체 외에 serializer 에 추가 컨텍스트를 제공해야 하는 경우가 있습니다. 한 예로, 일반적인 경우는 하이퍼링크 관계(hyperlinked relations)가 포함 된 serializer 를 사용하는 경우입니다. serializer 는 정규화 된 URL을 올바르게 생성할 수 있도록 현재 요청에 액세스 할 수 있어야 합니다.
 
-context직렬화기를 인스턴스화 할 때 인수 를 전달하여 임의의 추가 컨텍스트를 제공 할 수 있습니다 . 예를 들면 다음과 같습니다.
+serializer를 인스턴스화 할 때 context 인수를 전달하여 임의의 추가 컨텍스트를 제공 할 수 있습니다 . 예를 들면 다음과 같습니다.
 ```python
 serializer = AccountSerializer(account, context={'request': request})
 serializer.data
 # {'id': 6, 'owner': 'denvercoder9', 'created': datetime.datetime(2013, 2, 12, 09, 44, 56, 678870), 'details': 'http://example.com/accounts/6/details'}
 ```
-컨텍스트 사전은 속성 .to_representation()에 액세스하여 사용자 정의 메소드 와 같은 직렬 변환기 필드 로직 내에서 사용할 수 있습니다 self.context.
+context dictionary는 ``self.context`` 속성에 액세스하여  ``.to_representation()`` 와 같은 사용자 정의 메소드를 serializer 필드 로직 내에서 사용할 수 있습니다.
 
 
 ## ModelSerializer
-Django 모델 정의에 밀접하게 매핑되는 직렬 변환기 클래스가 필요할 수 있습니다.
+Django Model에 매핑되는  ``Serializer`` 클래스가 필요할 수 있습니다.
 
-이 ModelSerializer클래스는 Serializer모델 필드에 해당하는 필드가 있는 클래스 를 자동으로 만들 수있는 바로 가기를 제공 합니다.
+이 ``ModelSerializer`` 클래스는 Model 필드에 해당하는 필드를 갖는 ``Serializer`` 클래스를 자동으로 만들 수 있는 shortcut을 제공합니다.
 
-ModelSerializer클래스는 일반과 동일 Serializer것을 제외하고, 클래스 :
+``ModelSerializer`` 클래스는 아래의 사항을 제외하면 Serializer 클래스와 동일합니다. :
 
-모델에 따라 자동으로 일련의 필드를 생성합니다.
-unique_together 유효성 검사기와 같은 serializer에 대한 유효성 검사기를 자동으로 생성합니다.
-.create()및의 간단한 기본 구현이 포함됩니다 .update().
-선언은 ModelSerializer다음과 같습니다.
+* 모델에 따라 자동으로 일련의 필드를 생성합니다.
+* unique_together 와 같은 serializer에 대한 validator를 자동으로 생성합니다.
+* ``.create()`` 및 ``.update()``의 간단한 기본 구현이 포함됩니다.
+
+``ModelSerializer``선언은 다음과 같습니다.
 ```python
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['id', 'account_name', 'users', 'created']
 ```
-기본적으로 클래스의 모든 모델 필드는 해당하는 serializer 필드에 매핑됩니다.
+기본적으로 Model 클래스의 모든 필드는 serializer 필드에 매핑됩니다.
 
-모델의 외래 키와 같은 모든 관계가에 매핑됩니다 PrimaryKeyRelatedField. 직렬화 기 관계 문서에 지정된대로 명시 적으로 포함되지 않는 한 기본적으로 역관계는 포함되지 않습니다 .
+모델의 외래 키와 같은 모든 관계가 ``PrimaryKeyRelatedField`` 에 매핑됩니다. 명시적으로 포함되지 않는 한 기본적으로 역관계는 포함되지 않습니다.
 
 
 ### ModelSerializer 조사(inspection)
-Serializer 클래스는 유용한 상세 표현 문자열을 생성하여 해당 필드의 상태를 완전히 검사 할 수 있습니다. 이 기능은 ModelSerializers자동으로 생성되는 필드 및 유효성 검사기 집합을 결정하려는 위치에서 작업 할 때 특히 유용 합니다.
+Serializer 클래스는 유용한 상세(verbose) 표현 문자열을 생성하여 해당 필드의 상태를 완전히 검사 할 수 있습니다. 이 기능은 ModelSerializers 에서 자동으로 생성되는 필드 및 validator 집합을 확인하여 결정하는 작업을 할 때 특히 유용합니다.
 
-이렇게하려면을 사용하여 Django 셸을 연 python manage.py shell다음 serializer 클래스를 가져 와서 인스턴스화하고 객체 표현을 인쇄합니다.
+이렇게 하려면 ``python manage.py shell``을 사용하여 Django 쉘을 연 다음 serializer 클래스를 가져와서 인스턴스화하고 객체 표현을 출력합니다.
 ```python
 >>> from myapp.serializers import AccountSerializer
 >>> serializer = AccountSerializer()
@@ -478,10 +474,8 @@ AccountSerializer():
 ```
 
 
-
-
 ### 포함 할 필드 지정
-모델 시리얼 라이저에서 기본 필드의 하위 집합 만 사용하려면을 사용하는 것처럼 fields또는 exclude옵션을 사용하여 수행 할 수 있습니다 ModelForm. fields속성을 사용하여 직렬화해야하는 모든 필드를 명시 적으로 설정하는 것이 좋습니다 . 이렇게하면 모델이 변경 될 때 의도하지 않은 데이터 노출이 발생할 가능성이 줄어 듭니다.
+ModelSerializer 에서 기본 필드의 하위 집합만 사용하려면 ModelForm에서 처럼 fields 또는 exclude 옵션을 사용하여 수행 할 수 있습니다. fields 속성을 사용하여 직렬화해야 하는 모든 필드를 명시 적으로 설정하는 것이 좋습니다. 이렇게 하면 모델이 변경될 때 의도하지 않은 데이터 노출이 발생할 가능성이 줄어 듭니다.
 
 예를 들면 다음과 같습니다.
 ```python
@@ -491,7 +485,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ['id', 'account_name', 'users', 'created']
 ```
 
-모델의 모든 필드를 사용해야 함을 나타내도록 fields속성을 특수 값 '__all__'으로 설정할 수도 있습니다.
+모델의 모든 필드를 사용해야 함을 나타내도록 fields 속성을 특수 값 ``'__all__'``으로 설정할 수도 있습니다.
 
 예를 들면 다음과 같습니다.
 ```python
@@ -501,7 +495,7 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 ```
 
-exclude직렬화 기에서 제외 할 필드 목록으로 속성을 설정할 수 있습니다 .
+Serializer에서 제외 할 필드 목록을 exclude 속성에서 설정할 수 있습니다.
 
 예를 들면 다음과 같습니다.
 ```python
@@ -510,18 +504,14 @@ class AccountSerializer(serializers.ModelSerializer):
         model = Account
         exclude = ['users']
 ```
-경우 생성 위의 예에서, Account모델은 3 개 필드를 가지고 account_name, users그리고 created,이 분야에서 발생할 것이다 account_name및 created직렬화한다.
+위의 예에서 경우, Account 모델은 3개 필드(account_name, users, created)를 가지고 있지만 결과적으로 account_name, created 을 직렬화 합니다.
 
-fields및 exclude속성 의 이름 은 일반적으로 모델 클래스의 모델 필드에 매핑됩니다.
-
-또는 fields옵션의 이름 은 모델 클래스에 존재하는 인수를 사용하지 않는 특성 또는 메소드에 맵핑 될 수 있습니다.
-
-버전 3.3.0부터 또는 속성 중 하나를 제공 해야 합니다 .fieldsexclude
+fields 및 exclude 속성의 이름은 일반적으로 Model 클래스의 필드에 매핑됩니다.
 
 
 
 ### 중첩 직렬화 지정
-기본값 ModelSerializer은 관계에 기본 키를 사용하지만 다음 depth옵션을 사용하여 중첩 표현을 쉽게 생성 할 수도 있습니다 .
+기본적으로 ModelSerializer은 relationships에 primary keys를 사용하지만 다음과 같이 depth 옵션을 사용하여 중첩 표현을 쉽게 생성 할 수도 있습니다.
 ```python
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
@@ -529,13 +519,12 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ['id', 'account_name', 'users', 'created']
         depth = 1
 ```
-이 depth옵션은 평면 표현으로 되돌리기 전에 통과해야하는 관계의 깊이를 나타내는 정수 값으로 설정해야합니다.
+이 depth 옵션은 relationships을 평면 표현으로 되돌리기 전에 통과해야하는 relationships의 깊이를 나타내는 정수 값으로 설정해야 합니다.
 
-직렬화 수행 방식을 사용자 정의하려면 필드를 직접 정의해야합니다.
 
 
 ### 명시 적으로 필드 지정
-ModelSerializer클래스에서와 마찬가지로 클래스에서 필드를 선언하여 추가 필드를 추가 하거나 기본 필드를 재정의 할 수 있습니다 Serializer.
+``Serializer`` 클래스에서와 마찬가지로 ``ModelSerializer`` 클래스에서 필드를 선언하여 필드를 추가하거나 기본 필드를 재정의 할 수 있습니다.
 ```python
 class AccountSerializer(serializers.ModelSerializer):
     url = serializers.CharField(source='get_absolute_url', read_only=True)
@@ -544,15 +533,15 @@ class AccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
 ```
-추가 필드는 모든 속성에 해당하거나 모델에서 호출 할 수 있습니다.
+추가 필드는 모델에서 호출 할 수 있는 모든 속성에 사용할 수 있습니다.
 
 
 
 
 ### 읽기 전용 필드 지정
-여러 필드를 읽기 전용으로 지정할 수 있습니다. read_only=True속성 을 사용하여 각 필드를 명시 적으로 추가하는 대신 바로 가기 메타 옵션을 사용할 수 있습니다 read_only_fields.
+여러 필드를 읽기 전용으로 지정할 수 있습니다. ``read_only=True``속성을 사용하여 각 필드를 명시 적으로 추가하는 대신 ``read_only_fields`` 메타 옵션을 사용할 수 있습니다.
 
-이 옵션은 필드 이름의 목록 또는 튜플이어야하며 다음과 같이 선언됩니다.
+이 옵션은 필드 이름의 list 또는 tuple 이어야 하며 다음과 같이 선언됩니다.
 ```python
 class AccountSerializer(serializers.ModelSerializer):
     class Meta:
@@ -560,14 +549,15 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = ['id', 'account_name', 'users', 'created']
         read_only_fields = ['account_name']
 ```
-설정 한 모델 필드 editable=False및 AutoField필드는 기본적으로 읽기 전용으로 설정되며 read_only_fields옵션에 추가 할 필요가 없습니다 .
+``editable=False`` 및 ``AutoField`` 필드는 기본적으로 읽기 전용으로 설정되며 ``read_only_fields`` 옵션에 추가할 필요가 없습니다.
 
 
-참고 : 읽기 전용 필드가 unique_together모델 수준에서 제약 조건의 일부인 특수한 경우가 있습니다. 이 경우 제약 조건을 확인하기 위해 serializer 클래스에 필드가 필요하지만 사용자가 편집 할 수 없어야합니다.
+참고 : 읽기 전용 필드가 Model 수준에서 unique_together 제약 조건의 일부인 특수한 경우가 있습니다. 이 경우 제약 조건을 확인하기 위해 serializer 클래스에 필드가 필요하지만 사용자가 편집 할 수 없어야 합니다.
 
-이를 처리하는 올바른 방법은 serializer에서 필드를 명시 적으로 지정하여 read_only=True및 default=…키워드 인수를 모두 제공하는 것 입니다.
+이를 처리하는 올바른 방법은 serializer 에서 필드를 명시적으로 지정하여 ``read_only=True``및 ``default=…`` 키워드 인수를 모두 제공하는 것 입니다.
 
-이에 대한 한 가지 예는 현재 인증 User된 unique_together다른 식별자를 가진 읽기 전용 관계 입니다. 이 경우 사용자 필드를 다음과 같이 선언하십시오.
+이에 대한 한 가지 예는 현재 인증된 User 가 unique_together에 다른 식별자를 가진 읽기 전용 관계 인 경우 사용자 필드를 다음과 같이 선언하십시오.
+
 ```python
 user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.CurrentUserDefault())
 ```
@@ -575,9 +565,9 @@ user = serializers.PrimaryKeyRelatedField(read_only=True, default=serializers.Cu
 
 
 ### 추가 키워드 인수
-extra_kwargs옵션을 사용하여 필드에 임의의 추가 키워드 인수를 지정할 수있는 바로 가기도 있습니다. 의 경우와 read_only_fields같이 직렬 변환기에서 필드를 명시 적으로 선언 할 필요가 없습니다.
+extra_kwargs 옵션을 사용하여 필드에 임의의 추가 키워드 인수를 지정할 수 있습니다. ``read_only_fields``의 경우와 같이 Serializer에서 필드를 명시적으로 선언할 필요가 없습니다.
 
-이 옵션은 필드 이름을 키워드 인수 사전에 매핑하는 사전입니다. 예를 들면 다음과 같습니다.
+이 옵션은 필드 이름을 키워드 인수에 매핑하는 dictionary 입니다. 예를 들면 다음과 같습니다.
 ```python
 class CreateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -594,16 +584,16 @@ class CreateUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 ```
-필드가 이미 serializer 클래스에서 명시 적으로 선언 된 경우 extra_kwargs옵션이 무시됩니다.
+필드가 이미 serializer 클래스에서 명시적으로 선언 된 경우 extra_kwargs 옵션이 무시됩니다.
 
 
 
 ### 관계형 필드
-모델 인스턴스를 직렬화 할 때 관계를 나타내는 여러 가지 방법이 있습니다. 에 대한 기본 표현 ModelSerializer은 관련 인스턴스의 기본 키를 사용하는 것입니다.
+Model 인스턴스를 직렬화 할 때 relationships을 나타내는 여러 가지 방법이 있습니다. 기본적으로는 ModelSerializer에 관련 인스턴스의 기본 키를 사용하는 것입니다.
 
-대체 표현에는 하이퍼 링크를 사용한 직렬화, 전체 중첩 표현을 직렬화 또는 사용자 정의 표현을 사용한 직렬화가 포함됩니다.
+대체 방식에는 하이퍼링크(hyperlinks)를 사용한 직렬화, 전체 중첩 표현을 직렬화 하거나 또는 사용자 정의를 사용한 직렬화가 포함됩니다.
 
-자세한 내용은 시리얼 라이저 관계 설명서를 참조하십시오 .
+자세한 내용은 [Serializer Relations](https://www.django-rest-framework.org/api-guide/relations/) 설명서를 참조하십시오.
 
 
 ### 필드 매핑 사용자 정의
@@ -667,14 +657,16 @@ relation_info인수는 포함 명명 된 튜플이다 model_field, related_model
 .build_unknown_field(self, field_name, model_class)
 필드 이름이 모델 필드 또는 모델 속성에 매핑되지 않은 경우 호출됩니다. 서브 클래스가이 동작을 사용자 정의 할 수 있지만 기본 구현에서는 오류가 발생합니다.
 
+
+
 ## HyperlinkedModelSerializer
-HyperlinkedModelSerializer클래스는 유사하다 ModelSerializer오히려 기본 키보다는 관계를 표현하기 위해 하이퍼 링크를 사용하는 것을 제외하고 클래스입니다.
+``HyperlinkedModelSerializer`` 클래스는 relationships를 표현하기 위해 기본 키(primary key) 대신 하이퍼 링크를 사용하는 것을 제외하고는 ``ModelSerializer`` 클래스와 유사합니다.
 
-기본적으로 시리얼 라이저는 url기본 키 필드 대신 필드를 포함 합니다.
+``HyperlinkedModelSerializer`` 클래스는 기본적으로 기본 키 필드 대신 ``url`` 필드를 포함합니다.
 
-url 필드는 HyperlinkedIdentityFieldserializer 필드를 사용하여 표현 되며 모델의 모든 관계는 HyperlinkedRelatedFieldserializer 필드를 사용하여 표현됩니다 .
+url 필드는 ``HyperlinkedIdentityField`` 필드를 사용하여 표현되며 모델의 모든 relationships은 ``HyperlinkedRelatedField`` 필드를 사용하여 표현됩니다.
 
-기본 키를 fields옵션 에 추가하여 명시 적으로 포함시킬 수 있습니다 . 예를 들면 다음과 같습니다.
+fields 옵션에 기본 키를 명시적으로 포함시킬 수 있습니다 . 예를 들면 다음과 같습니다.
 ```python
 class AccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -683,31 +675,31 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
 ```
 
 ### 절대 및 상대 URL
-인스턴스화 할 때 직렬 변환기 컨텍스트에 HyperlinkedModelSerializer전류 request를 포함해야합니다 ( 예 :
+``HyperlinkedModelSerializer`` 를 인스턴스화 할 때 serializer 컨텍스트에 현재 request를 포함해야 합니다. :
 ```python
 serializer = AccountSerializer(queryset, context={'request': request})
 ```
 
-그렇게하면 하이퍼 링크에 적절한 호스트 이름이 포함될 수 있으므로 결과 표현은 다음과 같은 정규화 된 URL을 사용합니다.
+그렇게 하면 하이퍼링크에 적절한 호스트 이름이 포함된 결과 다음과 같이 정규화 된 URL을 사용합니다.
 ```python
 http://api.example.com/accounts/1/
 ```
 
-다음과 같은 상대 URL 대신
+다음과 같은 상대적 URL
 ```python
 /accounts/1/
 ```
-당신이 경우 않는 상대 URL을 사용하려면, 당신은 명시 적으로 통과해야 {'request': None} 시리얼 라이저 컨텍스트에서.
+상대 URL을 사용하려면, serializer 컨텍스트에 ``{'request': None}``를 명시적으로 전달해야 합니다.
 
 
 
 
 ### 하이퍼 링크 된 뷰가 결정되는 방법
-인스턴스를 모델링하기 위해 하이퍼 링크에 사용해야하는 뷰를 결정하는 방법이 필요합니다.
+모델의 인스턴스의 하이퍼 링크에 사용해야 하는 뷰를 결정하는 방법이 필요합니다.
 
-기본적으로 하이퍼 링크는 style과 일치하는 뷰 이름에 해당 '{model_name}-detail'하며 pk키워드 인수로 인스턴스를 찾습니다 .
+기본적으로 하이퍼 링크는 ``'{model_name}-detail'`` style과 일치하는 뷰 이름에 해당 하며 pk 키워드 인수로 인스턴스를 찾습니다.
 
-다음 view_name과 같이 설정 lookup_field에서 및 옵션 중 하나 또는 둘 다를 사용하여 URL 필드보기 이름 및 조회 필드를 대체 할 수 있습니다 extra_kwargs.
+다음과 같이 view_name 및 lookup_field 옵션 중 하나 또는 둘 다를 사용하여 extra_kwargs의 url 필드의 뷰 이름(view name) 및 조회 필드(lookup field)를 대체 할 수 있습니다.
 ```python
 class AccountSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -719,7 +711,7 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
         }
 ```
 
-또는 직렬 변환기의 필드를 명시 적으로 설정할 수 있습니다. 예를 들면 다음과 같습니다.
+또는 serializer 의 필드를 명시적으로 설정할 수 있습니다. 예를 들면 다음과 같습니다.
 ```python
 class AccountSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
@@ -737,12 +729,12 @@ class AccountSerializer(serializers.HyperlinkedModelSerializer):
         model = Account
         fields = ['url', 'account_name', 'users', 'created']
 ```
-팁 : 하이퍼 링크 된 표현과 URL conf를 올바르게 일치시키는 것은 때때로 약간 어색 할 수 있습니다. 인쇄 repr의 HyperlinkedModelSerializer예를하는 것은 이름과 관계가 너무 매핑 할 것으로 예상된다 조회 필드를 볼을 정확하게 검사 할 수있는 특히 유용한 방법입니다.
+팁 : 하이퍼링크 된 표현과 URL conf를 올바르게 일치시키는 것은 때때로 약간 어색할 수 있습니다. ``repr``를 사용하여 ``HyperlinkedModelSerializer`` 를 출력하는 것은 의 예를 하는 것은 view names 과 lookup fields 를 정확하게 검사 할 수 있는 특히 유용한 방법입니다.
 
 
 
 ### URL 필드 이름 변경
-URL 필드의 이름은 기본적으로 'url'입니다. URL_FIELD_NAME설정 을 사용하여이 설정을 전체적으로 무시할 수 있습니다 .
+URL 필드의 이름은 기본적으로 'url'입니다. ``URL_FIELD_NAME`` 설정을 사용하여 이 설정을 전체적으로 변경할 수 있습니다.
 
 
 ## ListSerializer
@@ -1131,30 +1123,40 @@ REST 프레임 워크 2는 개발자가 ModelSerializer클래스가 기본 필�
 
 ## Third party packages
 The following third party packages are also available.
+
 ### Django REST marshmallow
 The django-rest-marshmallow package provides an alternative implementation for serializers, using the python marshmallow library. It exposes the same API as the REST framework serializers, and can be used as a drop-in replacement in some use-cases.
+
 ### Serpy
 The serpy package is an alternative implementation for serializers that is built for speed. Serpy serializes complex datatypes to simple native types. The native types can be easily converted to JSON or any other format needed.
+
 ### MongoengineModelSerializer
 The django-rest-framework-mongoengine package provides a MongoEngineModelSerializer serializer class that supports using MongoDB as the storage layer for Django REST framework.
+
 ### GeoFeatureModelSerializer
 The django-rest-framework-gis package provides a GeoFeatureModelSerializer serializer class that supports GeoJSON both for read and write operations.
+
 ### HStoreSerializer
 The django-rest-framework-hstore package provides an HStoreSerializer to support django-hstore DictionaryField model field and its schema-mode feature.
+
 ### Dynamic REST
 The dynamic-rest package extends the ModelSerializer and ModelViewSet interfaces, adding API query parameters for filtering, sorting, and including / excluding all fields and relationships defined by your serializers.
+
 ### Dynamic Fields Mixin
 The drf-dynamic-fields package provides a mixin to dynamically limit the fields per serializer to a subset specified by an URL parameter.
+
 ### DRF FlexFields
 The drf-flex-fields package extends the ModelSerializer and ModelViewSet to provide commonly used functionality for dynamically setting fields and expanding primitive fields to nested models, both from URL parameters and your serializer class definitions.
+
 ### Serializer Extensions
 The django-rest-framework-serializer-extensions package provides a collection of tools to DRY up your serializers, by allowing fields to be defined on a per-view/request basis. Fields can be whitelisted, blacklisted and child serializers can be optionally expanded.
-### HTML JSON Forms
-The html-json-forms package provides an algorithm and serializer for processing <form> submissions per the (inactive) HTML JSON Form specification. The serializer facilitates processing of arbitrarily nested JSON structures within HTML. For example, <input name="items[0][id]" value="5"> will be interpreted as {"items": [{"id": "5"}]}.
+
 ### DRF-Base64
 DRF-Base64 provides a set of field and model serializers that handles the upload of base64-encoded files.
+
 ### QueryFields
 djangorestframework-queryfields allows API clients to specify which fields will be sent in the response via inclusion/exclusion query parameters.
+
 ### DRF Writable Nested
 The drf-writable-nested package provides writable nested model serializer which allows to create/update models with nested related data.
 

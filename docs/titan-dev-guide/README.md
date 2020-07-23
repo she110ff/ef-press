@@ -1,4 +1,6 @@
-# VuePress 시작
+# Introduction
+
+
 
 VuePress is composed of two parts: a [minimalistic static site generator](https://github.com/vuejs/vuepress/tree/master/packages/%40vuepress/core) with a Vue-powered [theming system](../theme/README.md) and [Plugin API](../plugin/README.md), and a [default theme](../theme/default-theme-config.md) optimized for writing technical documentation. It was created to support the documentation needs of Vue’s own sub projects.
 
@@ -76,6 +78,3 @@ Hexo has been serving the Vue docs well - in fact, we are probably still a long 
 ### GitBook
 
 We’ve been using GitBook for most of our sub project docs. The primary problem with GitBook is that its development reload performance is intolerable with a large amount of files. The default theme also has a pretty limiting navigation structure, and the theming system is, again, not Vue based. The team behind GitBook is also more focused on turning it into a commercial product rather than an open-source tool.
-
-
-[tutorial](https://vuepressbook.com/)

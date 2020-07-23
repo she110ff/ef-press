@@ -5,7 +5,6 @@ Django REST framework 은 웹 API를 작성할 수 있는 강력하고 유연한
 * 웹 browsable API 는 개발자에게 큰 사용성을 제공.
 * OAuth1a과 OAuth2를 포함하는 인증 정책을 지원.  
 * ORM 과 non-ORM 데이터 소스의 직렬화 지원.
-* Customizable all the way down - just use regular function-based views if you don't need the more powerful features.
 * 넓은 범위의 문서와 커뮤니티 제공.
 * Mozilla , Red Hat , Heroku 및 Eventbrite를 포함하여 국제적으로 인정 된 회사에서 사용하고 신뢰.
 
@@ -51,12 +50,6 @@ urlpatterns = [
 ```
 
 ## 간단한 예제 
-Let's take a look at a quick example of using REST framework to build a simple model-backed API.
-
-We'll create a read-write API for accessing information on the users of our project.
-
-Any global settings for a REST framework API are kept in a single configuration dictionary named REST_FRAMEWORK. Start off by adding the following to your settings.py module:
-
 REST 프레임 워크를 사용하여 간단한 모델 기반 API를 빌드하는 예를 살펴 보겠습니다.
 
 프로젝트 사용자 정보에 액세스하기 위한 읽기-쓰기 API를 작성합니다.
