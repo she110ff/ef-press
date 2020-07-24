@@ -145,3 +145,12 @@ class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SnippetSerializer
 ```
 결과적으로 많은 양의 무료 코드를 얻었고 깨끗하고 간결합니다.
+
+## View 유형 
+| View type         |      Signiture                                |   Description |
+| :-----------:     | -----------                                | :-----        |
+| function based    | def snippet_list(request):                    | JsonResponse, JSONParser |
+| decorator         | @api_view(['GET', 'POST'])                    | status.HTTP_201_CREATED |
+| Class based       | class SnippetList(APIView):                   |  def get(self, request, format=None): |
+| Mixin             | class SnippetList(mixins.ListModelMixin ...   |self.list(request, *args, **kwargs)|
+| mixed-in generic  | class SnippetList(generics.ListCreateAPIView):| queryset, serializer_class |
