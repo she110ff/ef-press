@@ -1,7 +1,7 @@
-# Relationships & 하이퍼링크 API(Tutorial 5)
+# 기초-관계 & 하이퍼링크
 지금까지 API의 relationsihp은 기본 키(primary key)를 사용하여 표현했습니다. 이번 튜토리얼에서는 관계에 하이퍼링크(hyperlink)를 사용하여 API의 결합(cohesion)과 검색 용이성(discoverability )을 향상시키도록 하겠습니다.
 
-## API 루트에 대한 엔드 포인트 작성
+## API 루트 엔드-포인트 작성
 현재 'snippet' 및 'user'에 대한 엔드 포인트가 있지만 API에 대한 단일 진입점(entry point)이 없습니다. ``snippets/views.py`` 에 ``@api_view`` decorator를 사용하는 함수 기반 뷰(function-based view)를 추가해서 사용할 것 입니다.:
 ```python
 from rest_framework.decorators import api_view
@@ -20,7 +20,7 @@ def api_root(request, format=None):
 
 
 
-## highlight 된 스니펫에 대한 엔드-포인트 작성
+## highlight 엔드-포인트 작성
 pastebin API에 코드 highlight 의 엔드-포인트가 누락되어 있습니다.
 
 코드 highlight 는 다른 API 엔드-포인트와 달리 JSON을 사용하지 않고 HTML 표현만 제공할 것 입니다. REST 프레임워크에서 제공하는 두 가지 스타일의 HTML renderer 가 있습니다. 하나는 templates를 사용하여 렌더링 된 HTML을 처리하고 다른 하나는 pre-rendered HTML을 처리합니다. 이 엔드-포인트에서는 pre-rendered HTML를 사용하려고 합니다.
@@ -98,7 +98,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 
-## URL 패턴의 이름이 지정되어 있는지 확인
+## URL 패턴 지정 확인
 하이퍼링크 된 API를 사용하려면 URL 패턴의 이름을 지정해야 합니다. 이름을 지정해야 하는 URL 패턴을 살펴 보겠습니다.
 
 * API의 루트는 ``'user-list'`` 및 ``'snippet-list'``을 포함해야 합니다.
