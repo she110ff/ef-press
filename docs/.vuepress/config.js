@@ -23,7 +23,10 @@ module.exports = {
       },
       {
         text: "Tool & Module",
-        items: [{ text: "Django-REST", link: "/tool-module/django-rest/" }],
+        items: [
+          { text: "Django-REST", link: "/tool-module/django-rest/" },
+          { text: "Clean Architecture", link: "/tool-module/clean-arch/" }
+        ],
       },
       { text: "External", link: "https://google.com" },
     ],
@@ -123,6 +126,13 @@ module.exports = {
             "serializer",
             "serializer-relations",
           ],
+        },
+      ],
+      "/tool-module/clean-arch/": [
+        {
+          title: "Clean Architecture",
+          collapsable: false,
+          children: ["", "in-django-product"],
         },
       ],
       "/tool-module/git/": [
