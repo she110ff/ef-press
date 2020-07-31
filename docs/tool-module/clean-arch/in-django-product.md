@@ -1,7 +1,6 @@
 # Clean Architecture in Django
 이 문서에서는 Django Restful API에 Clean Architecture를 적용하는 방법을 설명하려고 합니다. Django 프레임워크와 [Uncle Bob의 Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)에 익숙하다는 가정으로 이후에 설명을 진행합니다.
 
-<figure><img src="/clean-arch.png" /></figure>
 
 설명을 위해 GET 엔드-포인트에서 제품을 검색하는 최소한의 예제를 사용합니다. 아키텍처의 설명은 위의 다이어그램과 동일한 계층으로 구성됩니다. 우리는 가장 안쪽 구성에서부터 시작할 것 입니다.
 
@@ -19,6 +18,8 @@
 Django 와 타사 라이브러리로 구성된 이 계층은 해당 부분과 관련된 코드를 배치하여 구현을 추상화하는 곳 이기도 합니다 (글루 코드). ``factories.py``
 
 마지막으로 urls.py에서 url과 view를 연결합니다.
+
+<figure><img src="/ca-ys2.png" /></figure>
 
 
 ## 엔터티 레이어 (가장 안쪽 도메인)

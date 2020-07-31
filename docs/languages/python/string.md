@@ -313,6 +313,24 @@ x.find("dklskj")
 > -1
 ```
 
+### Simple Syntax 
+The syntax is similar to the one you used with str.format() but less verbose. Look at how easily readable this is:
+```python
+>>> name = "Eric"
+>>> age = 74
+>>> f"Hello, {name}. You are {age}."
+'Hello, Eric. You are 74.'
+```
+
+Because f-strings are evaluated at runtime, you can put any and all valid Python expressions in them. This allows you to do some nifty things.
+
+You could do something pretty straightforward, like this:
+```python
+>>> f"{2 * 37}"
+'74'
+```
+
+
 ### 코멘트 
 하나의 예제를 통해 문자열 응용에 대해 알아 보겠습니다. 
 우선, 파이썬에서 주석(commnet) 처리는 # 을 사용합니다. 프로그래머는 코드 상에서 볼 수 있지만 파이썬은 전혀 관여하지 않은 코드 부분입니다. 

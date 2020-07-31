@@ -3,9 +3,9 @@
 django 프로젝트를 처음 생성하면 아래와 같이 sqlite를 기반으로 데이터베이스 설정이 작성되어 있습니다. 이 설정을 사용하여 쉽게 django 프로젝트를 시작할 수 있습니다. 
 ```python
 DATABASES = {
-    ‘default’: {
-        ‘ENGINE’: ‘django.db.backends.sqlite3’,
-        ‘NAME’: os.path.join(BASE_DIR, ‘db.sqlite3’),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 ```
@@ -24,14 +24,28 @@ Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database,
 ### database 만들기
 
 ```bash
-> psql
+> psql -U postgres
 
-> CREATE USER sample_user WITH PASSWORD 'sample_password';
+> CREATE USER tms_user WITH PASSWORD 'tms_pass';
 
-> CREATE DATABASE sample_database WITH OWNER sample_user;
+> CREATE DATABASE tms_local WITH OWNER tms_user;
 
-> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO sample_user;
+> GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tms_user;
+
+> ALTER USER tms_user CREATEDB; # to create test db
 ```
+
+psql commnads
+* \\? list all the commands
+* \\l list databases
+* \\conninfo display information about current connection
+* \\c \[DBNAME\] connect to new database, e.g., \\c template1
+* \\dt list tables of the public schema
+* \\dt schema-name.* list tables of certain schema, e.g., \\dt public.*
+* \\dt *.* list tables of all schemas
+* Then you can run SQL statements, e.g., SELECT * FROM my_table;(Note: a statement must be terminated with semicolon ;)
+* \\q quit psql
+
 
 ### DB 세팅하기
 
@@ -39,13 +53,13 @@ Command line tool 에 SQL Shell 을 입력하고 창을 열면 Server, Database,
 
 ```python
 DATABASES = {
-    ‘default’: {
-        ‘ENGINE’: ‘django.db.backends.postgresql_psycopg2’,
-        ‘NAME’: sample_database,
-        ‘USER’: sample_user,
-        ‘PASSWORD’: ‘password’,
-        ‘HOST’: ‘localhost’,
-        ‘PORT’: ‘5432’,
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tms_local',
+        'USER': 'tms_user',
+        'PASSWORD': 'tms_pass',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 ```

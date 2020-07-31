@@ -90,6 +90,7 @@ module.exports = {
             "first-app-5",
             "first-app-6",
             "first-app-7",
+            "tests",
             "url-dispatcher",
             "errors",
           ],
