@@ -28,6 +28,12 @@ module.exports = {
           { text: "Clean Architecture", link: "/tool-module/clean-arch/" }
         ],
       },
+      {
+        text: "Workflow",
+        items: [
+          { text: "NuxtJS-Django", link: "/workflow/nuxtjs-django/" }
+        ],
+      },
       { text: "External", link: "https://google.com" },
     ],
 
@@ -143,7 +149,15 @@ module.exports = {
           children: ["", "git-flow", "ssh"],
         },
       ],
+      "/workflow/nuxtjs-django/": [
+        {
+          title: "NuxtJS & Django",
+          collapsable: false,
+          children: ["", "user-story", "usecase", "ui-interface"],
+        },
+      ],
 
+      
       // fallback
       "/": ["" /* / */],
     },
