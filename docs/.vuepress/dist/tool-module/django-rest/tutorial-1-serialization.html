@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>기초-직렬화 | Knowledge Share</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/assets/css/0.styles.3cf712f1.css" as="style"><link rel="preload" href="/assets/js/app.46a52470.js" as="script"><link rel="preload" href="/assets/js/2.73abacf5.js" as="script"><link rel="preload" href="/assets/js/75.fa84901e.js" as="script"><link rel="prefetch" href="/assets/js/10.351a57cb.js"><link rel="prefetch" href="/assets/js/11.6393c270.js"><link rel="prefetch" href="/assets/js/12.258ce84f.js"><link rel="prefetch" href="/assets/js/13.56874ee8.js"><link rel="prefetch" href="/assets/js/14.37295ec6.js"><link rel="prefetch" href="/assets/js/15.d3ebe5dd.js"><link rel="prefetch" href="/assets/js/16.f2f87609.js"><link rel="prefetch" href="/assets/js/17.bbd8a445.js"><link rel="prefetch" href="/assets/js/18.7d163443.js"><link rel="prefetch" href="/assets/js/19.19b5b7f6.js"><link rel="prefetch" href="/assets/js/20.829e3d87.js"><link rel="prefetch" href="/assets/js/21.f1db19aa.js"><link rel="prefetch" href="/assets/js/22.b0ae292b.js"><link rel="prefetch" href="/assets/js/23.62f19473.js"><link rel="prefetch" href="/assets/js/24.99acb3cb.js"><link rel="prefetch" href="/assets/js/25.910f9f6d.js"><link rel="prefetch" href="/assets/js/26.46561b4a.js"><link rel="prefetch" href="/assets/js/27.43efdd05.js"><link rel="prefetch" href="/assets/js/28.b34493f3.js"><link rel="prefetch" href="/assets/js/29.913d2330.js"><link rel="prefetch" href="/assets/js/3.0119ca6e.js"><link rel="prefetch" href="/assets/js/30.876cd1ae.js"><link rel="prefetch" href="/assets/js/31.eb5641ed.js"><link rel="prefetch" href="/assets/js/32.2c33ae94.js"><link rel="prefetch" href="/assets/js/33.0fd28b80.js"><link rel="prefetch" href="/assets/js/34.482bd009.js"><link rel="prefetch" href="/assets/js/35.77e80232.js"><link rel="prefetch" href="/assets/js/36.6154cdc8.js"><link rel="prefetch" href="/assets/js/37.ad4220f1.js"><link rel="prefetch" href="/assets/js/38.db259bfc.js"><link rel="prefetch" href="/assets/js/39.95fed648.js"><link rel="prefetch" href="/assets/js/4.18b7f171.js"><link rel="prefetch" href="/assets/js/40.0fdc22f3.js"><link rel="prefetch" href="/assets/js/41.ac95b8b8.js"><link rel="prefetch" href="/assets/js/42.b226d007.js"><link rel="prefetch" href="/assets/js/43.4022eb0b.js"><link rel="prefetch" href="/assets/js/44.24df495c.js"><link rel="prefetch" href="/assets/js/45.934df6e3.js"><link rel="prefetch" href="/assets/js/46.3c84a5bb.js"><link rel="prefetch" href="/assets/js/47.fe62c0b5.js"><link rel="prefetch" href="/assets/js/48.6158f309.js"><link rel="prefetch" href="/assets/js/49.10d00fb9.js"><link rel="prefetch" href="/assets/js/5.96509959.js"><link rel="prefetch" href="/assets/js/50.5a76b24b.js"><link rel="prefetch" href="/assets/js/51.e5626470.js"><link rel="prefetch" href="/assets/js/52.9ab31a32.js"><link rel="prefetch" href="/assets/js/53.0344e8e6.js"><link rel="prefetch" href="/assets/js/54.051230fc.js"><link rel="prefetch" href="/assets/js/55.0d6d875f.js"><link rel="prefetch" href="/assets/js/56.cb2d6ed4.js"><link rel="prefetch" href="/assets/js/57.e46f3cc2.js"><link rel="prefetch" href="/assets/js/58.a1265c97.js"><link rel="prefetch" href="/assets/js/59.e43d9167.js"><link rel="prefetch" href="/assets/js/6.eafd2c6f.js"><link rel="prefetch" href="/assets/js/60.f6b21a78.js"><link rel="prefetch" href="/assets/js/61.4a860e23.js"><link rel="prefetch" href="/assets/js/62.6ce4d451.js"><link rel="prefetch" href="/assets/js/63.8c36f6c5.js"><link rel="prefetch" href="/assets/js/64.01d48950.js"><link rel="prefetch" href="/assets/js/65.2429ca61.js"><link rel="prefetch" href="/assets/js/66.d47955f7.js"><link rel="prefetch" href="/assets/js/67.49ce7e31.js"><link rel="prefetch" href="/assets/js/68.c7cf9e03.js"><link rel="prefetch" href="/assets/js/69.a063450a.js"><link rel="prefetch" href="/assets/js/7.219c88d1.js"><link rel="prefetch" href="/assets/js/70.026d7c8c.js"><link rel="prefetch" href="/assets/js/71.23fea48d.js"><link rel="prefetch" href="/assets/js/72.66e45e3c.js"><link rel="prefetch" href="/assets/js/73.fd7cba88.js"><link rel="prefetch" href="/assets/js/74.2b525f65.js"><link rel="prefetch" href="/assets/js/76.a8d34081.js"><link rel="prefetch" href="/assets/js/77.3cc197c2.js"><link rel="prefetch" href="/assets/js/78.38e4043b.js"><link rel="prefetch" href="/assets/js/79.9491cbf2.js"><link rel="prefetch" href="/assets/js/8.a995c8bd.js"><link rel="prefetch" href="/assets/js/80.8df9a4a8.js"><link rel="prefetch" href="/assets/js/81.ea47d9c5.js"><link rel="prefetch" href="/assets/js/82.352235af.js"><link rel="prefetch" href="/assets/js/83.e0a3b10f.js"><link rel="prefetch" href="/assets/js/84.165fae16.js"><link rel="prefetch" href="/assets/js/85.54b07ddb.js"><link rel="prefetch" href="/assets/js/86.ad0be71f.js"><link rel="prefetch" href="/assets/js/87.529106b5.js"><link rel="prefetch" href="/assets/js/88.1213684e.js"><link rel="prefetch" href="/assets/js/89.c28404c1.js"><link rel="prefetch" href="/assets/js/9.f853c54c.js"><link rel="prefetch" href="/assets/js/90.03bd6d38.js"><link rel="prefetch" href="/assets/js/91.a008fe76.js"><link rel="prefetch" href="/assets/js/92.689e6d1f.js"><link rel="prefetch" href="/assets/js/93.6e7326b6.js"><link rel="prefetch" href="/assets/js/94.50198b6c.js"><link rel="prefetch" href="/assets/js/95.95b09757.js"><link rel="prefetch" href="/assets/js/96.588d599f.js"><link rel="prefetch" href="/assets/js/97.21b640fd.js"><link rel="prefetch" href="/assets/js/98.bd06af5f.js"><link rel="prefetch" href="/assets/js/99.8d1cc7e9.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.3cf712f1.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Knowledge Share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool &amp; Module" class="dropdown-title"><span class="title">Tool &amp; Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool &amp; Module" class="mobile-dropdown-title"><span class="title">Tool &amp; Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/django-rest/" class="nav-link router-link-active">
+  Django-REST
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/clean-arch/" class="nav-link">
+  Clean Architecture
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Workflow" class="dropdown-title"><span class="title">Workflow</span> <span class="arrow down"></span></button> <button type="button" aria-label="Workflow" class="mobile-dropdown-title"><span class="title">Workflow</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/workflow/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool &amp; Module" class="dropdown-title"><span class="title">Tool &amp; Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool &amp; Module" class="mobile-dropdown-title"><span class="title">Tool &amp; Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/django-rest/" class="nav-link router-link-active">
+  Django-REST
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/clean-arch/" class="nav-link">
+  Clean Architecture
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Workflow" class="dropdown-title"><span class="title">Workflow</span> <span class="arrow down"></span></button> <button type="button" aria-label="Workflow" class="mobile-dropdown-title"><span class="title">Workflow</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/workflow/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Django REST</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool-module/django-rest/" aria-current="page" class="sidebar-link">Why Django REST?</a></li><li><a href="/tool-module/django-rest/tutorial-1-serialization.html" aria-current="page" class="active sidebar-link">기초-직렬화</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#환경-구성" class="sidebar-link">환경 구성</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#시작하기" class="sidebar-link">시작하기</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#작업-모듈-작성" class="sidebar-link">작업 모듈 작성</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#직렬화-클래스-생성" class="sidebar-link">직렬화 클래스 생성</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#직렬화로-작업하기" class="sidebar-link">직렬화로 작업하기</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#modelserializers-사용" class="sidebar-link">ModelSerializers 사용</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#일반-django-view-작성" class="sidebar-link">일반 Django view 작성</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#웹-api-테스트" class="sidebar-link">웹 API 테스트</a></li><li class="sidebar-sub-header"><a href="/tool-module/django-rest/tutorial-1-serialization.html#진행-위치" class="sidebar-link">진행 위치</a></li></ul></li><li><a href="/tool-module/django-rest/tutorial-2-request.html" class="sidebar-link">기초-요청과 응답</a></li><li><a href="/tool-module/django-rest/tutorial-3-classbase.html" class="sidebar-link">기초-Class View</a></li><li><a href="/tool-module/django-rest/tutorial-4-authentication.html" class="sidebar-link">기초-인증과 권한</a></li><li><a href="/tool-module/django-rest/tutorial-5-relationship.html" class="sidebar-link">기초-관계 &amp; 하이퍼링크</a></li><li><a href="/tool-module/django-rest/tutorial-6-viewsets.html" class="sidebar-link">기초-뷰셋 &amp; 라우터</a></li><li><a href="/tool-module/django-rest/generic-view.html" class="sidebar-link">심화-Generic Views</a></li><li><a href="/tool-module/django-rest/viewsets.html" class="sidebar-link">심화-ViewSets</a></li><li><a href="/tool-module/django-rest/serializer.html" class="sidebar-link">심화-Serializers</a></li><li><a href="/tool-module/django-rest/serializer-relations.html" class="sidebar-link">심화-Serializer Relations</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="기초-직렬화"><a href="#기초-직렬화" class="header-anchor">#</a> 기초-직렬화</h1> <p>이 튜토리얼은 웹 API를 뼈대가 되는 코드 작성을 다룹니다. 그 과정에서 REST 프레임워크를 구성하는 다양한 구성 요소를 소개하고 모든 구성 요소가 어떻게 결합되는지 포괄적으로 이해합니다.</p> <p>이 튜토리얼의 코드는 GitHub 의 <a href="https://github.com/encode/rest-framework-tutorial" target="_blank" rel="noopener noreferrer">encode/rest-framework-tutorial<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 저장소에서 사용할 수 있습니다. 완성 된 구현은 테스트를 위해 샌드박스 버전으로 온라인으로 제공됩니다. <a href="https://restframework.herokuapp.com/" target="_blank" rel="noopener noreferrer">데모<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p> <h2 id="환경-구성"><a href="#환경-구성" class="header-anchor">#</a> 환경 구성</h2> <p>다른 작업을하기 전에 venv를 사용하여 새로운 가상 환경을 만듭니다 . 이를 통해 현재 진행중인 다른 프로젝트와 패키지 구성을 분리하여 사용할 수 있습니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>python3 -m venv <span class="token function">env</span>
+<span class="token builtin class-name">source</span> env/bin/activate
+</code></pre></div><p>이제 가상 환경 내부에 있으므로 패키지 요구 사항을 설치할 수 있습니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>pip <span class="token function">install</span> django
+pip <span class="token function">install</span> djangorestframework
+pip <span class="token function">install</span> pygments  <span class="token comment"># We'll be using this for the code highlighting</span>
+</code></pre></div><p>가상 환경을 종료하려면 deactivate를 입력 하십시오. 자세한 내용은 <a href="https://docs.python.org/3/library/venv.html" target="_blank" rel="noopener noreferrer">venv<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> 설명서를 참조하십시오.</p> <h2 id="시작하기"><a href="#시작하기" class="header-anchor">#</a> 시작하기</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token builtin class-name">cd</span> ~
+django-admin startproject tutorial
+<span class="token builtin class-name">cd</span> tutorial
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>python manage<span class="token punctuation">.</span>py startapp snippets
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token string">'rest_framework'</span><span class="token punctuation">,</span>
+    <span class="token string">'snippets.apps.SnippetsConfig'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+</code></pre></div><h2 id="작업-모듈-작성"><a href="#작업-모듈-작성" class="header-anchor">#</a> 작업 모듈 작성</h2> <p>코드 스니펫을 저장하는 데 사용되는 간단한 Snippet 모델을 작성하여 시작하겠습니다. <code>snippets/models.py</code> 을 다음과 같이 작성하세요.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
+<span class="token keyword">from</span> pygments<span class="token punctuation">.</span>lexers <span class="token keyword">import</span> get_all_lexers
+<span class="token keyword">from</span> pygments<span class="token punctuation">.</span>styles <span class="token keyword">import</span> get_all_styles
+
+LEXERS <span class="token operator">=</span> <span class="token punctuation">[</span>item <span class="token keyword">for</span> item <span class="token keyword">in</span> get_all_lexers<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">if</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+LANGUAGE_CHOICES <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">for</span> item <span class="token keyword">in</span> LEXERS<span class="token punctuation">]</span><span class="token punctuation">)</span>
+STYLE_CHOICES <span class="token operator">=</span> <span class="token builtin">sorted</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> item<span class="token punctuation">)</span> <span class="token keyword">for</span> item <span class="token keyword">in</span> get_all_styles<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Snippet</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    created <span class="token operator">=</span> models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">(</span>auto_now_add<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    title <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">)</span>
+    code <span class="token operator">=</span> models<span class="token punctuation">.</span>TextField<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    linenos <span class="token operator">=</span> models<span class="token punctuation">.</span>BooleanField<span class="token punctuation">(</span>default<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    language <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>choices<span class="token operator">=</span>LANGUAGE_CHOICES<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token string">'python'</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+    style <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>choices<span class="token operator">=</span>STYLE_CHOICES<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token string">'friendly'</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        ordering <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'created'</span><span class="token punctuation">]</span>
+</code></pre></div><p>또한 스니펫 모델의 마이그레이션을 작성하고 데이터베이스를 동기화해야 합니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>python manage<span class="token punctuation">.</span>py makemigrations snippets
+python manage<span class="token punctuation">.</span>py migrate
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>LEXERS [
+    ('ABAP', ('abap',), ('*.abap', '*.ABAP'), ('text/x-abap',)), 
+    ('APL', ('apl',), ('*.apl',), ()), 
+    ('ABNF', ('abnf',), ('*.abnf',), ('text/x-abnf',)), 
+    ('ActionScript 3', ('as3', 'actionscript3'), ('*.as',), ('application/x-actionscript3', 'text/x-actionscript3', 'text/actionscript3')), 
+    ('ActionScript', ('as', 'actionscript'), ('*.as',), ('application/x-actionscript', 'text/x-actionscript', 'text/actionscript')), 
+    ('Ada', ('ada', 'ada95', 'ada2005'), ('*.adb', '*.ads', '*.ada'), ('text/x-ada',)), 
+    ('ADL', ('adl',), ('*.adl', '*.adls', '*.adlf', '*.adlx'), ()),
+    ...
+]
+
+LANGUAGE_CHOICES [
+    ('abap', 'ABAP'), 
+    ('abnf', 'ABNF'), 
+    ('ada', 'Ada'), 
+    ('adl', 'ADL'),
+    ...
+]
+
+STYLE_CHOICES [
+    ('abap', 'abap'), 
+    ('algol', 'algol'), 
+    ('algol_nu', 'algol_nu'), 
+    ('arduino', 'arduino'), 
+    ('autumn', 'autumn'), 
+    ('borland', 'borland'), 
+    ('bw', 'bw'), 
+    ('colorful', 'colorful'), 
+    ('default', 'default'), 
+    ...
+] 
+</code></pre></div><h2 id="직렬화-클래스-생성"><a href="#직렬화-클래스-생성" class="header-anchor">#</a> 직렬화 클래스 생성</h2> <p>웹 API에서 시작해야 할 첫 번째 사항은 스니펫 인스턴스를 json 같은 표현으로 직렬화하고 역 직렬화하는 방법을 제공하는 것입니다. Django의 form과 매우 유사한 직렬 변환기를 선언하여 이를 수행 할 수 있습니다. snippets 디렉토리에 <code>serializers.py</code> 파일을 작성하고 다음을 추가하십시오.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<span class="token keyword">from</span> snippets<span class="token punctuation">.</span>models <span class="token keyword">import</span> Snippet<span class="token punctuation">,</span> LANGUAGE_CHOICES<span class="token punctuation">,</span> STYLE_CHOICES
+
+
+<span class="token keyword">class</span> <span class="token class-name">SnippetSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>Serializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> serializers<span class="token punctuation">.</span>IntegerField<span class="token punctuation">(</span>read_only<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    title <span class="token operator">=</span> serializers<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>required<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> allow_blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> max_length<span class="token operator">=</span><span class="token number">100</span><span class="token punctuation">)</span>
+    code <span class="token operator">=</span> serializers<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>style<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">'base_template'</span><span class="token punctuation">:</span> <span class="token string">'textarea.html'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    linenos <span class="token operator">=</span> serializers<span class="token punctuation">.</span>BooleanField<span class="token punctuation">(</span>required<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+    language <span class="token operator">=</span> serializers<span class="token punctuation">.</span>ChoiceField<span class="token punctuation">(</span>choices<span class="token operator">=</span>LANGUAGE_CHOICES<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token string">'python'</span><span class="token punctuation">)</span>
+    style <span class="token operator">=</span> serializers<span class="token punctuation">.</span>ChoiceField<span class="token punctuation">(</span>choices<span class="token operator">=</span>STYLE_CHOICES<span class="token punctuation">,</span> default<span class="token operator">=</span><span class="token string">'friendly'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">create</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> validated_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        Create and return a new `Snippet` instance, given the validated data.
+        &quot;&quot;&quot;</span>
+        <span class="token keyword">return</span> Snippet<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>create<span class="token punctuation">(</span><span class="token operator">**</span>validated_data<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> instance<span class="token punctuation">,</span> validated_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        Update and return an existing `Snippet` instance, given the validated data.
+        &quot;&quot;&quot;</span>
+        instance<span class="token punctuation">.</span>title <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'title'</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>title<span class="token punctuation">)</span>
+        instance<span class="token punctuation">.</span>code <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'code'</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>code<span class="token punctuation">)</span>
+        instance<span class="token punctuation">.</span>linenos <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'linenos'</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>linenos<span class="token punctuation">)</span>
+        instance<span class="token punctuation">.</span>language <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'language'</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>language<span class="token punctuation">)</span>
+        instance<span class="token punctuation">.</span>style <span class="token operator">=</span> validated_data<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'style'</span><span class="token punctuation">,</span> instance<span class="token punctuation">.</span>style<span class="token punctuation">)</span>
+        instance<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> instance
+</code></pre></div><p>직렬화 클래스의 첫 번째 부분은 직렬화/역 직렬화 되는 필드를 정의합니다. <code>create()</code>는 인스턴스가 만들지고 <code>update()</code>는 <code>serializer.save()</code>를 호출 할 때 수정되는 방법을 정의합니다.</p> <p>Serializer 클래스는 Django의 <code>Form</code>클래스(Data Transform Object) 매우 유사합니다.  <code>required</code>, <code>max_length</code>, <code>default</code> 같은 검증 플래그를 포함하고 있습니다.</p> <p>필드 플래그는 HTML로 렌더링 할 때와 같이 특정 상황에서 Serializer가 표시되는 방법을 제어 할 수도 있습니다. 위 의 플래그<code>{'base_template': 'textarea.html'}</code>는 <code>widget=widgets.Textarea</code>를 Django Form 클래스에서 사용하는 것과 같습니다. 이 자습서의 뒷 부분에서 볼 수 있듯이 browsable  API가 표시되는 방법을 제어하는 ​​데 특히 유용합니다.</p> <p>나중에는 실제로 시간을 절약을 위해 <code>ModelSerializer</code> 클래스를 사용할 수 있지만 지금은 serializer 정의를 명시적으로 유지합니다.</p> <h2 id="직렬화로-작업하기"><a href="#직렬화로-작업하기" class="header-anchor">#</a> 직렬화로 작업하기</h2> <p>새로운 Serializer 클래스 사용에 익숙해 지기 위해 Django shell에서 살펴 보도록 하겠습니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>python manage.py shell
+</code></pre></div><p>필요한 모듈을 가져오기 한 후에 코드 스니펫을 만들어 보겠습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> snippets<span class="token punctuation">.</span>models <span class="token keyword">import</span> Snippet
+<span class="token keyword">from</span> snippets<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> SnippetSerializer
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>renderers <span class="token keyword">import</span> JSONRenderer
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>parsers <span class="token keyword">import</span> JSONParser
+
+snippet <span class="token operator">=</span> Snippet<span class="token punctuation">(</span>code<span class="token operator">=</span><span class="token string">'foo = &quot;bar&quot;\n'</span><span class="token punctuation">)</span>
+snippet<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+snippet <span class="token operator">=</span> Snippet<span class="token punctuation">(</span>code<span class="token operator">=</span><span class="token string">'print(&quot;hello, world&quot;)\n'</span><span class="token punctuation">)</span>
+snippet<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>이제 스니펫 인스턴스를 사용할 수 있습니다. 이러한 인스턴스 중 하나를 직렬화 하는 방법을 살펴 보겠습니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>snippet<span class="token punctuation">)</span>
+serializer.data
+<span class="token comment"># {'id': 2, 'title': '', 'code': 'print(&quot;hello, world&quot;)\n', 'linenos': False, 'language': 'python', 'style': 'friendly'}</span>
+</code></pre></div><p>이 시점에서 모델 인스턴스를 Python 데이터 유형으로 변환했습니다. 다음은 직렬화 프로세스를 마무리하기 위해 데이터를 json로 렌더링합니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>content <span class="token operator">=</span> JSONRenderer<span class="token punctuation">(</span><span class="token punctuation">)</span>.render<span class="token punctuation">(</span>serializer.data<span class="token punctuation">)</span>
+content
+<span class="token comment"># b'{&quot;id&quot;: 2, &quot;title&quot;: &quot;&quot;, &quot;code&quot;: &quot;print(\\&quot;hello, world\\&quot;)\\n&quot;, &quot;linenos&quot;: false, &quot;language&quot;: &quot;python&quot;, &quot;style&quot;: &quot;friendly&quot;}'</span>
+</code></pre></div><p>역 직렬화는 비슷합니다. 먼저 스트림을 Python 데이터 유형으로 구문 분석합니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">import</span> io
+
+stream <span class="token operator">=</span> io.BytesIO<span class="token punctuation">(</span>content<span class="token punctuation">)</span>
+data <span class="token operator">=</span> JSONParser<span class="token punctuation">(</span><span class="token punctuation">)</span>.parse<span class="token punctuation">(</span>stream<span class="token punctuation">)</span>
+</code></pre></div><p>... 그러면 원시 데이터 유형을 완전히 채워진 객체 인스턴스로 복원합니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code>serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+serializer.is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># True</span>
+serializer.validated_data
+<span class="token comment"># OrderedDict([('title', ''), ('code', 'print(&quot;hello, world&quot;)\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])</span>
+serializer.save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment"># &lt;Snippet: Snippet object&gt;</span>
+</code></pre></div><p>API가 양식을 사용하는 것과 비슷한 점에 유의하십시오. 시리얼 라이저를 사용하는 뷰를 작성하기 시작하면 유사성이 훨씬 더 분명 해져야합니다.</p> <p>모델 인스턴스 대신 쿼리 세트를 직렬화 할 수도 있습니다. 그렇게하기 위해 단순히 many=Trueserializer 인수에 플래그를 추가합니다 .</p> <div class="language-bash extra-class"><pre class="language-bash"><code>serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>Snippet.objects.all<span class="token punctuation">(</span><span class="token punctuation">)</span>, <span class="token assign-left variable">many</span><span class="token operator">=</span>True<span class="token punctuation">)</span>
+serializer.data
+<span class="token comment"># [OrderedDict([('id', 1), ('title', ''), ('code', 'foo = &quot;bar&quot;\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 2), ('title', ''), ('code', 'print(&quot;hello, world&quot;)\n'), ('linenos', False), ('language', 'python'), ('style', 'friendly')]), OrderedDict([('id', 3), ('title', ''), ('code', 'print(&quot;hello, world&quot;)'), ('linenos', False), ('language', 'python'), ('style', 'friendly')])]</span>
+</code></pre></div><h2 id="modelserializers-사용"><a href="#modelserializers-사용" class="header-anchor">#</a> ModelSerializers 사용</h2> <p><code>SnippetSerializer</code> 클래스는 <code>Snippet</code> 모델에 포함 된 많은 정보를 복제하고 있습니다. 코드를 좀 더 간결하게 유지할 수 있다면 좋을 것입니다.</p> <p>Django에서 <code>Form</code> 클래스 및 <code>ModelForm</code> 클래스를 제공하는 것과 같은 방식으로 REST 프레임워크가 <code>Serializer</code> 클래스, <code>ModelSerializer</code> 클래스를 가지고 있습니다.</p> <p><code>ModelSerializer</code> 클래스를 사용하여 <code>Serializer</code>를 리팩토링 하려면 <code>snippets/serializers.py</code>  파일을 다시 열고 <code>SnippetSerializer</code> 클래스를 다음으로 바꿉니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> rest_framework <span class="token keyword">import</span> serializers
+<span class="token keyword">from</span> snippets<span class="token punctuation">.</span>models <span class="token keyword">import</span> Snippet
+
+
+<span class="token keyword">class</span> <span class="token class-name">SnippetSerializer</span><span class="token punctuation">(</span>serializers<span class="token punctuation">.</span>ModelSerializer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        model <span class="token operator">=</span> Snippet
+        fields <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'id'</span><span class="token punctuation">,</span> <span class="token string">'title'</span><span class="token punctuation">,</span> <span class="token string">'code'</span><span class="token punctuation">,</span> <span class="token string">'linenos'</span><span class="token punctuation">,</span> <span class="token string">'language'</span><span class="token punctuation">,</span> <span class="token string">'style'</span><span class="token punctuation">]</span>
+</code></pre></div><p>serializers 에 있는 좋은 특성 중 하나는 serializers 인스턴스의 모든 필드를 표시하여 인쇄 할 수 있다는 것입니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> snippets<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> SnippetSerializer
+serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">repr</span><span class="token punctuation">(</span>serializer<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># SnippetSerializer():</span>
+<span class="token comment">#    id = IntegerField(label='ID', read_only=True)</span>
+<span class="token comment">#    title = CharField(allow_blank=True, max_length=100, required=False)</span>
+<span class="token comment">#    code = CharField(style={'base_template': 'textarea.html'})</span>
+<span class="token comment">#    linenos = BooleanField(required=False)</span>
+<span class="token comment">#    language = ChoiceField(choices=[('Clipper', 'FoxPro'), ('Cucumber', 'Gherkin'), ('RobotFramework', 'RobotFramework'), ('abap', 'ABAP'), ('ada', 'Ada')...</span>
+<span class="token comment">#    style = ChoiceField(choices=[('autumn', 'autumn'), ('borland', 'borland'), ('bw', 'bw'), ('colorful', 'colorful')...</span>
+</code></pre></div><p><code>ModelSerializer</code> 클래스는 특별히 마술 같은 일을 하는 것이 아니고 Serializer 클래스를 빠르게  만들기 위한 방법이라는 것을 기억해야 합니다.</p> <ul><li>자동으로 필드 세트를 결정</li> <li>create(),  update() 메소드에 대한 간단한 기본 구현</li></ul> <h2 id="일반-django-view-작성"><a href="#일반-django-view-작성" class="header-anchor">#</a> 일반 Django view 작성</h2> <p>새로운 Serializer 클래스를 사용하여 일부 API의 뷰를 작성하는 방법을 살펴 보겠습니다. 현재로서는 REST 프레임워크의 다른 기능을 사용하지 않을 것입니다. 뷰를 일반 Django 뷰로 작성합니다.</p> <p><code>snippets/views.py</code> 파일에 다음을 추가하십시오</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> HttpResponse<span class="token punctuation">,</span> JsonResponse
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>views<span class="token punctuation">.</span>decorators<span class="token punctuation">.</span>csrf <span class="token keyword">import</span> csrf_exempt
+<span class="token keyword">from</span> rest_framework<span class="token punctuation">.</span>parsers <span class="token keyword">import</span> JSONParser
+<span class="token keyword">from</span> snippets<span class="token punctuation">.</span>models <span class="token keyword">import</span> Snippet
+<span class="token keyword">from</span> snippets<span class="token punctuation">.</span>serializers <span class="token keyword">import</span> SnippetSerializer
+</code></pre></div><p>기존의 모든 스니펫을 나열하거나 새 스니펫을 만드는 것을 지원하는 뷰가 될 것입니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token decorator annotation punctuation">@csrf_exempt</span>
+<span class="token keyword">def</span> <span class="token function">snippet_list</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    List all code snippets, or create a new snippet.
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'GET'</span><span class="token punctuation">:</span>
+        snippets <span class="token operator">=</span> Snippet<span class="token punctuation">.</span>objects<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>snippets<span class="token punctuation">,</span> many<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> safe<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'POST'</span><span class="token punctuation">:</span>
+        data <span class="token operator">=</span> JSONParser<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parse<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+        serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> serializer<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            serializer<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">,</span> status<span class="token operator">=</span><span class="token number">201</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>errors<span class="token punctuation">,</span> status<span class="token operator">=</span><span class="token number">400</span><span class="token punctuation">)</span>
+</code></pre></div><p>CSRF 토큰이 없는 클라이언트에서 이 뷰에 POST를 수행하려면 뷰를 csrf_exempt로 표시해야 합니다. 이것은 일반적인 것은 아닙니다.</p> <p>또한 개별 스니펫에 해당하는 뷰가 필요하며 스니펫을 검색, 업데이트 또는 삭제하는 데 사용할 수 있습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token decorator annotation punctuation">@csrf_exempt</span>
+<span class="token keyword">def</span> <span class="token function">snippet_detail</span><span class="token punctuation">(</span>request<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    Retrieve, update or delete a code snippet.
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">try</span><span class="token punctuation">:</span>
+        snippet <span class="token operator">=</span> Snippet<span class="token punctuation">.</span>objects<span class="token punctuation">.</span>get<span class="token punctuation">(</span>pk<span class="token operator">=</span>pk<span class="token punctuation">)</span>
+    <span class="token keyword">except</span> Snippet<span class="token punctuation">.</span>DoesNotExist<span class="token punctuation">:</span>
+        <span class="token keyword">return</span> HttpResponse<span class="token punctuation">(</span>status<span class="token operator">=</span><span class="token number">404</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'GET'</span><span class="token punctuation">:</span>
+        serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>snippet<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'PUT'</span><span class="token punctuation">:</span>
+        data <span class="token operator">=</span> JSONParser<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>parse<span class="token punctuation">(</span>request<span class="token punctuation">)</span>
+        serializer <span class="token operator">=</span> SnippetSerializer<span class="token punctuation">(</span>snippet<span class="token punctuation">,</span> data<span class="token operator">=</span>data<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> serializer<span class="token punctuation">.</span>is_valid<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            serializer<span class="token punctuation">.</span>save<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> JsonResponse<span class="token punctuation">(</span>serializer<span class="token punctuation">.</span>errors<span class="token punctuation">,</span> status<span class="token operator">=</span><span class="token number">400</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">elif</span> request<span class="token punctuation">.</span>method <span class="token operator">==</span> <span class="token string">'DELETE'</span><span class="token punctuation">:</span>
+        snippet<span class="token punctuation">.</span>delete<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> HttpResponse<span class="token punctuation">(</span>status<span class="token operator">=</span><span class="token number">204</span><span class="token punctuation">)</span>
+</code></pre></div><p>마지막으로 이러한 뷰를 연결해야 합니다. <code>snippets/urls.py</code> 파일을 작성 하십시오.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
+<span class="token keyword">from</span> snippets <span class="token keyword">import</span> views
+
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'snippets/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>snippet_list<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'snippets/&lt;int:pk&gt;/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>snippet_detail<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>또한 스니펫 앱의 URL을 포함 시키려면 <code>tutorial/urls.py</code> 파일 에 루트 urlconf 를 연결해야 합니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path<span class="token punctuation">,</span> include
+
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'snippets.urls'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>아직 다루지 않은 몇 가지 Edge 사례가 있습니다. malformed json를 보내거나 뷰가 처리하지 않는 메소드로 요청하면 500 &quot;서버 오류&quot; 응답으로 끝납니다.</p> <h2 id="웹-api-테스트"><a href="#웹-api-테스트" class="header-anchor">#</a> 웹 API 테스트</h2> <p>이제 스니펫을 제공하는 샘플 서버를 시작할 수 있습니다. shell 을 종료하고</p> <div class="language-python extra-class"><pre class="language-python"><code>quit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre></div><p>Django의 개발 서버를 시작합니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>python manage<span class="token punctuation">.</span>py runserver
+</code></pre></div><p>curl 또는 httpie를 사용하여 API를 테스트 할 수 있습니다 . Httpie는 Python으로 작성된 사용자 친화적 인 http 클라이언트입니다.</p> <p>pip를 사용하여 httpie를 설치할 수 있습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>pip install httpie
+</code></pre></div><p>모든 스니펫 목록을 얻을 수 있습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>http http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">8000</span><span class="token operator">/</span>snippets<span class="token operator">/</span>
+
+HTTP<span class="token operator">/</span><span class="token number">1.1</span> <span class="token number">200</span> OK
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">&quot;id&quot;</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;title&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;code&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;foo = \&quot;bar\&quot;\n&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;linenos&quot;</span><span class="token punctuation">:</span> false<span class="token punctuation">,</span>
+    <span class="token string">&quot;language&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;python&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;style&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;friendly&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token string">&quot;id&quot;</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;title&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;code&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;print(\&quot;hello, world\&quot;)\n&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;linenos&quot;</span><span class="token punctuation">:</span> false<span class="token punctuation">,</span>
+    <span class="token string">&quot;language&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;python&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;style&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;friendly&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre></div><p>또는 id를 참조하여 특정 스니펫을 얻을 수 있습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>http http<span class="token punctuation">:</span><span class="token operator">//</span><span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span><span class="token punctuation">:</span><span class="token number">8000</span><span class="token operator">/</span>snippets<span class="token operator">/</span><span class="token number">2</span><span class="token operator">/</span>
+
+HTTP<span class="token operator">/</span><span class="token number">1.1</span> <span class="token number">200</span> OK
+<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">{</span>
+  <span class="token string">&quot;id&quot;</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;title&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;code&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;print(\&quot;hello, world\&quot;)\n&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;linenos&quot;</span><span class="token punctuation">:</span> false<span class="token punctuation">,</span>
+  <span class="token string">&quot;language&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;python&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;style&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;friendly&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>마찬가지로 웹 브라우저에서 이러한 URL을 방문하여 동일한 json을 표시 할 수 있습니다.</p> <h2 id="진행-위치"><a href="#진행-위치" class="header-anchor">#</a> 진행 위치</h2> <p>Django의 Forms API와 비슷한 느낌의 직렬화 API와 일부 Django 뷰가 있습니다.</p> <p>우리의 API 뷰는 현재 json 응답을 제공하는 것 이상으로 특별한 작업을 수행하지 않으며 여전히 정리하고 싶은 오류 처리에 엣지 사례가 있지만 작동하는 웹 API입니다.</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/tool-module/django-rest/" class="prev router-link-active">
+        Why Django REST?
+      </a></span> <span class="next"><a href="/tool-module/django-rest/tutorial-2-request.html">
+        기초-요청과 응답
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.46a52470.js" defer></script><script src="/assets/js/2.73abacf5.js" defer></script><script src="/assets/js/75.fa84901e.js" defer></script>
+  </body>
+</html>
