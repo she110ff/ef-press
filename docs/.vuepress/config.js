@@ -1,37 +1,63 @@
 module.exports = {
   host: "localhost",
+  port: 8888,
   title: "Knowledge Share",
   description: "Just playing around",
   themeConfig: {
+    lastUpdated: 'Last Updated',
     nav: [
       { text: "Home", link: "/" },
       {
         text: "Languages",
-        items: [{ text: "Python", link: "/languages/python/" }],
+        items: [
+          { text: "JavaScript", link: "/languages/python/" },
+          { text: "Python", link: "/languages/python/" },
+        ]
       },
       {
         text: "Frameworks",
         ariaLabel: "Language Menu",
         items: [
-          { text: "VSCode", link: "/frameworks/vscode/" },
-          { text: "Git", link: "/frameworks/git/" },
           { text: "VueJS", link: "/frameworks/vuejs/" },
           { text: "Django", link: "/frameworks/django/" },
-          { text: "NuxtJS", link: "/frameworks/nuxtjs/" },
           { text: "NestJS", link: "/frameworks/nestjs/" },
         ],
       },
       {
-        text: "Tool & Module",
+        text: "Sub Frameworks",
         items: [
-          { text: "Django-REST", link: "/tool-module/django-rest/" },
-          { text: "Clean Architecture", link: "/tool-module/clean-arch/" }
+          { text: "NuxtJS", link: "/subframeworks/nuxtjs/" },
+          { text: "VuePress", link: "/subframeworks/vuepress/" },
+          { text: "Django-REST", link: "/subframeworks/django-rest/" },
+          ]
+      },
+      {
+        text: "Methodology",
+        items: [
+          { text: "Clean Architecture", link: "/methodology/clean-arch/" },
+          { text: "Test Driven Development", link: "/methodology/clean-arch/" },
+          { text: "Sprint(Agile)", link: "/methodology/clean-arch/" },
         ],
       },
       {
-        text: "Workflow",
+        text: "Tool&Module",
         items: [
-          { text: "NuxtJS-Django", link: "/workflow/nuxtjs-django/" }
+          { text: "Git", link: "/tool-module/git/" },
+          { text: "VSCode", link: "/tool-module/vscode/" },
+          { text: "Vim", link: "/tool-module/vim/" },
+          { text: "Pandas", link: "/tool-module/pandas/" },
+        ],
+      },
+      {
+        text: "Boilerplate",
+        items: [
+          { text: "NuxtJS-Django", link: "/practice/nuxtjs-django/" }
+        ],
+      },
+      {
+        text: "Practice",
+        items: [
+          { text: "FinDev", link: "/practice/nuxtjs-django/" }
         ],
       },
       { text: "External", link: "https://google.com" },
@@ -62,13 +88,7 @@ module.exports = {
           ],
         },
       ],
-      "/frameworks/vscode/": [
-        {
-          title: "VSCode",
-          collapsable: false,
-          children: ["", "install", "concept"],
-        },
-      ],
+
       "/frameworks/vuejs/": [
         {
           title: "VueJS",
@@ -102,21 +122,14 @@ module.exports = {
           ],
         },
       ],
-      "/frameworks/nuxtjs/": [
+      "/subframeworks/nuxtjs/": [
         {
           title: "NuxtJS",
           collapsable: false,
           children: ["", "nuxt-install", "directory-structure", "concept"],
         },
       ],
-      "/frameworks/nestjs/": [
-        {
-          title: "NestJS",
-          collapsable: false,
-          children: ["", "nest-install", "controllers"],
-        },
-      ],
-      "/tool-module/django-rest/": [
+      "/subframeworks/django-rest/": [
         {
           title: "Django REST",
           collapsable: false,
@@ -135,7 +148,7 @@ module.exports = {
           ],
         },
       ],
-      "/tool-module/clean-arch/": [
+      "/methodology/clean-arch/": [
         {
           title: "Clean Architecture",
           collapsable: false,
@@ -149,7 +162,28 @@ module.exports = {
           children: ["", "git-flow", "ssh"],
         },
       ],
-      "/workflow/nuxtjs-django/": [
+      "/tool-module/vscode/": [
+        {
+          title: "VSCode",
+          collapsable: false,
+          children: ["", "install", "concept"],
+        },
+      ],
+      "/tool-module/pandas/": [
+        {
+          title: "Pandas",
+          collapsable: false,
+          children: ["", "install"],
+        },
+      ],
+      "/tool-module/vim/": [
+        {
+          title: "Vim",
+          collapsable: false,
+          children: ["", "install"],
+        },
+      ],
+      "/practice/nuxtjs-django/": [
         {
           title: "NuxtJS & Django",
           collapsable: false,
