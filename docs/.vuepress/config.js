@@ -129,6 +129,13 @@ module.exports = {
           children: ["", "nuxt-install", "directory-structure", "concept"],
         },
       ],
+      "/subframeworks/vuepress/": [
+        {
+          title: "VuePress",
+          collapsable: false,
+          children: ["", "deploy"],
+        },
+      ],
       "/subframeworks/django-rest/": [
         {
           title: "Django REST",
@@ -179,6 +186,13 @@ module.exports = {
       "/tool-module/vim/": [
         {
           title: "Vim",
+          collapsable: false,
+          children: ["", "install"],
+        },
+      ],
+      "/tool-module/heroku/": [
+        {
+          title: "Heroku",
           collapsable: false,
           children: ["", "install"],
         },
