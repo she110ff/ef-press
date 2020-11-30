@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clean Architecture in Django | Knowledge Share</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/assets/css/0.styles.518e2871.css" as="style"><link rel="preload" href="/assets/js/app.2cc1247e.js" as="script"><link rel="preload" href="/assets/js/2.73abacf5.js" as="script"><link rel="preload" href="/assets/js/58.3a969b89.js" as="script"><link rel="prefetch" href="/assets/js/10.351a57cb.js"><link rel="prefetch" href="/assets/js/100.9b1bfd09.js"><link rel="prefetch" href="/assets/js/101.2bf25c95.js"><link rel="prefetch" href="/assets/js/11.6393c270.js"><link rel="prefetch" href="/assets/js/12.258ce84f.js"><link rel="prefetch" href="/assets/js/13.56874ee8.js"><link rel="prefetch" href="/assets/js/14.37295ec6.js"><link rel="prefetch" href="/assets/js/15.f68ba4b5.js"><link rel="prefetch" href="/assets/js/16.b66c784e.js"><link rel="prefetch" href="/assets/js/17.bbd8a445.js"><link rel="prefetch" href="/assets/js/18.7d163443.js"><link rel="prefetch" href="/assets/js/19.19b5b7f6.js"><link rel="prefetch" href="/assets/js/20.5089f068.js"><link rel="prefetch" href="/assets/js/21.724cc5d2.js"><link rel="prefetch" href="/assets/js/22.5c67cf08.js"><link rel="prefetch" href="/assets/js/23.3dec653b.js"><link rel="prefetch" href="/assets/js/24.60448c98.js"><link rel="prefetch" href="/assets/js/25.4f4cd96f.js"><link rel="prefetch" href="/assets/js/26.3d026ee4.js"><link rel="prefetch" href="/assets/js/27.4c1a5062.js"><link rel="prefetch" href="/assets/js/28.b34493f3.js"><link rel="prefetch" href="/assets/js/29.4370a6f6.js"><link rel="prefetch" href="/assets/js/3.05df731a.js"><link rel="prefetch" href="/assets/js/30.9b3ad4ec.js"><link rel="prefetch" href="/assets/js/31.4381d454.js"><link rel="prefetch" href="/assets/js/32.acde7d37.js"><link rel="prefetch" href="/assets/js/33.a5ca4340.js"><link rel="prefetch" href="/assets/js/34.bc236592.js"><link rel="prefetch" href="/assets/js/35.50d8e110.js"><link rel="prefetch" href="/assets/js/36.a8d744e0.js"><link rel="prefetch" href="/assets/js/37.1a7db623.js"><link rel="prefetch" href="/assets/js/38.915c24f1.js"><link rel="prefetch" href="/assets/js/39.8eb6cce7.js"><link rel="prefetch" href="/assets/js/4.00c04b5f.js"><link rel="prefetch" href="/assets/js/40.12479e7d.js"><link rel="prefetch" href="/assets/js/41.3483dca2.js"><link rel="prefetch" href="/assets/js/42.d374af25.js"><link rel="prefetch" href="/assets/js/43.0212e186.js"><link rel="prefetch" href="/assets/js/44.bfb21c26.js"><link rel="prefetch" href="/assets/js/45.e26cd72a.js"><link rel="prefetch" href="/assets/js/46.e616338f.js"><link rel="prefetch" href="/assets/js/47.e71ba62c.js"><link rel="prefetch" href="/assets/js/48.9ffe6cfc.js"><link rel="prefetch" href="/assets/js/49.0d75685f.js"><link rel="prefetch" href="/assets/js/5.4c9d079c.js"><link rel="prefetch" href="/assets/js/50.2ca4469d.js"><link rel="prefetch" href="/assets/js/51.9c56f1df.js"><link rel="prefetch" href="/assets/js/52.f2d4c612.js"><link rel="prefetch" href="/assets/js/53.052ca265.js"><link rel="prefetch" href="/assets/js/54.7bcddc0c.js"><link rel="prefetch" href="/assets/js/55.9de0744c.js"><link rel="prefetch" href="/assets/js/56.f7d981cf.js"><link rel="prefetch" href="/assets/js/57.72c75a12.js"><link rel="prefetch" href="/assets/js/59.5c0880ea.js"><link rel="prefetch" href="/assets/js/6.eafd2c6f.js"><link rel="prefetch" href="/assets/js/60.e00eb340.js"><link rel="prefetch" href="/assets/js/61.4cec8aea.js"><link rel="prefetch" href="/assets/js/62.6aabc621.js"><link rel="prefetch" href="/assets/js/63.c0593afd.js"><link rel="prefetch" href="/assets/js/64.f4a76f3f.js"><link rel="prefetch" href="/assets/js/65.d31ea88a.js"><link rel="prefetch" href="/assets/js/66.1f42baff.js"><link rel="prefetch" href="/assets/js/67.4b288085.js"><link rel="prefetch" href="/assets/js/68.789b7dd8.js"><link rel="prefetch" href="/assets/js/69.8e0bf397.js"><link rel="prefetch" href="/assets/js/7.219c88d1.js"><link rel="prefetch" href="/assets/js/70.60f782e4.js"><link rel="prefetch" href="/assets/js/71.4b6cdac6.js"><link rel="prefetch" href="/assets/js/72.532f2670.js"><link rel="prefetch" href="/assets/js/73.bb73aaee.js"><link rel="prefetch" href="/assets/js/74.e1480c92.js"><link rel="prefetch" href="/assets/js/75.f8b0bd09.js"><link rel="prefetch" href="/assets/js/76.384c8b2c.js"><link rel="prefetch" href="/assets/js/77.bb74f74a.js"><link rel="prefetch" href="/assets/js/78.09f58d88.js"><link rel="prefetch" href="/assets/js/79.c515bdba.js"><link rel="prefetch" href="/assets/js/8.a995c8bd.js"><link rel="prefetch" href="/assets/js/80.e167074f.js"><link rel="prefetch" href="/assets/js/81.a3f3ec76.js"><link rel="prefetch" href="/assets/js/82.ad48c80a.js"><link rel="prefetch" href="/assets/js/83.8c2050c0.js"><link rel="prefetch" href="/assets/js/84.4600dcb5.js"><link rel="prefetch" href="/assets/js/85.cdf54af1.js"><link rel="prefetch" href="/assets/js/86.8ab1c235.js"><link rel="prefetch" href="/assets/js/87.0fc32640.js"><link rel="prefetch" href="/assets/js/88.3b21aa69.js"><link rel="prefetch" href="/assets/js/89.fc03d156.js"><link rel="prefetch" href="/assets/js/9.f853c54c.js"><link rel="prefetch" href="/assets/js/90.60d0f166.js"><link rel="prefetch" href="/assets/js/91.8ff89bba.js"><link rel="prefetch" href="/assets/js/92.078562fb.js"><link rel="prefetch" href="/assets/js/93.d83edc73.js"><link rel="prefetch" href="/assets/js/94.1a9474be.js"><link rel="prefetch" href="/assets/js/95.125b9971.js"><link rel="prefetch" href="/assets/js/96.c7a6e028.js"><link rel="prefetch" href="/assets/js/97.c6c2b5de.js"><link rel="prefetch" href="/assets/js/98.747ca3ad.js"><link rel="prefetch" href="/assets/js/99.e16be5ca.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.518e2871.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Knowledge Share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sub Frameworks" class="dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sub Frameworks" class="mobile-dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/subframeworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/vuepress/" class="nav-link">
+  VuePress
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/django-rest/" class="nav-link">
+  Django-REST
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Methodology" class="dropdown-title"><span class="title">Methodology</span> <span class="arrow down"></span></button> <button type="button" aria-label="Methodology" class="mobile-dropdown-title"><span class="title">Methodology</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Clean Architecture
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Test Driven Development
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Sprint(Agile)
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool&amp;Module" class="dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool&amp;Module" class="mobile-dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vim/" class="nav-link">
+  Vim
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/pandas/" class="nav-link">
+  Pandas
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Boilerplate" class="dropdown-title"><span class="title">Boilerplate</span> <span class="arrow down"></span></button> <button type="button" aria-label="Boilerplate" class="mobile-dropdown-title"><span class="title">Boilerplate</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Practice" class="dropdown-title"><span class="title">Practice</span> <span class="arrow down"></span></button> <button type="button" aria-label="Practice" class="mobile-dropdown-title"><span class="title">Practice</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  FinDev
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sub Frameworks" class="dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sub Frameworks" class="mobile-dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/subframeworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/vuepress/" class="nav-link">
+  VuePress
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/django-rest/" class="nav-link">
+  Django-REST
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Methodology" class="dropdown-title"><span class="title">Methodology</span> <span class="arrow down"></span></button> <button type="button" aria-label="Methodology" class="mobile-dropdown-title"><span class="title">Methodology</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Clean Architecture
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Test Driven Development
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link router-link-active">
+  Sprint(Agile)
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool&amp;Module" class="dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool&amp;Module" class="mobile-dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/git/" class="nav-link">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vim/" class="nav-link">
+  Vim
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/pandas/" class="nav-link">
+  Pandas
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Boilerplate" class="dropdown-title"><span class="title">Boilerplate</span> <span class="arrow down"></span></button> <button type="button" aria-label="Boilerplate" class="mobile-dropdown-title"><span class="title">Boilerplate</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Practice" class="dropdown-title"><span class="title">Practice</span> <span class="arrow down"></span></button> <button type="button" aria-label="Practice" class="mobile-dropdown-title"><span class="title">Practice</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  FinDev
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Clean Architecture</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/methodology/clean-arch/" aria-current="page" class="sidebar-link">The Clean Code Blog by Robert C. Martin (Uncle Bob)</a></li><li><a href="/methodology/clean-arch/in-django-product.html" aria-current="page" class="active sidebar-link">Clean Architecture in Django</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/methodology/clean-arch/in-django-product.html#엔터티-레이어-가장-안쪽-도메인" class="sidebar-link">엔터티 레이어 (가장 안쪽 도메인)</a></li><li class="sidebar-sub-header"><a href="/methodology/clean-arch/in-django-product.html#사용-사례-계층-가장-바깥쪽-도메인" class="sidebar-link">사용 사례 계층 (가장 바깥쪽 도메인)</a></li><li class="sidebar-sub-header"><a href="/methodology/clean-arch/in-django-product.html#인터페이스-어댑터-계층" class="sidebar-link">인터페이스 어댑터 계층</a></li><li class="sidebar-sub-header"><a href="/methodology/clean-arch/in-django-product.html#프레임-워크-및-드라이버-계층" class="sidebar-link">프레임 워크 및 드라이버 계층</a></li><li class="sidebar-sub-header"><a href="/methodology/clean-arch/in-django-product.html#의존성-주입" class="sidebar-link">의존성 주입</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="clean-architecture-in-django"><a href="#clean-architecture-in-django" class="header-anchor">#</a> Clean Architecture in Django</h1> <p>이 문서에서는 Django Restful API에 Clean Architecture를 적용하는 방법을 설명하려고 합니다. Django 프레임워크와 <a href="https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html" target="_blank" rel="noopener noreferrer">Uncle Bob의 Clean Architecture<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>에 익숙하다는 가정으로 이후에 설명을 진행합니다.</p> <p>설명을 위해 GET 엔드-포인트에서 제품을 검색하는 최소한의 예제를 사용합니다. 아키텍처의 설명은 위의 다이어그램과 동일한 계층으로 구성됩니다. 우리는 가장 안쪽 구성에서부터 시작할 것 입니다.</p> <p>엔터티 레이어 (가장 안쪽 도메인) :
+엔티티와 관련된 엔터프라이즈 비즈니스 로직을 할당합니다. <code>entities.py</code></p> <p>사용 사례 계층 (가장 바깥쪽 도메인) :
+<code>interactors.py</code> 에는 각 사용 사례의 비즈니스 로직을 포함합니다. 여기에 응용 프로그램 수준의 로직를 배치합니다. 우리는 구현에 커맨드 패턴을 사용하는데, 이는 태스크 큐잉을 처리하거나 오류 발생시 롤백을 돕고 종속성과 매개 변수를 분리하기 때문입니다. (가독성, 테스트 및 종속성 주입에 실제로 유용함)</p> <p>인터페이스 어댑터 계층 :
+여기에는 프레임워크에서 분리는 되어 API Restful, 데이터베이스 스토리지, 캐싱 등을 관여하는 부분이 있습니다.<code>views.py</code> 이 있습니다. Django의 뷰 구조를 따르지만 완전히 분리됩니다.</p> <p>프레임 워크 및 드라이버 계층 :
+Django 와 타사 라이브러리로 구성된 이 계층은 해당 부분과 관련된 코드를 배치하여 구현을 추상화하는 곳 이기도 합니다 (글루 코드). <code>factories.py</code></p> <p>마지막으로 urls.py에서 url과 view를 연결합니다.</p> <figure><img src="/ca-ys2.png"></figure> <h2 id="엔터티-레이어-가장-안쪽-도메인"><a href="#엔터티-레이어-가장-안쪽-도메인" class="header-anchor">#</a> 엔터티 레이어 (가장 안쪽 도메인)</h2> <p>먼저 <code>entities.py</code> 를 정의합니다.:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">Product</span> <span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+
+    <span class="token keyword">def</span> __init __ <span class="token punctuation">(</span>self<span class="token punctuation">,</span> reference<span class="token punctuation">,</span> brand_id<span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+        self<span class="token punctuation">.</span>_reference <span class="token operator">=</span> reference 
+        self<span class="token punctuation">.</span>_brand_id <span class="token operator">=</span> brand_id 
+
+    <span class="token decorator annotation punctuation">@property</span> 
+    <span class="token keyword">def</span> <span class="token function">reference</span> <span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_reference 
+
+    <span class="token decorator annotation punctuation">@property</span> 
+    <span class="token keyword">def</span> <span class="token function">brand_id</span> <span class="token punctuation">(</span>self<span class="token punctuation">)</span> <span class="token punctuation">:</span> 
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_brand_id
+
+</code></pre></div><p>이것은 가장 간단한 엔티티의 예입니다. 엔티티와 관련된 비즈니스 로직 및 상위 수준 규칙을 할당합니다. (예 : 불변 검증)</p> <h2 id="사용-사례-계층-가장-바깥쪽-도메인"><a href="#사용-사례-계층-가장-바깥쪽-도메인" class="header-anchor">#</a> 사용 사례 계층 (가장 바깥쪽 도메인)</h2> <p><code>interactors.py</code> 에는 각 사용 사례의 비즈니스 로직을 포함합니다. 여기에 응용 프로그램 수준의 로직를 배치합니다. 우리는 구현에 커맨드 패턴을 사용하는데, 이는 태스크 큐잉을 처리하거나 오류 발생시 롤백을 돕고 종속성과 매개 변수를 분리하기 때문입니다. (가독성, 테스트 및 종속성 주입에 실제로 유용함)</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">GetProductInteractor</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> product_repo<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>product_repo <span class="token operator">=</span> product_repo
+
+    <span class="token keyword">def</span> <span class="token function">set_params</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> reference<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>reference <span class="token operator">=</span> reference
+        <span class="token keyword">return</span> self
+
+    <span class="token keyword">def</span> <span class="token function">execute</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>product_repo \
+                        <span class="token punctuation">.</span>get_product<span class="token punctuation">(</span>reference<span class="token operator">=</span>self<span class="token punctuation">.</span>reference<span class="token punctuation">)</span>
+</code></pre></div><p>이 예도 너무 간단합니다. 사용자-등록 과정을 예를 들어 보면, 사용자 속성을 검증하고, 리포지토리에서 사용자 이름을 사용할 수 있는지 확인이 된 후에 새로운 사용자 엔터티를 생성/저장하고 메일 서비스에 사용자 정보를 전달하여 메일 전송을 요청해야 합니다.</p> <h2 id="인터페이스-어댑터-계층"><a href="#인터페이스-어댑터-계층" class="header-anchor">#</a> 인터페이스 어댑터 계층</h2> <p>여기에는 프레임워크에서 분리는 되어 API Restful, 데이터베이스 스토리지, 캐싱 등을 관여하는 부분이 있습니다.</p> <p>우선 views.py 이 있습니다. Django의 뷰 구조를 따르지만 완전히 분리됩니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> <span class="token punctuation">.</span>factories <span class="token keyword">import</span> GetProductInteractorFactory
+<span class="token keyword">from</span> <span class="token punctuation">.</span>serializers <span class="token keyword">import</span> ProductSerializer
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductView</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> get_product_interactor<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>get_product_interactor <span class="token operator">=</span> get_product_interactor
+
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> reference<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            product <span class="token operator">=</span> self<span class="token punctuation">.</span>get_product_interactor \
+                              <span class="token punctuation">.</span>set_params<span class="token punctuation">(</span>reference<span class="token operator">=</span>reference<span class="token punctuation">)</span> \ 
+                              <span class="token punctuation">.</span>execute<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+        <span class="token keyword">except</span> EntityDoesNotExist<span class="token punctuation">:</span>
+            body <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token string">'error'</span><span class="token punctuation">:</span> <span class="token string">'Product does not exist!'</span><span class="token punctuation">}</span>
+            status <span class="token operator">=</span> <span class="token number">404</span>
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            body <span class="token operator">=</span> ProductSerializer<span class="token punctuation">.</span>serialize<span class="token punctuation">(</span>product<span class="token punctuation">)</span>
+            status <span class="token operator">=</span> <span class="token number">200</span>
+
+        <span class="token keyword">return</span> body<span class="token punctuation">,</span> status
+</code></pre></div><p>그리고 여기 serializers.py는 뷰가 파이썬 dict를 body로 반환한다는 것을 보여주려는 것 외에 아키텍처 상의 의미는 없습니다.:</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">ProductSerializer</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">serialize</span><span class="token punctuation">(</span>product<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            <span class="token string">'reference'</span><span class="token punctuation">:</span> product<span class="token punctuation">.</span>reference
+            <span class="token string">'brand_id'</span><span class="token punctuation">:</span> product<span class="token punctuation">.</span>brand_id
+        <span class="token punctuation">}</span>
+</code></pre></div><p>ProductView 는 팩토리에서 인터랙터를 얻습니다(팩토리가 무엇인지 나중에 볼 것입니다). 입력 매개 변수를 분석하고 (구문 / 형식 유효성 검사도 가능) serializer를 사용하여 결과를 변환합니다. 예외 처리 및 형식 지정 예외를 포함합니다.</p> <p>이 계층의 다른 쪽에는 정면 repositories.py.이 있습니다. 스토리지에 직접 액세스하지 않지만 (이 부분은 다음 계층에 설명되어 있음) 소스 스토리지, 캐싱, 인덱싱 등을 선택합니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">class</span> <span class="token class-name">ProductRepo</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> db_repo<span class="token punctuation">,</span> cache_repo<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>db_repo <span class="token operator">=</span> db_repo
+        self<span class="token punctuation">.</span>cache_repo <span class="token operator">=</span> cache_repo
+
+    <span class="token keyword">def</span> <span class="token function">get_product</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> reference<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        product <span class="token operator">=</span> self<span class="token punctuation">.</span>cache_repo<span class="token punctuation">.</span>get_product<span class="token punctuation">(</span>reference<span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> product <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            product <span class="token operator">=</span> self<span class="token punctuation">.</span>db_repo<span class="token punctuation">.</span>get_product<span class="token punctuation">(</span>reference<span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>cache_repo<span class="token punctuation">.</span>save_product<span class="token punctuation">(</span>product<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> product
+</code></pre></div><h2 id="프레임-워크-및-드라이버-계층"><a href="#프레임-워크-및-드라이버-계층" class="header-anchor">#</a> 프레임 워크 및 드라이버 계층</h2> <p>Django 와 타사 라이브러리로 구성된 이 계층은 해당 부분과 관련된 코드를 배치하여 구현을 추상화하는 곳 이기도 합니다 (글루 코드).</p> <p>이 예에서는 데이터베이스와 웹의 두 부분이 있습니다.</p> <p><code>factories.py</code> 부분에서는 Django ORM과 완전히 연결된 저장소를 만들었습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> common<span class="token punctuation">.</span>exceptions <span class="token keyword">import</span> EntityDoesNotExist
+<span class="token keyword">from</span> <span class="token punctuation">.</span>models <span class="token keyword">import</span> ORMProduct
+<span class="token keyword">from</span> <span class="token punctuation">.</span>entities <span class="token keyword">import</span> Product
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductDatabaseRepo</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_product</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> reference<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">try</span><span class="token punctuation">:</span>
+            orm_product <span class="token operator">=</span> ORMProduct<span class="token punctuation">.</span>objects \
+                                       <span class="token punctuation">.</span>get<span class="token punctuation">(</span>reference<span class="token operator">=</span>reference<span class="token punctuation">)</span>
+        <span class="token keyword">except</span> ORMProduct<span class="token punctuation">.</span>DoesNotExist<span class="token punctuation">:</span>
+            <span class="token keyword">raise</span> EntityDoesNotExist<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>_decode_orm_product<span class="token punctuation">(</span>orm_product<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">_decode_orm_product</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> orm_product<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> Product<span class="token punctuation">(</span>reference<span class="token operator">=</span>orm_product<span class="token punctuation">.</span>reference<span class="token punctuation">,</span>
+                       brand_id<span class="token operator">=</span>orm_product<span class="token punctuation">.</span>brand_id<span class="token punctuation">)</span>
+</code></pre></div><p>보시다시피 이 클래스가 반환하는 객체와 예외는 모두 우리가 정의하므로 모든 orm 세부 정보를 숨 깁니다.</p> <p>두 번째는 세부 정보를 숨기고 프레임워크 레이어에서 뷰를 분리하는 뷰 래퍼를 만들었습니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">import</span> json
+
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>http <span class="token keyword">import</span> HttpResponse
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>views <span class="token keyword">import</span> View
+
+
+<span class="token keyword">class</span> <span class="token class-name">ViewWrapper</span><span class="token punctuation">(</span>View<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    view_factory <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        body<span class="token punctuation">,</span> status <span class="token operator">=</span> self<span class="token punctuation">.</span>view_factory<span class="token punctuation">.</span>create<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token operator">**</span>kwargs<span class="token punctuation">)</span>
+
+        <span class="token keyword">return</span> HttpResponse<span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>body<span class="token punctuation">)</span><span class="token punctuation">,</span> status<span class="token operator">=</span>status<span class="token punctuation">,</span>
+                            content_type<span class="token operator">=</span><span class="token string">'application/json'</span><span class="token punctuation">)</span>
+</code></pre></div><p>이 Wrapper 클래스의 목표는 두 가지 입니다.</p> <ol><li>요청(request)의 모든 인자를 순수 python 객체로 변환하고 결과에 대한 응답과 형식을 지정합니다.</li> <li>self.view_factory.create()에서 만들어진 view는 모든 종속적 요소들을 생성하고 연결하게 됩니다.</li></ol> <p>이 레이어에서 models.py, admin.py, urls.py, settings.py, 마이그레이션 및 기타 django 관련 코드를 작성하고 다루어야 합니다.</p> <p>이 레이어는 Django (또는 다른 라이브러리)와 완전히 연결되어 있습니다. 필수적으로 구현해야 하지만 최대한 간결하게 유지해야 합니다.</p> <h2 id="의존성-주입"><a href="#의존성-주입" class="header-anchor">#</a> 의존성 주입</h2> <p>구조에 대한 의존성 주입을 통해 조각들을 연결하여 구성합니다.</p> <p>종속성 해결을 담당하는  factories.py 를 만듭니다.</p> <div class="language-python extra-class"><pre class="language-python"><code><span class="token keyword">from</span> <span class="token punctuation">.</span>repositories <span class="token keyword">import</span> ProductDatabaseRepo<span class="token punctuation">,</span> ProductCacheRepo
+<span class="token keyword">from</span> <span class="token punctuation">.</span>unit_repositories <span class="token keyword">import</span> ProductRepo
+<span class="token keyword">from</span> <span class="token punctuation">.</span>interactors <span class="token keyword">import</span> GetProductInteractor
+
+<span class="token keyword">class</span> <span class="token class-name">ProductDatabaseRepoFactory</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+	<span class="token decorator annotation punctuation">@staticmethod</span>
+	<span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> ProductDatabaseRepo<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductCacheRepoFactory</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+	<span class="token decorator annotation punctuation">@staticmethod</span>
+	<span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+		<span class="token keyword">return</span> ProductCacheRepo<span class="token punctuation">(</span><span class="token punctuation">)</span> 
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductRepoFactory</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+		db_repo <span class="token operator">=</span> ProductDatabaseRepoFactory<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+		cache_repo <span class="token operator">=</span> ProductCacheRepoFactory<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ProductRepo<span class="token punctuation">(</span>db_repo<span class="token punctuation">,</span> cache_repo<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">GetProductInteractorFactory</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        product_repo <span class="token operator">=</span> ProductRepoFactory<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> GetProductInteractor<span class="token punctuation">(</span>product_repo<span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">ProductViewFactory</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token decorator annotation punctuation">@staticmethod</span>
+    <span class="token keyword">def</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        get_product_interactor <span class="token operator">=</span> GetProductInteractorFactory<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> ProductView<span class="token punctuation">(</span>get_product_interactor<span class="token punctuation">)</span>
+</code></pre></div><p>Factory는 종속성을 재귀적으로 생성하고 해결하면서 각 요소의 Factory 이기도 합니다.</p> <p>그리고 마지막으로 urls.py에서 url과 view를 연결합니다.</p> <div class="language-python extra-class"><pre class="language-python"><code>url<span class="token punctuation">(</span><span class="token string">r'^products/(?P&lt;reference&gt;\w+)$'</span><span class="token punctuation">,</span>
+    ViewWrapper<span class="token punctuation">.</span>as_view<span class="token punctuation">(</span>view_factory<span class="token operator">=</span>ProductViewFactory<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre></div><p>이 게시물은 Django 아키텍처와 구성 요소를 파괴하거나 오용하지 않으려 했고 어떤 상황에서 유용한 대안일 수 있습니다.</p> <p>이 글은 <a href="https://engineering.21buttons.com/clean-architecture-in-django-d326a4ab86a9" target="_blank" rel="noopener noreferrer">Clean Architecture in Django<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>를 번역하였습니다.</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">11/29/2020, 3:17:07 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/methodology/clean-arch/" class="prev router-link-active">
+        The Clean Code Blog by Robert C. Martin (Uncle Bob)
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.2cc1247e.js" defer></script><script src="/assets/js/2.73abacf5.js" defer></script><script src="/assets/js/58.3a969b89.js" defer></script>
+  </body>
+</html>

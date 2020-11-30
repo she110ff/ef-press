@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SSH key | Knowledge Share</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    
+    <meta name="description" content="Just playing around">
+    
+    <link rel="preload" href="/assets/css/0.styles.518e2871.css" as="style"><link rel="preload" href="/assets/js/app.2cc1247e.js" as="script"><link rel="preload" href="/assets/js/2.73abacf5.js" as="script"><link rel="preload" href="/assets/js/79.c515bdba.js" as="script"><link rel="prefetch" href="/assets/js/10.351a57cb.js"><link rel="prefetch" href="/assets/js/100.9b1bfd09.js"><link rel="prefetch" href="/assets/js/101.2bf25c95.js"><link rel="prefetch" href="/assets/js/11.6393c270.js"><link rel="prefetch" href="/assets/js/12.258ce84f.js"><link rel="prefetch" href="/assets/js/13.56874ee8.js"><link rel="prefetch" href="/assets/js/14.37295ec6.js"><link rel="prefetch" href="/assets/js/15.f68ba4b5.js"><link rel="prefetch" href="/assets/js/16.b66c784e.js"><link rel="prefetch" href="/assets/js/17.bbd8a445.js"><link rel="prefetch" href="/assets/js/18.7d163443.js"><link rel="prefetch" href="/assets/js/19.19b5b7f6.js"><link rel="prefetch" href="/assets/js/20.5089f068.js"><link rel="prefetch" href="/assets/js/21.724cc5d2.js"><link rel="prefetch" href="/assets/js/22.5c67cf08.js"><link rel="prefetch" href="/assets/js/23.3dec653b.js"><link rel="prefetch" href="/assets/js/24.60448c98.js"><link rel="prefetch" href="/assets/js/25.4f4cd96f.js"><link rel="prefetch" href="/assets/js/26.3d026ee4.js"><link rel="prefetch" href="/assets/js/27.4c1a5062.js"><link rel="prefetch" href="/assets/js/28.b34493f3.js"><link rel="prefetch" href="/assets/js/29.4370a6f6.js"><link rel="prefetch" href="/assets/js/3.05df731a.js"><link rel="prefetch" href="/assets/js/30.9b3ad4ec.js"><link rel="prefetch" href="/assets/js/31.4381d454.js"><link rel="prefetch" href="/assets/js/32.acde7d37.js"><link rel="prefetch" href="/assets/js/33.a5ca4340.js"><link rel="prefetch" href="/assets/js/34.bc236592.js"><link rel="prefetch" href="/assets/js/35.50d8e110.js"><link rel="prefetch" href="/assets/js/36.a8d744e0.js"><link rel="prefetch" href="/assets/js/37.1a7db623.js"><link rel="prefetch" href="/assets/js/38.915c24f1.js"><link rel="prefetch" href="/assets/js/39.8eb6cce7.js"><link rel="prefetch" href="/assets/js/4.00c04b5f.js"><link rel="prefetch" href="/assets/js/40.12479e7d.js"><link rel="prefetch" href="/assets/js/41.3483dca2.js"><link rel="prefetch" href="/assets/js/42.d374af25.js"><link rel="prefetch" href="/assets/js/43.0212e186.js"><link rel="prefetch" href="/assets/js/44.bfb21c26.js"><link rel="prefetch" href="/assets/js/45.e26cd72a.js"><link rel="prefetch" href="/assets/js/46.e616338f.js"><link rel="prefetch" href="/assets/js/47.e71ba62c.js"><link rel="prefetch" href="/assets/js/48.9ffe6cfc.js"><link rel="prefetch" href="/assets/js/49.0d75685f.js"><link rel="prefetch" href="/assets/js/5.4c9d079c.js"><link rel="prefetch" href="/assets/js/50.2ca4469d.js"><link rel="prefetch" href="/assets/js/51.9c56f1df.js"><link rel="prefetch" href="/assets/js/52.f2d4c612.js"><link rel="prefetch" href="/assets/js/53.052ca265.js"><link rel="prefetch" href="/assets/js/54.7bcddc0c.js"><link rel="prefetch" href="/assets/js/55.9de0744c.js"><link rel="prefetch" href="/assets/js/56.f7d981cf.js"><link rel="prefetch" href="/assets/js/57.72c75a12.js"><link rel="prefetch" href="/assets/js/58.3a969b89.js"><link rel="prefetch" href="/assets/js/59.5c0880ea.js"><link rel="prefetch" href="/assets/js/6.eafd2c6f.js"><link rel="prefetch" href="/assets/js/60.e00eb340.js"><link rel="prefetch" href="/assets/js/61.4cec8aea.js"><link rel="prefetch" href="/assets/js/62.6aabc621.js"><link rel="prefetch" href="/assets/js/63.c0593afd.js"><link rel="prefetch" href="/assets/js/64.f4a76f3f.js"><link rel="prefetch" href="/assets/js/65.d31ea88a.js"><link rel="prefetch" href="/assets/js/66.1f42baff.js"><link rel="prefetch" href="/assets/js/67.4b288085.js"><link rel="prefetch" href="/assets/js/68.789b7dd8.js"><link rel="prefetch" href="/assets/js/69.8e0bf397.js"><link rel="prefetch" href="/assets/js/7.219c88d1.js"><link rel="prefetch" href="/assets/js/70.60f782e4.js"><link rel="prefetch" href="/assets/js/71.4b6cdac6.js"><link rel="prefetch" href="/assets/js/72.532f2670.js"><link rel="prefetch" href="/assets/js/73.bb73aaee.js"><link rel="prefetch" href="/assets/js/74.e1480c92.js"><link rel="prefetch" href="/assets/js/75.f8b0bd09.js"><link rel="prefetch" href="/assets/js/76.384c8b2c.js"><link rel="prefetch" href="/assets/js/77.bb74f74a.js"><link rel="prefetch" href="/assets/js/78.09f58d88.js"><link rel="prefetch" href="/assets/js/8.a995c8bd.js"><link rel="prefetch" href="/assets/js/80.e167074f.js"><link rel="prefetch" href="/assets/js/81.a3f3ec76.js"><link rel="prefetch" href="/assets/js/82.ad48c80a.js"><link rel="prefetch" href="/assets/js/83.8c2050c0.js"><link rel="prefetch" href="/assets/js/84.4600dcb5.js"><link rel="prefetch" href="/assets/js/85.cdf54af1.js"><link rel="prefetch" href="/assets/js/86.8ab1c235.js"><link rel="prefetch" href="/assets/js/87.0fc32640.js"><link rel="prefetch" href="/assets/js/88.3b21aa69.js"><link rel="prefetch" href="/assets/js/89.fc03d156.js"><link rel="prefetch" href="/assets/js/9.f853c54c.js"><link rel="prefetch" href="/assets/js/90.60d0f166.js"><link rel="prefetch" href="/assets/js/91.8ff89bba.js"><link rel="prefetch" href="/assets/js/92.078562fb.js"><link rel="prefetch" href="/assets/js/93.d83edc73.js"><link rel="prefetch" href="/assets/js/94.1a9474be.js"><link rel="prefetch" href="/assets/js/95.125b9971.js"><link rel="prefetch" href="/assets/js/96.c7a6e028.js"><link rel="prefetch" href="/assets/js/97.c6c2b5de.js"><link rel="prefetch" href="/assets/js/98.747ca3ad.js"><link rel="prefetch" href="/assets/js/99.e16be5ca.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.518e2871.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Knowledge Share</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sub Frameworks" class="dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sub Frameworks" class="mobile-dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/subframeworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/vuepress/" class="nav-link">
+  VuePress
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/django-rest/" class="nav-link">
+  Django-REST
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Methodology" class="dropdown-title"><span class="title">Methodology</span> <span class="arrow down"></span></button> <button type="button" aria-label="Methodology" class="mobile-dropdown-title"><span class="title">Methodology</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Clean Architecture
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Test Driven Development
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Sprint(Agile)
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool&amp;Module" class="dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool&amp;Module" class="mobile-dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/git/" class="nav-link router-link-active">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vim/" class="nav-link">
+  Vim
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/pandas/" class="nav-link">
+  Pandas
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Boilerplate" class="dropdown-title"><span class="title">Boilerplate</span> <span class="arrow down"></span></button> <button type="button" aria-label="Boilerplate" class="mobile-dropdown-title"><span class="title">Boilerplate</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Practice" class="dropdown-title"><span class="title">Practice</span> <span class="arrow down"></span></button> <button type="button" aria-label="Practice" class="mobile-dropdown-title"><span class="title">Practice</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  FinDev
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Languages" class="dropdown-title"><span class="title">Languages</span> <span class="arrow down"></span></button> <button type="button" aria-label="Languages" class="mobile-dropdown-title"><span class="title">Languages</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/languages/python/" class="nav-link">
+  Python
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frameworks/vuejs/" class="nav-link">
+  VueJS
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/django/" class="nav-link">
+  Django
+</a></li><li class="dropdown-item"><!----> <a href="/frameworks/nestjs/" class="nav-link">
+  NestJS
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Sub Frameworks" class="dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow down"></span></button> <button type="button" aria-label="Sub Frameworks" class="mobile-dropdown-title"><span class="title">Sub Frameworks</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/subframeworks/nuxtjs/" class="nav-link">
+  NuxtJS
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/vuepress/" class="nav-link">
+  VuePress
+</a></li><li class="dropdown-item"><!----> <a href="/subframeworks/django-rest/" class="nav-link">
+  Django-REST
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Methodology" class="dropdown-title"><span class="title">Methodology</span> <span class="arrow down"></span></button> <button type="button" aria-label="Methodology" class="mobile-dropdown-title"><span class="title">Methodology</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Clean Architecture
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Test Driven Development
+</a></li><li class="dropdown-item"><!----> <a href="/methodology/clean-arch/" class="nav-link">
+  Sprint(Agile)
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Tool&amp;Module" class="dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow down"></span></button> <button type="button" aria-label="Tool&amp;Module" class="mobile-dropdown-title"><span class="title">Tool&amp;Module</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/tool-module/git/" class="nav-link router-link-active">
+  Git
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vscode/" class="nav-link">
+  VSCode
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/vim/" class="nav-link">
+  Vim
+</a></li><li class="dropdown-item"><!----> <a href="/tool-module/pandas/" class="nav-link">
+  Pandas
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Boilerplate" class="dropdown-title"><span class="title">Boilerplate</span> <span class="arrow down"></span></button> <button type="button" aria-label="Boilerplate" class="mobile-dropdown-title"><span class="title">Boilerplate</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  NuxtJS-Django
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Practice" class="dropdown-title"><span class="title">Practice</span> <span class="arrow down"></span></button> <button type="button" aria-label="Practice" class="mobile-dropdown-title"><span class="title">Practice</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/practice/nuxtjs-django/" class="nav-link">
+  FinDev
+</a></li></ul></div></div><div class="nav-item"><a href="https://google.com" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  External
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Git</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/tool-module/git/" aria-current="page" class="sidebar-link">소개</a></li><li><a href="/tool-module/git/git-flow.html" class="sidebar-link">Git Flow</a></li><li><a href="/tool-module/git/ssh.html" aria-current="page" class="active sidebar-link">SSH key</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#config" class="sidebar-link">config</a></li><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#특정-파일-커밋" class="sidebar-link">특정 파일 커밋</a></li><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#commit-대상에서-제외-하기" class="sidebar-link">commit 대상에서 제외 하기</a></li><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#이미-push-된-파일을-gitignore-에서-제외하기" class="sidebar-link">이미 push 된 파일을 .gitignore 에서 제외하기</a></li><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#generate-a-new-ssh-key" class="sidebar-link">Generate a new SSH Key</a></li><li class="sidebar-sub-header"><a href="/tool-module/git/ssh.html#add-a-new-ssh-key-to-your-git" class="sidebar-link">Add a new SSH key to your Git</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="ssh-key"><a href="#ssh-key" class="header-anchor">#</a> SSH key</h1> <h2 id="config"><a href="#config" class="header-anchor">#</a> config</h2> <p>Git 설정을 보여줍니다.</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> config --list
+</code></pre></div><h2 id="특정-파일-커밋"><a href="#특정-파일-커밋" class="header-anchor">#</a> 특정 파일 커밋</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> commit -m <span class="token string">&quot;mod gitignore&quot;</span> /workspaces/tms-frontend/.gitignore
+</code></pre></div><h2 id="commit-대상에서-제외-하기"><a href="#commit-대상에서-제외-하기" class="header-anchor">#</a> commit 대상에서 제외 하기</h2> <p>다시 변경내역에 추가하고 싶으면 git update-index --no-assume-unchanged 파일명 명령어를 사용하면 다시 git status에서 변경파일로 나옵니다.</p> <p> 임시로 사용할 때는 좋지만 현재 unchanged로 지정된 파일의 내역을 보는 명령어는 없으므로 너무 장기간 사용해서 --assume-unchanged로 지정된 것을 잊어먹으로 오히려 혼란을 초래할 수도 있어 보입니다. 
+</p><p> 이럴 경우에는 git update-index --really-refresh 를 사용하면 앞에서 --assume-unchanged로 지정한 내용을 무시하고 워킹트리에 대한 인덱스를 새로 갱신합니다
+```bash
+git update-index --assume-unchanged k8s/kustomization.yaml skaffold.yaml
+```
+</p><h2 id="이미-push-된-파일을-gitignore-에서-제외하기"><a href="#이미-push-된-파일을-gitignore-에서-제외하기" class="header-anchor">#</a> 이미 push 된 파일을 .gitignore 에서 제외하기</h2> <p>git으로 관리하고 싶지 않은 파일들은 .gitignore 에 명시함으로써 해당 파일을 무시할 수 있다. 하지만 종종 무시할 파일을 .gitignore 에 추가하기 전에 git push 해버리는 경우가 있다. 이 때 뒤늦게 .gitignore 을 수정하여 push를 하지만 원격 저장소에서 해당 파일은 사라지지 않는다.</p> <p>
+git 명령들을 실행해주면 .gitignore의 파일들이 적용되어 원격 저장소에서 사라진다.
+```bash
+$ git rm -r --cached .
+$ git add .
+$ git commit -m &quot;Apply .gitignore&quot;
+$ git push
+```
+</p><p>Git 설정을 합니다. .</p> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment"># global</span>
+<span class="token function">git</span> config --global user.name <span class="token string">&quot;young&quot;</span>
+<span class="token function">git</span> config --global user.email <span class="token string">&quot;young@gmail.com&quot;</span>
+<span class="token comment"># local</span>
+<span class="token function">git</span> config user.name <span class="token string">&quot;young&quot;</span>
+<span class="token function">git</span> config user.enauk <span class="token string">&quot;young@gmail.com&quot;</span>
+</code></pre></div><h2 id="generate-a-new-ssh-key"><a href="#generate-a-new-ssh-key" class="header-anchor">#</a> Generate a new SSH Key</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> remote set-url origin git@github.com:username/repo.git
+</code></pre></div><div class="language-bash extra-class"><pre class="language-bash"><code>ssh-keygen -t rsa -b <span class="token number">4096</span> -C <span class="token string">&quot;user@email.com&quot;</span>
+<span class="token punctuation">..</span>.
+<span class="token operator">&gt;</span> Your identification has been saved <span class="token keyword">in</span> C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>user/.ssh/id_rsa
+<span class="token operator">&gt;</span> Your public key has been saved <span class="token keyword">in</span> C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>user/.ssh/id_rsa.pub
+<span class="token operator">&gt;</span> <span class="token punctuation">..</span>.
+</code></pre></div><p>git remote set-url origin https://<USERNAME>:<PASSWORD>@github.com/ocean-network-express/tms-frontend.git</PASSWORD></USERNAME></p> <h2 id="add-a-new-ssh-key-to-your-git"><a href="#add-a-new-ssh-key-to-your-git" class="header-anchor">#</a> Add a new SSH key to your Git</h2> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">cat</span> C:<span class="token punctuation">\</span>Users<span class="token punctuation">\</span>user/.ssh/id_rsa.pub
+ssh-rsa AAAAB3Nza <span class="token punctuation">..</span><span class="token punctuation">..</span><span class="token punctuation">..</span>. <span class="token assign-left variable">rcP4w</span><span class="token operator">==</span> user@email.com  <span class="token comment"># copy this</span>
+</code></pre></div><p><a href="https://docs.github.com/en/github/authenticating-to-github/adding-a-new-ssh-key-to-your-github-account" target="_blank" rel="noopener noreferrer">Adding a new SSH key to your GitHub account<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">11/26/2020, 10:57:27 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/tool-module/git/git-flow.html" class="prev">
+        Git Flow
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.2cc1247e.js" defer></script><script src="/assets/js/2.73abacf5.js" defer></script><script src="/assets/js/79.c515bdba.js" defer></script>
+  </body>
+</html>
